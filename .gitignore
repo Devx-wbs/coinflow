@@ -1,7 +1,5 @@
 /vendor/
 .env
 /node_modules/
-/storage/
-/public/storage/
 *.zip
 *.log
