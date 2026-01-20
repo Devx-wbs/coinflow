@@ -1,0 +1,24 @@
+[20-Sep-2025 03:06:58 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7
+[20-Sep-2025 03:07:02 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7
+[20-Sep-2025 03:07:06 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7
+[23-Sep-2025 21:25:34 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7
+[24-Sep-2025 11:37:24 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7
+[25-Sep-2025 04:06:55 UTC] PHP Fatal error:  Uncaught Error: Class "PHPUnit\Framework\TestCase" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/tests/Unit/ExampleTest.php on line 7

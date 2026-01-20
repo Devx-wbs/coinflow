@@ -1,0 +1,172 @@
+[20-Sep-2025 03:06:57 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[20-Sep-2025 03:06:57 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[20-Sep-2025 03:07:01 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[20-Sep-2025 03:07:01 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[20-Sep-2025 03:07:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[20-Sep-2025 03:07:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[20-Sep-2025 03:07:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[20-Sep-2025 03:07:10 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[22-Sep-2025 22:17:28 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[22-Sep-2025 22:17:51 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[22-Sep-2025 22:27:31 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[23-Sep-2025 14:13:32 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[23-Sep-2025 14:17:54 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[23-Sep-2025 14:31:04 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[23-Sep-2025 15:31:34 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[23-Sep-2025 15:51:42 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[23-Sep-2025 16:01:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[23-Sep-2025 16:02:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[23-Sep-2025 16:09:03 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[23-Sep-2025 16:11:38 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[23-Sep-2025 16:12:29 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[23-Sep-2025 16:13:21 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[23-Sep-2025 16:19:24 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[24-Sep-2025 04:57:36 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[24-Sep-2025 04:58:37 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[24-Sep-2025 05:03:55 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[24-Sep-2025 05:16:15 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[24-Sep-2025 05:18:01 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[24-Sep-2025 05:24:17 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[24-Sep-2025 05:36:08 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[24-Sep-2025 05:39:08 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[24-Sep-2025 05:41:56 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[24-Sep-2025 05:49:17 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 13
+[24-Sep-2025 06:02:22 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 14
+[24-Sep-2025 06:06:23 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[10-Oct-2025 09:58:39 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[10-Oct-2025 10:05:39 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 15
+[10-Oct-2025 11:23:15 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 15
+[10-Oct-2025 11:40:33 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[10-Oct-2025 13:42:05 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 23
+[12-Oct-2025 10:52:50 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Artisan" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/console.php on line 6
+[12-Oct-2025 11:16:53 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php:15
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/api.php on line 15
+[12-Oct-2025 14:53:51 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Route" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php:23
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/routes/web.php on line 23

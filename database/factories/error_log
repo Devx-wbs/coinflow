@@ -1,0 +1,56 @@
+[20-Sep-2025 03:06:56 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[20-Sep-2025 03:07:00 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[24-Sep-2025 05:08:48 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[24-Sep-2025 20:05:48 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[24-Sep-2025 21:10:18 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[29-Sep-2025 03:29:27 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[29-Sep-2025 04:29:09 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[29-Sep-2025 17:39:56 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[29-Sep-2025 17:58:31 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[29-Sep-2025 18:09:03 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[10-Oct-2025 17:52:43 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[10-Oct-2025 19:14:32 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[12-Oct-2025 17:33:55 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12
+[14-Oct-2025 22:53:00 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Database\Eloquent\Factories\Factory" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/factories/UserFactory.php on line 12

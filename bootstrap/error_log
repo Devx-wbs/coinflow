@@ -1,0 +1,36 @@
+[20-Sep-2025 03:06:47 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[20-Sep-2025 03:06:50 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[22-Sep-2025 22:26:44 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[22-Sep-2025 23:55:43 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[22-Sep-2025 23:59:55 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[23-Sep-2025 00:10:30 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[23-Sep-2025 16:04:40 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[23-Sep-2025 18:22:42 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
+[23-Sep-2025 18:28:20 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Application" not found in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/digiwbs/public_html/coin-flow.digiwbs.com/bootstrap/app.php on line 7
