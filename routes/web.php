@@ -37,7 +37,7 @@ Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('fo
 Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
 Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
-// Registration
+// Registrations
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
 
