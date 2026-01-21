@@ -44,19 +44,12 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
 // Pricing page
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
-
-
-
-
-
 // Routes protected by auth middleware
-    Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'route.permission'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-
-    //plan
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
@@ -74,10 +67,6 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
         Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
     });
 
-
-
-
-
     //merchant contact
 
     Route::get('/merchant-contact', [MerchantController::class, 'index'])->name('merchant-contact');
@@ -88,7 +77,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
     Route::get('/subscribe-store', [MerchantController::class, 'subscribe_store_index'])->name('subscribe-store');
 
     //license management
-    Route::get('/license_managment', [MerchantController::class, 'license_managment_index'])->name('license_managment');
+    Route::get('/license', [MerchantController::class, 'license_managment_index'])->name('license-managment');
 
 
     // global stats
@@ -134,14 +123,14 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
 
 
     // user role permission
-Route::prefix('user-role-permission')->group(function () {
-    Route::get('/', [UserRolePermissionController::class, 'index'])->name('user-role-permission');
-    Route::get('/create', [UserRolePermissionController::class, 'create'])->name('user-role-permission.create');
-    Route::post('/store', [UserRolePermissionController::class, 'store'])->name('user-role-permission.store');
-    Route::get('/edit/{id}', [UserRolePermissionController::class, 'edit'])->name('user-role-permission.edit');
-    Route::put('/edit/{id}', [UserRolePermissionController::class, 'update'])->name('user-role-permission.update');
-    Route::delete('delete/{id}', [UserRolePermissionController::class, 'destroy'])->name('user-role-permission.destroy');
-});
+    Route::prefix('user-role-permission')->group(function () {
+        Route::get('/', [UserRolePermissionController::class, 'index'])->name('user-role-permission');
+        Route::get('/create', [UserRolePermissionController::class, 'create'])->name('user-role-permission.create');
+        Route::post('/store', [UserRolePermissionController::class, 'store'])->name('user-role-permission.store');
+        Route::get('/edit/{id}', [UserRolePermissionController::class, 'edit'])->name('user-role-permission.edit');
+        Route::put('/edit/{id}', [UserRolePermissionController::class, 'update'])->name('user-role-permission.update');
+        Route::delete('delete/{id}', [UserRolePermissionController::class, 'destroy'])->name('user-role-permission.destroy');
+    });
 
     // update profile
 

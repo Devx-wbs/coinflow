@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <form method="GET" action="{{ route('license_managment') }}" class="mb-3">
+    <form method="GET" action="{{ route('license-managment') }}" class="mb-3">
         <div class="row g-2">
             <div class="col-md-3">
                 <input type="text" name="search_license_key" value="{{ request('search_license_key') }}" class="form-control" placeholder="Search License Key">

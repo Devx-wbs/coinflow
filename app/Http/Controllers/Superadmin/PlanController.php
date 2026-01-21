@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -111,7 +112,7 @@ class PlanController extends Controller
 
         $validated['max_activations'] = Plan::resolveMaxActivations($validated);
 
-       
+
         $plan->update([
             'name'              => $validated['name'],
             'description'       => $validated['description'] ?? null,

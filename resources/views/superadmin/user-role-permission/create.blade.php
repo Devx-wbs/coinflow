@@ -27,10 +27,13 @@
                         <label class="form-label">Role</label>
                         <select name="role" class="form-select" required>
                             <option value="">Select Role</option>
-                            <option value="2">Subadmin</option>
-                            <option value="3">Support</option>
+                            @foreach($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
                         </select>
                     </div>
+
+
                     <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-select" required>
@@ -45,50 +48,32 @@
                 {{-- Permissions Table --}}
                 <h6 class="mb-3">Assign Permissions</h6>
                 <div class="table-responsive">
-                    @php
-                        $modules = [
-                            'Dashboard',
-                            'Subscribe Stores',
-                            'License Management',
-                            'User Roles & Permission',
-                            
-                            'Store Earnings',
-                            'Plan Management',
-                            'Logs & Errors',
-                            'Merchant Contacts',
-                            'Support',
-                            'Global Setting',
-                            'Update Tracker',
-                            'Push Notices'
-                        ];
-                    @endphp
+
 
                     <table class="table table-bordered align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Module Name</th>
-                                <th class="text-center">View</th>
-                                <th class="text-center">Edit</th>
+                                <th class="text-center">Action</th>
+                                <th>Permission Name</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($modules as $module)
-                                <tr>
-                                    <td>{{ $module }}</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" 
-                                            name="permissions[]" 
-                                            value="{{ strtolower(str_replace([' ', '&'], ['_', 'and'], $module)).'_view' }}">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="checkbox" 
-                                            name="permissions[]" 
-                                            value="{{ strtolower(str_replace([' ', '&'], ['_', 'and'], $module)).'_edit' }}">
-                                    </td>
-                                </tr>
+                            @foreach($permissions as $permission)
+                            <tr>
+
+                                <td class="text-center">
+                                    <input type="checkbox"
+                                        name="permissions[]"
+                                        value="{{ $permission->name }}">
+                                </td>
+                                <td>{{ $permission->name }}</td>
+
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
 
                 <div class="d-flex justify-content-end mt-4">

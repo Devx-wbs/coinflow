@@ -23,11 +23,18 @@
                 </div>
 
                 <div class="row mb-3">
+
                     <div class="col-md-6">
                         <label class="form-label">Role</label>
-                        <select name="role" class="form-select" required>
-                            <option value="2" {{ $user->role == 2 ? 'selected' : '' }}>Subadmin</option>
-                            <option value="3" {{ $user->role == 3 ? 'selected' : '' }}>Support</option>
+                        <select name="role_id" class="form-select" required>
+                            <option value="">Select Role</option>
+
+                            @foreach ($roles as $role)
+                            <option value="{{ $role->id }}"
+                               {{ $user->role == $role->id ? 'selected' : '' }}>
+                                {{ $role->name}}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -41,58 +48,32 @@
 
                 <hr class="my-4">
 
-                <h6 class="mb-3">Module Permissions</h6>
-                <div class="table-responsive">
-                    @php
-                        use Spatie\Permission\Models\Permission;
-                        $modules = [
-                            'Dashboard',
-                            'Subscribe Stores',
-                            'License Management',
-                            'User Roles & Permission',
-                         
-                            'Store Earnings',
-                            'Plan Management',
-                            'Logs & Errors',
-                            'Merchant Contacts',
-                            'Support',
-                            'Global Setting',
-                            'Update Tracker',
-                            'Push Notices'
-                        ];
-                    @endphp
+                <h6 class="mb-3">Assign Permissions</h6>
 
+                <div class="table-responsive">
                     <table class="table table-bordered align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>Module Name</th>
-                                <th class="text-center">View</th>
-                                <th class="text-center">Edit</th>
+                                <th class="text-center">Action</th>
+                                <th>Permission Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($modules as $module)
-                                @php
-                                    $viewPerm = strtolower(str_replace([' ', '&'], ['_', 'and'], $module)) . '_view';
-                                    $editPerm = strtolower(str_replace([' ', '&'], ['_', 'and'], $module)) . '_edit';
-                                @endphp
-                                <tr>
-                                    <td>{{ $module }}</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="permissions[]" 
-                                            value="{{ $viewPerm }}"
-                                            {{ Permission::where('name', $viewPerm)->exists() && $user->hasPermissionTo($viewPerm) ? 'checked' : '' }}>
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="permissions[]" 
-                                            value="{{ $editPerm }}"
-                                            {{ Permission::where('name', $editPerm)->exists() && $user->hasPermissionTo($editPerm) ? 'checked' : '' }}>
-                                    </td>
-                                </tr>
+                            @foreach($permissions as $permission)
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox"
+                                        name="permissions[]"
+                                        value="{{ $permission->name }}"
+                                        {{ in_array($permission->name, $userPermissions) ? 'checked' : '' }}>
+                                </td>
+                                <td>{{ $permission->name }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+
 
                 <div class="d-flex justify-content-end mt-4">
                     <a href="{{ route('user-role-permission') }}" class="btn btn-secondary me-2">Cancel</a>

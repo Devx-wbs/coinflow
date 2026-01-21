@@ -30,7 +30,7 @@
     @endif
 
     <ul class="navbar-nav">
-      @if($user->role == 1 || $user->canany(['dashboard_view', 'dashboard_edit']))
+       @if($user?->canAccessModule('dashboard-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -54,8 +54,7 @@
       @endif
 
       {{-- Subscribe Stores --}}
-     @if($user->role == 1 || $user->canany(['subscribe_store_view', 'subscribe_store_edit']))
-    
+    @if($user?->canAccessModule('subscribe-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('subscribe-store') ? 'active' : '') }}" href="{{ route('subscribe-store') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -78,10 +77,9 @@
       </li>
       @endif
 
-      @if($user && ($user->role == 1 || $user->canany(['license_managment_view', 'license_managment_edit'])))
-
+@if($user?->canAccessModule('license-'))
        <li class="nav-item">
-        <a class="nav-link {{ (Request::is('license_managment') ? 'active' : '') }}" href="{{ route('license_managment') }}">
+        <a class="nav-link {{ (Request::is('license-managment') ? 'active' : '') }}" href="{{ route('license-managment') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -103,7 +101,7 @@
       </li>
       @endif
        
-      @if($user && ($user->role == 1 || $user->canany(['user_role_permission_view', 'user_role_permission_edit'])))
+       @if($user?->canAccessModule('user-role-'))
        <li class="nav-item">
         <a class="nav-link {{ (Request::is('user-role-permission') ? 'active' : '') }}" href="{{ route('user-role-permission') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -155,7 +153,8 @@
       <!-- test -->
      
       
-      @if($user && ($user->role == 1 || $user->canany(['plan_management_view', 'plan_management_edit'])))
+  
+      @if($user?->canAccessModule('plan-'))
 
        <li class="nav-item">
         <a class="nav-link {{ Route::is('plans-index') ? 'active' : '' }}" href="{{ route('plans-index') }}">
@@ -180,8 +179,7 @@
       </li>
       @endif
       
-      @if($user && ($user->role == 1 || $user->canany(['logs_error_view', 'logs_error_edit'])))
-
+@if($user?->canAccessModule('logs-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('logs-error') ? 'active' : '') }}" href="{{ url('logs-error') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -208,7 +206,7 @@
       
       
       
-      @if($user && ($user->role == 1 || $user->canany(['merchant_contact_view', 'merchant_contact_edit'])))
+      @if($user?->canAccessModule('merchant-'))
 
       <li class="nav-item">
         <!--<a class="nav-link  " href="{{ url('static-sign-in') }}">-->
@@ -232,7 +230,7 @@
         </a>
       </li>
       @endif
-      @if($user && ($user->role == 1 || $user->canany(['support_view', 'support_edit'])))
+      @if($user?->canAccessModule('support-'))
        <li class="nav-item">
         <a class="nav-link {{ Route::is('support') ? 'active' : '' }}" href="{{ route('support') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -258,7 +256,7 @@
       @endif
       
       
-       @if($user && ($user->role == 1 || $user->canany(['global_setting_view', 'global_setting_edit'])))
+       @if($user?->canAccessModule('global-'))
        <li class="nav-item">
         <a class="nav-link {{ (Request::is('global-setting') ? 'active' : '') }}" href="{{ route('global-setting') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -305,7 +303,7 @@
         </a>
       </li>
         @endif
-      @if($user && ($user->role == 1 || $user->canany(['push_notice_view', 'push_notice_edit'])))
+        @if($user?->canAccessModule('push-'))
         <li class="nav-item">
         <a class="nav-link {{ (Request::is('push-notice') ? 'active' : '') }}" href="{{ route('push-notice') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
