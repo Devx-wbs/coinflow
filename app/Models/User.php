@@ -65,8 +65,14 @@ class User extends Authenticatable
         return $this->hasOne(License::class, 'user_id', 'id');
     }
 
-    public function permissions()
+
+    public function canAccessModule(string $prefix): bool
     {
-        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id');
+        if ($this->role == 1) {
+            return true;
+        }
+        return $this->getAllPermissions()
+            ->pluck('name')
+            ->contains(fn($perm) => str_starts_with($perm, $prefix));
     }
 }
