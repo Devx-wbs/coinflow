@@ -102,9 +102,6 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
 
 
     // user Roles & permission
-
-
-
     // push Notices
     Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
 
