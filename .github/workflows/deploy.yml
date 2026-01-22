@@ -37,7 +37,9 @@ jobs:
             echo "Installing PHP dependencies..."
             composer install --no-dev --optimize-autoloader
 
-            
+             echo "Fixing Laravel permissions..."
+            sudo chown -R apache:apache storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
 
             echo "Running migrations..."
             php artisan migrate --force
