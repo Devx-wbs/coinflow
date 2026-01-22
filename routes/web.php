@@ -68,7 +68,6 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
     });
 
     //merchant contact
-
     Route::get('/merchant-contact', [MerchantController::class, 'index'])->name('merchant-contact');
     Route::get('merchant-store/{license}', [MerchantController::class, 'viewStores'])->name('merchant.store.view');
 
@@ -103,9 +102,6 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
 
 
     // user Roles & permission
-
-
-
     // push Notices
     Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
 
