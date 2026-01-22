@@ -80,7 +80,7 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
     Route::get('/license', [MerchantController::class, 'license_managment_index'])->name('license-managment');
 
 
-    // global stats
+    // global stats 
     Route::get('/global-stats', [MerchantController::class, 'global_stats_index'])->name('global-stats');
 
 
