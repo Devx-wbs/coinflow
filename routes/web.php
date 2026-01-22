@@ -68,7 +68,6 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
     });
 
     //merchant contact
-
     Route::get('/merchant-contact', [MerchantController::class, 'index'])->name('merchant-contact');
     Route::get('merchant-store/{license}', [MerchantController::class, 'viewStores'])->name('merchant.store.view');
 
