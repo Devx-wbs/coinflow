@@ -27,15 +27,17 @@ jobs:
 
             cd /var/www/html/coinflow
             git config --global --add safe.directory /var/www/html/coinflow
+            echo "Laravel permissions..."
+            sudo chown -R apache:apache storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
+            
             echo "Pulling latest code..."
             git pull origin main
 
             echo "Installing PHP dependencies..."
             composer install --no-dev --optimize-autoloader
 
-            echo "Laravel permissions..."
-            sudo chown -R apache:apache storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
+            
 
             echo "Running migrations..."
             php artisan migrate --force
