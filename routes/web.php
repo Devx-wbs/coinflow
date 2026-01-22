@@ -26,6 +26,7 @@ Route::get('/download-zip', [DownloadZipController::class, 'download'])->name('d
 Route::get('/plan-detail', [FrontedController::class, 'plan_detail'])->name('plan-detail');
 
 // Login form
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 // Handle login
