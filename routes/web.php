@@ -85,7 +85,6 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
 
 
     // store earning 
-
     // Route::get('/store-earning', [MerchantController::class, 'store_earning_index'])->name('store-earning');
 
 
