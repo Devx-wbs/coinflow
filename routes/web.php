@@ -52,7 +52,7 @@ Route::middleware(['auth', 'route.permission'])->group(function () {
 
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
-        Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
+        Route::get('/createddd', [PlanController::class, 'create'])->name('plan-create');
         Route::post('/', [PlanController::class, 'store'])->name('plan-store');
         Route::get('/{plan}/edit', [PlanController::class, 'edit'])->name('plan-edit');
         Route::put('/{plan}', [PlanController::class, 'update'])->name('plan-update');
