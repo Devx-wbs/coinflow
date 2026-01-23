@@ -17,7 +17,7 @@ return new class extends Migration
         $table->unsignedBigInteger('plan_id');
         $table->unsignedBigInteger('subscription_id')->nullable();
         $table->string('license_key')->unique();
-        $table->string('store_url');
+        $table->string('store_url')->nullable();
         $table->integer('max_activations')->default(1);
         $table->integer('used_activations')->default(0);
         $table->enum('status', ['active', 'revoked', 'expired'])->default('active');

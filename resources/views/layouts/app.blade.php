@@ -9,6 +9,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <!-- CSRF token for AJAX -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
   @if (env('IS_DEMO'))
       <x-demo-metas></x-demo-metas>
   @endif
