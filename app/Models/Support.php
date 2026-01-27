@@ -109,7 +109,8 @@ class Support extends Model
     }
 
 
-    //custom functions
-
-    
+    public function reply()
+{
+    return $this->hasOne(SupportReply::class);
+}
 }

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SupportReplyMail;
 use App\Models\Support;
+use App\Models\SupportReply;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SupportController extends Controller
 {
@@ -94,12 +97,6 @@ class SupportController extends Controller
             'status' => $request->status,
         ]);
 
-        // Send email to customer
-        // Mail::raw("Your ticket {$ticket->ticket_id} has been updated: ".$request->admin_reply, function($message) use ($ticket){
-        //     $message->to($ticket->customer_email)
-        //             ->subject("Ticket Update: {$ticket->ticket_id}");
-        // });
-
         return redirect()->route('admin.support.index')->with('success', 'Ticket updated and email sent');
     }
 
@@ -143,6 +140,47 @@ class SupportController extends Controller
         return response()->json([
             'success' => true,
             'assigned_user_name' => $support->assignedUser->name,
+        ]);
+    }
+
+
+    public function reply(Request $request, $id)
+    {
+        $support = Support::with(['user', 'reply'])->findOrFail($id);
+
+        // 🚫 Block if already replied
+        if ($support->reply) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This ticket already has a reply.'
+            ], 422);
+        }
+
+        $request->validate([
+            'reply' => 'required|string'
+        ]);
+
+        $reply = SupportReply::create([
+            'support_id' => $support->id,
+            'user_id'    => auth()->id(),
+            'message'    => $request->reply,
+        ]);
+
+        // optional: auto-close ticket
+
+
+        Mail::to($support->user->email)
+            ->send(new SupportReplyMail($support, $reply));
+        $support->update([
+            'status' => Support::STATUS_CLOSED
+        ]);
+        return response()->json([
+            'success' => true,
+            'reply' => [
+                'text' => $reply->message,
+                'user' => auth()->user()->name,
+                'time' => $reply->created_at->format('Y-m-d H:i')
+            ]
         ]);
     }
 }
