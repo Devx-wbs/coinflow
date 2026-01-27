@@ -1,7 +1,9 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
+@php
+use App\Models\Support;
+@endphp
 <h4 class="mb-3">Customer Support</h4>
 
 <a href="{{ route('support-create') }}" class="btn btn-primary">
@@ -51,14 +53,14 @@
             <td>{{ $support->subject }}</td>
             <td>{{ $support->category_name }}</td>
             <td>
-                <span class="badge bg-{{ $support->status === 'closed' ? 'success' : 'warning' }}">
-                    {{ strtoupper($support->status) }}
+                <span class="badge bg-{{ $support->status === Support::STATUS_CLOSED ? 'success' : 'warning' }}">
+                    {{ $support->status_name }}
                 </span>
             </td>
             <td>{{ $support->created_at->format('Y-m-d') }}</td>
             <td>
-                <a href="{{ route('support-show', $support->id) }}">View</a>
-                <a href="{{ route('support-destroy', $support->id) }}">Delete</a>
+                <a class="btn btn-primary" href="{{ route('support-show', $support->id) }}">View</a>
+                <a class="btn btn-danger" href="{{ route('support-destroy', $support->id) }}">Delete</a>
             </td>
         </tr>
         @empty
