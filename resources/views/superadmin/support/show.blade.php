@@ -23,7 +23,7 @@
         </ul>
         <a href="{{ route('support') }}" class="btn btn-secondary btn-sm">Back to Tickets</a>
     </div>
-    
+
 </div>
 <div id="assignMessage" class="alert alert-success" style="display: none;"></div>
 <div class="row">
@@ -44,15 +44,37 @@
                 <hr>
 
                 <!-- Reply Form -->
+
+                <hr>
+                <h6>Reply</h6>
+
+                <div id="replyList">
+                    @if($support->reply)
+                    <div class="border rounded p-3 mb-3 bg-light">
+                        <strong>
+                            {{ $support->reply->user->name }}
+                            <small class="text-muted">
+                                • {{ $support->reply->created_at->format('Y-m-d H:i') }}
+                            </small>
+                        </strong>
+                        <p class="mb-0 mt-1">{{ $support->reply->message }}</p>
+                    </div>
+                    @else
+                    <p class="text-muted">No reply yet.</p>
+                    @endif
+                </div>
+                @if(!$support->reply)
                 <form id="replyForm">
                     @csrf
                     <div class="mb-2">
                         <label for="reply">Reply to Customer</label>
-                        <textarea class="form-control" id="reply" name="reply" rows="3" placeholder="Type your reply here..."></textarea>
+                        <textarea class="form-control" id="reply" name="reply" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm">Send Reply</button>
                 </form>
-                <div id="replyMessage" class="mt-2" style="display:none;"></div>
+                @endif
+
+                <div id="replyMessage" class="mt-2"></div>
             </div>
         </div>
     </div>
@@ -84,6 +106,57 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+
+       const replyForm = document.getElementById('replyForm');
+    const replyList = document.getElementById('replyList');
+    const replyMessage = document.getElementById('replyMessage');
+
+    if (replyForm) {
+        replyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch("{{ route('support.reply', $support->id) }}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Append new reply instantly
+                    replyList.innerHTML = `
+                        <div class="border rounded p-3 mb-3 bg-light">
+                            <strong>
+                                ${data.reply.user}
+                                <small class="text-muted">• just now</small>
+                            </strong>
+                            <p class="mb-0 mt-1">${data.reply.text}</p>
+                        </div>
+                    `;
+
+                    // Reset and hide form after reply
+                    replyForm.remove();
+                    replyMessage.innerHTML = `<div class="alert alert-success">Reply Send successfully!</div>`;
+                } else {
+                    replyMessage.innerHTML = `<div class="alert alert-danger">${data.message || 'Failed to send reply'}</div>`;
+                }
+
+                setTimeout(() => replyMessage.innerHTML = '', 3000);
+            })
+            .catch(err => {
+                console.error(err);
+                replyMessage.innerHTML = `<div class="alert alert-danger">An error occurred.</div>`;
+                setTimeout(() => replyMessage.innerHTML = '', 3000);
+            });
+        });
+    }
 
         const assignLinks = document.querySelectorAll('.assign-user');
         const msg = document.getElementById('assignMessage');
@@ -162,21 +235,21 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-                        
+
 
                         // Show success message
                         msg.textContent = 'Status updated to ' + data.status_name;
                         msg.className = 'alert alert-success'; // green
                         msg.style.display = 'block';
                     } else {
-                       // Show error message
-                            msg.textContent = 'Failed to change status!';
-                            msg.className = 'alert alert-danger'; // red
-                            msg.style.display = 'block';
+                        // Show error message
+                        msg.textContent = 'Failed to change status!';
+                        msg.className = 'alert alert-danger'; // red
+                        msg.style.display = 'block';
                     }
                     setTimeout(() => {
-                            msg.style.display = 'none';
-                        }, 3000);
+                        msg.style.display = 'none';
+                    }, 3000);
                 })
                 .catch(err => console.error('Error:', err));
         });
