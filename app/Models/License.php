@@ -23,17 +23,7 @@ class License extends Model
 
    // use HasFactory;
 
-    // protected $fillable = [
-    //     'user_id',
-    //     'plan_id',
-    //     'subscription_id',
-    //     'license_key',
-    //     'store_url',
-    //     'max_activations',
-    //     'used_activations',
-    //     'status',
-    //     'expiration_date',
-    // ];
+
 
     protected $casts = [
         'expiration_date' => 'date',
