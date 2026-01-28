@@ -109,14 +109,14 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
 
     // user Roles & permission
     // push Notices
-    // Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
+    Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
 
-    Route::prefix('push-notice')->name('push.notice.')->group(function () {
-        Route::get('/', [PushNoticeController::class, 'index'])->name('index');
-        Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
-    });
+    // Route::prefix('push-notice')->name('push.notice.')->group(function () {
+    //     Route::get('/', [PushNoticeController::class, 'index'])->name('index');
+    //     Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
+    // });
 
-
+ 
     //global setting
 
     Route::get('/global-setting', [GlobalSettingController::class, 'index'])->name('global-setting');
