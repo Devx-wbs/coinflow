@@ -129,15 +129,6 @@ class MerchantController extends Controller
     }
 
 
-
-
-
-    public function push_notice_index()
-    {
-
-        return view('superadmin.merchant.push_notice_index');
-    }
-
     public function viewStores($licenseId)
     {
         $license = License::with(['user', 'planInfo'])->findOrFail($licenseId);

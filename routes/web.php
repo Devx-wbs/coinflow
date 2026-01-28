@@ -51,6 +51,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
         Route::get('/success', [BuyplanController::class, 'success'])->name('buyplan.success');
         Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
     });
+
     });
 Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
@@ -109,12 +110,17 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
 
     // user Roles & permission
     // push Notices
-    Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
+    // Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
 
-    // Route::prefix('push-notice')->name('push.notice.')->group(function () {
-    //     Route::get('/', [PushNoticeController::class, 'index'])->name('index');
-    //     Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
-    // });
+    Route::prefix('push-notice')->name('push.notice.')->group(function () {
+        Route::get('/', [PushNoticeController::class, 'index'])->name('index');
+        Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
+        Route::get('/view/{notification}', [PushNoticeController::class, 'show'])->name('show');
+        Route::post('/{notification}/resend', [PushNoticeController::class, 'resend'])->name('send');
+    // Update notification message
+    Route::post('/{notification}/update', [PushNoticeController::class, 'update'])->name('update');
+     Route::get('/{notification}/edit', [PushNoticeController::class, 'edit'])->name('edit');
+    });
 
  
     //global setting
