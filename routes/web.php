@@ -116,7 +116,7 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
     //     Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
     // });
 
-
+ 
     //global setting
 
     Route::get('/global-setting', [GlobalSettingController::class, 'index'])->name('global-setting');
