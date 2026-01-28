@@ -15,6 +15,7 @@ use App\Http\Controllers\BuyplanController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\DownloadZipController;
+use App\Http\Controllers\PushNoticeController;
 use App\Http\Controllers\Superadmin\SupportController;
 
 Route::get('/', [FrontedController::class, 'index']);
@@ -41,24 +42,19 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
 // Routes protected by auth middleware
-Route::middleware('auth')->group(function () {
-
+    Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-
+  #Payment stripe buy
     Route::prefix('buyplan')->group(function () {
         Route::get('/', [BuyplanController::class, 'create'])->name('buyplan.create');
         Route::post('/store', [BuyplanController::class, 'store'])->name('buyplan.store');
         Route::get('/success', [BuyplanController::class, 'success'])->name('buyplan.success');
         Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
     });
-
-
-    Route::middleware('route.permission')->group(function () {});
+    });
+Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
+    // Route::middleware('route.permission')->group(function () {});
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
@@ -68,13 +64,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{plan}', [PlanController::class, 'destroy'])->name('plan-destroy');
     });
 
-    #Payment stripe buy
-    // Route::prefix('buyplan')->group(function () {
-    //     Route::get('/', [BuyplanController::class, 'create'])->name('buyplan.create');
-    //     Route::post('/store', [BuyplanController::class, 'store'])->name('buyplan.store');
-    //     Route::get('/success', [BuyplanController::class, 'success'])->name('buyplan.success');
-    //     Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
-    // });
 
     //merchant contact
     Route::get('/merchant-contact', [MerchantController::class, 'index'])->name('merchant-contact');
@@ -108,7 +97,7 @@ Route::middleware('auth')->group(function () {
 
     // support
     Route::prefix('support')->group(function () {
-         Route::post('/{id}/reply', [SupportController::class, 'reply'])->name('support.reply');
+        Route::post('/{id}/reply', [SupportController::class, 'reply'])->name('support.reply');
         Route::get('/', [SupportController::class, 'index'])->name('support');
         Route::get('/create', [SupportController::class, 'create'])->name('support-create');
         Route::post('/store', [SupportController::class, 'store'])->name('support-store');
@@ -117,12 +106,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/{id}/assign', [SupportController::class, 'assignTo'])->name('support.assign');
         Route::post('/{id}/status', [SupportController::class, 'updateStatus'])->name('support.updateStatus'); // ✅ added
     });
-    
+
     // user Roles & permission
     // push Notices
-    Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
+    // Route::get('/push-notice', [MerchantController::class, 'push_notice_index'])->name('push-notice');
 
-
+    Route::prefix('push-notice')->name('push.notice.')->group(function () {
+        Route::get('/', [PushNoticeController::class, 'index'])->name('index');
+        Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
+    });
 
 
     //global setting
