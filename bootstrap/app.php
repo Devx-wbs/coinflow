@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckRoutePermission;
+use App\Models\SystemLog;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -26,5 +27,29 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->report(function (Throwable $e) {
+
+            // ✅ Check toggle ON/OFF
+            if (!SystemLog::systemLogsEnabled()) {
+                return;
+            }
+
+            // ❌ Skip 404 errors
+            if ($e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                return;
+            }
+
+            // ✅ Save error into DB
+            SystemLog::create([
+                'level'   => 'error',
+                'message' => $e->getMessage(),
+                'trace'   => $e->getTraceAsString(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+                'url'     => request()->fullUrl(),
+                'method'  => request()->method(),
+                'user_id' => auth()->check() ? auth()->id() : null,
+                'ip'      => request()->ip(),
+            ]);
+        });
     })->create();

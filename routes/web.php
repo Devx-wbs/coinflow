@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Superadmin\SystemLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FrontedController;
@@ -42,9 +43,9 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
 // Routes protected by auth middleware
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-  #Payment stripe buy
+    #Payment stripe buy
     Route::prefix('buyplan')->group(function () {
         Route::get('/', [BuyplanController::class, 'create'])->name('buyplan.create');
         Route::post('/store', [BuyplanController::class, 'store'])->name('buyplan.store');
@@ -52,8 +53,8 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.p
         Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
     });
 
-    });
-Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
+        });
+    Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('plans')->group(function () {
@@ -87,7 +88,7 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
 
 
     // logs & errors
-    Route::get('/logs-error', [MerchantController::class, 'logs_error_index'])->name('logs-error');
+    // Route::get('/logs-error', [MerchantController::class, 'logs_error_index'])->name('logs-error');
 
 
     // update tracker
@@ -117,21 +118,29 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
         Route::post('/store', [PushNoticeController::class, 'store'])->name('store');
         Route::get('/view/{notification}', [PushNoticeController::class, 'show'])->name('show');
         Route::post('/{notification}/resend', [PushNoticeController::class, 'resend'])->name('send');
-    // Update notification message
-    Route::post('/{notification}/update', [PushNoticeController::class, 'update'])->name('update');
-     Route::get('/{notification}/edit', [PushNoticeController::class, 'edit'])->name('edit');
+        // Update notification message
+        Route::post('/{notification}/update', [PushNoticeController::class, 'update'])->name('update');
+        Route::get('/{notification}/edit', [PushNoticeController::class, 'edit'])->name('edit');
     });
 
- 
+
     //global setting
 
     Route::get('/global-setting', [GlobalSettingController::class, 'index'])->name('global-setting');
     Route::post('global-settings/save-fee', [GlobalSettingController::class, 'saveFee'])->name('save-fee');
     Route::post('global-settings/save-coins', [GlobalSettingController::class, 'saveCoins'])->name('save-coins');
     Route::post('/global-setting/api-key', [GlobalSettingController::class, 'updateApiKey'])->name('update-api-key');
+    Route::post('/global-setting/log-toggle',  [GlobalSettingController::class, 'saveLogToggle'])->name('save-log-toggle');
 
 
-
+    //Logs and Errors
+Route::prefix('logs-error')->group(function () {
+    Route::delete('/delete-all', [SystemLogController::class, 'deleteAll'])->name('logs.deleteAll');
+    Route::get('/', [SystemLogController::class, 'index'])->name('logs.index');
+    Route::get('/{id}', [SystemLogController::class, 'show'])->name('logs.show');
+    Route::delete('/{id}', [SystemLogController::class, 'destroy'])->name('logs.delete');
+    Route::post('/export', [SystemLogController::class, 'export'])->name('logs.export');
+});
     // user role permission
     Route::prefix('user-role-permission')->group(function () {
         Route::get('/', [UserRolePermissionController::class, 'index'])->name('user-role-permission');
