@@ -2,7 +2,9 @@
 
 @section('content')
 
-
+@php
+use App\Models\Notification;
+@endphp
 <div class="container-fluid py-4">
     <!-- Page Title & Subtitle -->
     <div class="mb-2">
