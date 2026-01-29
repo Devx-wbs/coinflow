@@ -37,6 +37,35 @@
             </form>
         </div>
 
+
+        <!-- Logs & Error Tracking -->
+<div class="card mb-4 px-3 py-4">
+    <div class="mb-4">
+        <span class="h5">
+            <i class="fas fa-bug me-2"></i>Logs and Errors
+        </span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <label class="fw-bold">Enable Error Logging System</label>
+
+        
+
+        <div class="form-check form-switch">
+            
+            <input class="form-check-input bg-success border-success"
+                   type="checkbox"
+                   id="logToggleSwitch"
+                   {{ ($logStatus == 1) ? 'checked' : '' }}>
+        </div>
+        
+    </div>
+
+    <small class="text-muted mt-2">
+        If enabled, system errors will be saved in database and shown in admin dashboard.
+    </small>
+</div>
+
         
         <!-- Transaction Fee Settings -->
         <div class="card mb-4 px-3 py-4">
@@ -233,6 +262,35 @@
         })
         .catch(() => showAlert('danger', 'Something went wrong while updating API key.'));
     });
+
+
+    // ---------- LOG TOGGLE HANDLER ----------
+document.getElementById('logToggleSwitch').addEventListener('change', function () {
+
+    let status = this.checked ? 1 : 0;
+
+    fetch('{{ route("save-log-toggle") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({
+            log_status: status
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            showAlert('success', data.message);
+        } else {
+            showAlert('danger', 'Error updating log system');
+        }
+    })
+    .catch(() => showAlert('danger', 'Something went wrong while saving toggle.'));
+});
+
+
 
     </script>
 @endsection
