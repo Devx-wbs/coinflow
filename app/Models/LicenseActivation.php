@@ -11,6 +11,7 @@ class LicenseActivation extends Model
     protected $fillable = [
         'license_id',
         'store_url',
+        'status',
         'activated_at',
         'deactivated_at'
     ];

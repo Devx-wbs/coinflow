@@ -71,15 +71,9 @@ class LicenseController extends Controller
             ->where('store_url', $request->store_url)
             ->first();
 
-
         // Count active stores ONCE
-        // $activeCount = LicenseActivation::where('license_id', $license->id)
-        //     ->where('status', 'active')
-        //     ->count();
-
         $activeCount = LicenseActivation::where('license_id', $license->id)
-            ->whereNotNull('activated_at')
-            ->whereNull('deactivated_at')
+            ->where('status', 'active')
             ->count();
 
         /** -------------------------------

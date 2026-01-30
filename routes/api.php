@@ -93,7 +93,7 @@ Route::get('/tickets', [TicketController::class, 'index']);
 
 
 Route::post('/verify-deactivation-license', [LicenseController::class, 'deactivateStore']);
-
+Route::post('/verify-activation-license', [LicenseController::class, 'verify']);
 
 
 
@@ -106,7 +106,7 @@ Route::post('/license/validate', [LicenseController::class, 'validateLicense']);
 Route::post('/license/create', [LicenseController::class, 'createLicense']);
 
 Route::get('/global-settings', [GlobalSettingApiController::class, 'index']);
-Route::post('/verify-activation-license', [LicenseController::class, 'verify']);
+
 
 
 
