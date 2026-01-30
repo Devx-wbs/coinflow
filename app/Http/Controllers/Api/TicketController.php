@@ -19,15 +19,49 @@ class TicketController extends Controller
         return response()->json($tickets);
     }
 
-    // View a single ticket
-    public function show($id)
+
+    public function guestIndex(Request $request)
     {
-        $ticket = Support::where('user_id', auth()->id())
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $tickets = Support::whereNull('user_id')
+            ->where('email', $request->email)
+            ->with('reply')
+            ->latest()
+            ->paginate(10);
+
+        return response()->json($tickets);
+    }
+
+
+    public function show(Request $request, $id)
+    {
+        // ✅ Case 1: Authenticated User
+        if (auth()->check()) {
+
+            $ticket = Support::where('user_id', auth()->id())
+                ->with('reply')
+                ->findOrFail($id);
+
+            return response()->json($ticket);
+        }
+
+        // ✅ Case 2: Guest User
+        // Guest must provide email
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $ticket = Support::whereNull('user_id')
+            ->where('email', $request->email)
             ->with('reply')
             ->findOrFail($id);
 
         return response()->json($ticket);
     }
+
 
     // Create a new ticket
     public function store(Request $request)
@@ -37,18 +71,37 @@ class TicketController extends Controller
             'description' => 'required|string',
             'category_id' => 'required|integer',
             'priority' => 'required|integer',
+            'email'        => 'nullable|email',
         ]);
 
+
+        // Check if user is authenticated
+        $userId = auth()->id();
+
+        // If user not logged in, email must be provided
+        if (!$userId && !$request->email) {
+            return response()->json([
+                'message' => 'Email is required for guest ticket creation.'
+            ], 422);
+        }
+
+
+        // Create Ticket
         $ticket = Support::create([
-            'user_id' => auth()->id(),
-            'subject' => $request->subject,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'priority' => $request->priority,
-            'status' => Support::STATUS_INACTIVE,
+            'user_id'      => $userId,              // null if guest
+            'email'        => $request->email,      // stored for guest
+            'subject'      => $request->subject,
+            'description'  => $request->description,
+            'category_id'  => $request->category_id,
+            'priority'     => $request->priority,
+            'status'       => Support::STATUS_INACTIVE,
         ]);
 
-        return response()->json($ticket, 201);
+
+        return response()->json([
+            'message' => 'Ticket created successfully',
+            'ticket'  => $ticket
+        ], 201);
     }
 
     // Update ticket (only if no reply yet)
@@ -71,7 +124,7 @@ class TicketController extends Controller
             'priority' => 'required|integer',
         ]);
 
-        $ticket->update($request->only('subject','description','category_id','priority'));
+        $ticket->update($request->only('subject', 'description', 'category_id', 'priority'));
 
         return response()->json($ticket);
     }
