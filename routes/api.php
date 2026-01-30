@@ -83,11 +83,13 @@ Route::middleware('auth:sanctum')->group(function () {
 // -----------------------
 // Support Ticket API Routes
 // // -----------------------
-Route::get('/tickets', [TicketController::class, 'index']);        // list all tickets of user
-Route::get('/tickets/{id}', [TicketController::class, 'show']);    // view single ticket
-Route::post('/tickets', [TicketController::class, 'store']);       // create ticket
-Route::put('/tickets/{id}', [TicketController::class, 'update']);  // update ticket (only if no reply)
-Route::post('/guest-tickets', [TicketController::class, 'guestIndex']);
+
+Route::post('/tickets/create', [TicketController::class, 'store']);       // create ticket
+Route::get('/tickets/view/{id}', [TicketController::class, 'show']);
+Route::get('/tickets', [TicketController::class, 'index']); 
+
+  // update ticket (only if no reply)
+
 
 
 Route::post('/verify-deactivation-license', [LicenseController::class, 'deactivateStore']);
