@@ -2,6 +2,11 @@
 
 @section('content')
 
+
+@php
+use App\Models\PluginVersion;
+@endphp
+
 <div class="container-fluid py-4">
     {{-- 1. HEADER AND ACTION BUTTONS --}}
     <div class="row mb-4">
@@ -11,19 +16,31 @@
                     <h5 class="mb-0">Update Tracker</h5>
                     <p class="text-sm mb-0 text-secondary">Monitor plugin versions across all stores</p>
                 </div>
-               <div class="d-flex gap-2">
-    <a href="{{ route('plan-create') }}" 
-       class="btn btn-primary btn-md active px-5 text-white" 
-       target="_blank" 
-       role="button" 
-       aria-pressed="true">
-        Send Update Notice
-    </a>
+                <div class="d-flex gap-2">
 
-    <button class="btn btn-outline-secondary btn-sm">
-        <i class="fa fa-file-export me-1"></i> Export Reports
-    </button>
-</div>
+
+                    <form method="POST"
+                        action="{{ route('update-tracker.sendNotice', $latestVersion->id) }}">
+                        @csrf
+
+                        <button type="submit" class="btn btn-primary btn-md px-4">
+                            Send Update Notice
+                        </button>
+                    </form>
+
+
+
+                    <a href="{{ route('update-tracker.export') }}"
+                        class="btn btn-outline-secondary btn-sm">
+                        <i class="fa fa-file-export me-1"></i> Export Reports
+                    </a>
+
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPluginModal">
+                            Add Plugin
+                        </button>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -37,18 +54,29 @@
                 <div class="col-xl-3 col-md-6 mb-md-0 mb-3 border-end">
                     <div class="p-3">
                         <p class="text-secondary mb-1">Total Stores</p>
-                        <h2 class="font-weight-bolder text-dark">100</h2>
+                        <h2 class="font-weight-bolder text-dark">
+                            {{ $totalStores }}
+                        </h2>
                         <p class="text-sm text-secondary mb-0">Across all versions</p>
                         <i class="fa fa-store text-info text-2xl position-absolute end-0 me-3" style="top: 15px;"></i>
                     </div>
                 </div>
 
+
+
                 {{-- Card 2: Latest Stores --}}
                 <div class="col-xl-3 col-md-6 mb-md-0 mb-3 border-end">
                     <div class="p-3">
                         <p class="text-secondary mb-1">Latest Version</p>
-                        <h2 class="font-weight-bolder text-dark">45</h2>
-                        <p class="text-sm text-success mb-0">45.0% of stores</p>
+                        <h2 class="font-weight-bolder text-dark">
+                            {{ $latestStores }}
+                        </h2>
+
+
+                        <p class="text-sm text-success mb-0">
+                            {{ $totalStores > 0 ? number_format(($latestStores / $totalStores) * 100, 1) : 0 }}%
+                            of stores
+                        </p>
                         <i class="fa fa-store text-warning text-2xl position-absolute end-0 me-3" style="top: 15px;"></i>
                     </div>
                 </div>
@@ -57,8 +85,14 @@
                 <div class="col-xl-3 col-md-6 mb-md-0 mb-3 border-end">
                     <div class="p-3">
                         <p class="text-secondary mb-1">Outdated Stores</p>
-                        <h2 class="font-weight-bolder text-dark">23</h2>
-                        <p class="text-sm text-danger mb-0">23.0% need updates</p>
+                        <h2 class="font-weight-bolder text-dark">
+                            {{ $outdatedStores }}
+                        </h2>
+
+                        <p class="text-sm text-danger mb-0">
+                            {{ $totalStores > 0 ? number_format(($outdatedStores / $totalStores) * 100, 1) : 0 }}%
+                            need updates
+                        </p>
                         <i class="fa fa-warehouse text-danger text-2xl position-absolute end-0 me-3" style="top: 15px;"></i>
                     </div>
                 </div>
@@ -67,8 +101,16 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="p-3">
                         <p class="text-secondary mb-1">Current Version</p>
-                        <h2 class="font-weight-bolder text-dark">v2.1.4</h2>
-                        <p class="text-sm text-secondary mb-0">Released 2024-01-15</p>
+                        @if($latestVersion)
+                        <h2 class="font-weight-bolder text-dark">
+                            {{ $latestVersion->version }}
+                        </h2>
+
+                        <p class="text-sm text-secondary mb-0">
+                            Released {{ $latestVersion->released_at->format('Y-m-d') }}
+                        </p>
+                        @endif
+
                         <i class="fa fa-user-circle text-primary text-2xl position-absolute end-0 me-3" style="top: 15px;"></i>
                     </div>
                 </div>
@@ -81,68 +123,66 @@
         <div class="card-header pb-0">
             <h6>Version Distribution</h6>
         </div>
+
         <div class="card-body pt-2 pb-2 px-4">
-            {{-- Distribution Bar 1 --}}
+
+            @foreach($plugins as $plugin)
+
+            @php
+
+            // ✅ Unique Store Count per Version
+            $count = $storeCounts[$plugin->id] ?? 0;
+
+            // ✅ Percentage Calculation
+            $percent = $totalStores > 0
+            ? ($count / $totalStores) * 100
+            : 0;
+            @endphp
+
             <div class="mb-3">
+
+                <!-- Header Row -->
                 <div class="d-flex justify-content-between align-items-center mb-1">
-                    <p class="text-sm font-weight-bold mb-0">v2.1.4 <span class="badge bg-success ms-1">Latest</span></p>
-                    <p class="text-sm text-secondary mb-0">45 stores (45.0%)</p>
+
+                    <!-- Version Name -->
+                    <p class="text-sm font-weight-bold mb-0">
+                        {{ $plugin->version }}
+
+                        <!-- ✅ Type Badge -->
+                        <span class="badge {{ $plugin->category_badge_class }} ms-1">
+                            {{ $plugin->category_name}}
+                        </span>
+                    </p>
+
+                    <!-- Store Count + Percent -->
+                    <p class="text-sm text-secondary mb-0">
+                        {{ $count }} stores ({{ number_format($percent, 1) }}%)
+                    </p>
+
                 </div>
+
+                <!-- Progress Bar -->
                 <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ $percent }}%">
+                    </div>
                 </div>
-            </div>
-            
-            {{-- Distribution Bar 2 --}}
-            <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <p class="text-sm font-weight-bold mb-0">v2.1.3 <span class="badge bg-info ms-1">Supported</span></p>
-                    <p class="text-sm text-secondary mb-0">32 stores (32.0%)</p>
-                </div>
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 32%" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+
             </div>
 
-            {{-- Distribution Bar 3 (Security Update) --}}
-            <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <p class="text-sm font-weight-bold mb-0">v2.1.2 <span class="badge bg-warning ms-1">Security Update</span> <i class="fa fa-exclamation-triangle text-danger"></i></p>
-                    <p class="text-sm text-secondary mb-0">15 stores (15.0%)</p>
-                </div>
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
+            @endforeach
 
-            {{-- Distribution Bar 4 (Unsupported) --}}
-            <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <p class="text-sm font-weight-bold mb-0">v2.0.8 <span class="badge bg-danger ms-1">Unsupported</span> <i class="fa fa-exclamation-triangle text-danger"></i></p>
-                    <p class="text-sm text-secondary mb-0">6 stores (6.0%)</p>
-                </div>
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 6%" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            
-            {{-- Distribution Bar 5 (Unsupported) --}}
-            <div class="mb-3">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <p class="text-sm font-weight-bold mb-0">v2.0.7 <span class="badge bg-danger ms-1">Unsupported</span> <i class="fa fa-exclamation-triangle text-danger"></i></p>
-                    <p class="text-sm text-secondary mb-0">2 stores (2.0%)</p>
-                </div>
-                <div class="progress" style="height: 10px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 2%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
         </div>
     </div>
+
 
     {{-- 4. DETAILED PLUGIN VERSION TABLE (THIRD MAIN CONTAINER) --}}
     <div class="card mb-4">
         <div class="card-header pb-0">
-            <h6 class="d-flex align-items-center">Plugin Version <span class="badge bg-secondary ms-2">5 versions</span></h6>
+            <h6 class="d-flex align-items-center">Plugin Version <span class="badge bg-secondary ms-2">
+                    {{ $plugins->count() }} versions
+                </span></h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -153,97 +193,185 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Released</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Store Count</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Percentage</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">State</th>
                             <th class="text-secondary opacity-7">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- Table Row 1 (v2.1.4) --}}
+                        @foreach($plugins as $plugin)
+
+                        @php
+                        // Store count per version
+                        $storeCount = $storeCounts[$plugin->id] ?? 0;
+
+                        // Percentage calculation
+                        $percentage = $totalStores > 0
+                        ? ($storeCount / $totalStores) * 100
+                        : 0;
+                        @endphp
+
                         <tr>
-                            <td class="align-middle ps-3"><h6 class="mb-0 text-sm">v2.1.4</h6></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2024-01-15</p></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">45</p></td>
-                            <td class="align-middle">
+                            <!-- Version -->
+                            <td>{{ $plugin->version }}</td>
+
+                            <!-- Released -->
+                            <td>{{ $plugin->released_at->format('Y-m-d') }}</td>
+
+                            <!-- Store Count -->
+                            <td>{{ $storeCount }}</td>
+
+                            <!-- Percentage -->
+                            <td>
                                 <div class="d-flex align-items-center">
                                     <div class="progress w-75 me-2" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-primary"
+                                            role="progressbar"
+                                            style="width: {{ $percentage }}%;"
+                                            aria-valuenow="{{ $storeCount }}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="{{ $totalStores }}">
+                                        </div>
                                     </div>
-                                    <span class="text-xs font-weight-bold">45.0%</span>
+
+                                    <span class="text-xs font-weight-bold">
+                                        {{ number_format($percentage, 1) }}%
+                                    </span>
                                 </div>
                             </td>
-                            <td class="align-middle"><span class="badge bg-success">Latest</span></td>
-                            <td class="align-middle"><a href="javascript:;" class="text-info font-weight-bold text-xs">View Store</a></td>
-                        </tr>
-                        {{-- Table Row 2 (v2.1.3) --}}
-                        <tr>
-                            <td class="align-middle ps-3"><h6 class="mb-0 text-sm">v2.1.3</h6></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2024-01-08</p></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">32</p></td>
-                            <td class="align-middle">
-                                <div class="d-flex align-items-center">
-                                    <div class="progress w-75 me-2" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 32%;" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="text-xs font-weight-bold">32.0%</span>
-                                </div>
+
+                            <!-- Type -->
+                            <td>
+                                <span class="badge {{ $plugin->category_badge_class }}">
+                                    {{ $plugin->category_name }}
+                                </span>
                             </td>
-                            <td class="align-middle"><span class="badge bg-info">Supported</span></td>
-                            <td class="align-middle"><a href="javascript:;" class="text-info font-weight-bold text-xs">View Store</a></td>
-                        </tr>
-                        {{-- Table Row 3 (v2.1.2) --}}
-                        <tr>
-                            <td class="align-middle ps-3"><h6 class="mb-0 text-sm">v2.1.2</h6></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2024-01-20</p></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">15</p></td>
-                            <td class="align-middle">
-                                <div class="d-flex align-items-center">
-                                    <div class="progress w-75 me-2" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="text-xs font-weight-bold">15.0%</span>
-                                </div>
+
+
+                            <td>
+                                <span class="badge {{ $plugin->type_badge_class }}">
+                                    {{ $plugin->type_name }}
+                                </span>
                             </td>
-                            <td class="align-middle"><span class="badge bg-warning">Security Update</span></td>
-                            <td class="align-middle"><a href="javascript:;" class="text-info font-weight-bold text-xs">View Store</a></td>
-                        </tr>
-                        {{-- Table Row 4 (v2.0.8) --}}
-                        <tr>
-                            <td class="align-middle ps-3"><h6 class="mb-0 text-sm">v2.0.8</h6></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2024-01-15</p></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">6</p></td>
-                            <td class="align-middle">
-                                <div class="d-flex align-items-center">
-                                    <div class="progress w-75 me-2" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 6%;" aria-valuenow="6" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="text-xs font-weight-bold">6.0%</span>
-                                </div>
+                            <!-- State -->
+                            <td>
+                                <span class="badge {{ $plugin->state_badge_class }}">
+                                    {{ $plugin->state_name }}
+                                </span>
                             </td>
-                            <td class="align-middle"><span class="badge bg-danger">Unsupported</span></td>
-                            <td class="align-middle"><a href="javascript:;" class="text-info font-weight-bold text-xs">View Store</a></td>
-                        </tr>
-                        {{-- Table Row 5 (v2.0.7) --}}
-                        <tr>
-                            <td class="align-middle ps-3"><h6 class="mb-0 text-sm">v2.0.7</h6></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2024-01-22</p></td>
-                            <td class="align-middle"><p class="text-xs font-weight-bold mb-0">2</p></td>
-                            <td class="align-middle">
-                                <div class="d-flex align-items-center">
-                                    <div class="progress w-75 me-2" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 2%;" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="text-xs font-weight-bold">2.0%</span>
-                                </div>
+
+                            <!-- Actions -->
+                            <td>
+                                <!-- Download -->
+                                <a href="{{ route('update-tracker.download', $plugin->id) }}"
+                                    class="btn btn-success btn-sm">
+                                    Download
+                                </a>
+
+                                <!-- Delete -->
+                                <form action="{{ route('update-tracker.delete', $plugin->id) }}"
+                                    method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                        class="btn btn-danger btn-sm">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
-                            <td class="align-middle"><span class="badge bg-danger">Unsupported</span></td>
-                            <td class="align-middle"><a href="javascript:;" class="text-info font-weight-bold text-xs">View Store</a></td>
                         </tr>
-                        {{-- Use a Blade @foreach loop here for dynamic data --}}
+
+                        @endforeach
                     </tbody>
+
                 </table>
             </div>
         </div>
     </div>
+
+
 </div>
 
 @endsection
+
+
+<!-- Add Plugin Modal -->
+<div class="modal fade" id="addPluginModal" tabindex="-1" aria-labelledby="addPluginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ route('update-tracker.add') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPluginModalLabel">
+                        Add New Plugin Version
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body">
+
+                    <!-- Version -->
+                    <div class="mb-3">
+                        <label class="form-label">Version</label>
+                        <input type="text"
+                            name="version"
+                            class="form-control"
+                            placeholder="e.g. 2.1.4"
+                            required>
+                    </div>
+
+                    <!-- Plugin ZIP -->
+                    <div class="mb-3">
+                        <label class="form-label">Plugin ZIP File</label>
+                        <input type="file"
+                            name="zip"
+                            class="form-control"
+                            accept=".zip"
+                            required>
+                    </div>
+
+                    <!-- Release Date -->
+                    <div class="mb-3">
+                        <label class="form-label">Release Date</label>
+                        <input type="date"
+                            name="released_at"
+                            class="form-control"
+                            value="{{ date('Y-m-d') }}"
+                            required>
+                    </div>
+
+
+                    <!-- Category Dropdown -->
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="category_id" class="form-select" required>
+                            @foreach(PluginVersion::categories() as $id => $name)
+                            <option value="{{ $id }}">
+                                {{ $name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Upload Plugin
+                    </button>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

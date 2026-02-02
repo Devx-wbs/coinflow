@@ -15,10 +15,14 @@ class LicenseActivation extends Model
         'activated_at',
         'deactivated_at'
     ];
-    
+
     public function license()
     {
         return $this->belongsTo(License::class, 'license_id');
     }
 
+    public function plugin()
+    {
+        return $this->belongsTo(PluginVersion::class, 'plugin_id');
+    }
 }

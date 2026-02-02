@@ -20,8 +20,13 @@ use App\Http\Controllers\PushNoticeController;
 use App\Http\Controllers\Superadmin\SupportController;
 
 Route::get('/', [FrontedController::class, 'index']);
-Route::get('/download-zip', [DownloadZipController::class, 'download'])->name('download.zip');
+
+Route::get('/update-tracker/download/{id}', [MerchantController::class, 'download'])
+    ->middleware('plugin.download.secure')
+    ->name('update-tracker.download');
+
 Route::get('/plan-detail', [FrontedController::class, 'plan_detail'])->name('plan-detail');
+
 
 // Login form
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -83,16 +88,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/global-stats', [MerchantController::class, 'global_stats_index'])->name('global-stats');
 
 
-    // store earning 
-    // Route::get('/store-earning', [MerchantController::class, 'store_earning_index'])->name('store-earning');
+    
 
 
-    // logs & errors
-    // Route::get('/logs-error', [MerchantController::class, 'logs_error_index'])->name('logs-error');
+
+    //update plugin
 
 
-    // update tracker
-    Route::get('/update-tracker', [MerchantController::class, 'update_tracker_index'])->name('update-tracker');
+    Route::prefix('update-tracker')->group(function () {
+        // Dashboard Page
+        Route::get('/', [MerchantController::class, 'update_tracker_index'])->name('update-tracker.index');
+        // Add Plugin Version
+        Route::post('/add', [MerchantController::class, 'add_plugin'])->name('update-tracker.add');
+        // Delete Plugin Version
+        Route::delete('/delete/{id}', [MerchantController::class, 'destroy'])->name('update-tracker.delete');
+        // Export Plugin Report
+        Route::get('/export', [MerchantController::class, 'exportPluginReport'])->name('update-tracker.export');
+
+        // Send Update Notice Emails
+        Route::post('/send-notice/{pluginVersion}', [MerchantController::class, 'sendUpdateNotice'])->name('update-tracker.sendNotice');
+        // Download Plugin ZIP
+        // Route::get('/download/{id}', [MerchantController::class, 'download'])->name('update-tracker.download');
+    });
 
 
 
@@ -134,13 +151,13 @@ Route::middleware('auth')->group(function () {
 
 
     //Logs and Errors
-Route::prefix('logs-error')->group(function () {
-    Route::delete('/delete-all', [SystemLogController::class, 'deleteAll'])->name('logs.deleteAll');
-    Route::get('/', [SystemLogController::class, 'index'])->name('logs.index');
-    Route::get('/{id}', [SystemLogController::class, 'show'])->name('logs.show');
-    Route::delete('/{id}', [SystemLogController::class, 'destroy'])->name('logs.delete');
-    Route::post('/export', [SystemLogController::class, 'export'])->name('logs.export');
-});
+    Route::prefix('logs-error')->group(function () {
+        Route::delete('/delete-all', [SystemLogController::class, 'deleteAll'])->name('logs.deleteAll');
+        Route::get('/', [SystemLogController::class, 'index'])->name('logs.index');
+        Route::get('/{id}', [SystemLogController::class, 'show'])->name('logs.show');
+        Route::delete('/{id}', [SystemLogController::class, 'destroy'])->name('logs.delete');
+        Route::post('/export', [SystemLogController::class, 'export'])->name('logs.export');
+    });
     // user role permission
     Route::prefix('user-role-permission')->group(function () {
         Route::get('/', [UserRolePermissionController::class, 'index'])->name('user-role-permission');
