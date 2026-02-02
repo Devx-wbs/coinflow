@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => PermissionMiddleware::class,
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'route.permission' => CheckRoutePermission::class,
+            'plugin.download.secure' => \App\Http\Middleware\PluginDownloadSecurity::class,
 
         ]);
     })

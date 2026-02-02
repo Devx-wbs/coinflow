@@ -20,7 +20,7 @@
       @if(Auth::check())
         <!-- 🔹 Logged in view -->
         <div class="button" style="display:flex; align-items:center; gap:16px;">
-          <form method="GET" action="{{ route('download.zip') }}" style="display:inline;">
+          <form method="GET" action="#" style="display:inline;">
             @csrf
             <!-- <button type="submit" class="btn-download">
               Download Plugin

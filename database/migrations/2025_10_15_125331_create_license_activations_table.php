@@ -13,6 +13,9 @@ class CreateLicenseActivationsTable extends Migration
             // Foreign key to licenses table
             $table->unsignedBigInteger('license_id');
             $table->string('store_url');
+            $table->enum('status', ['active', 'inactive'])
+                ->default('active')
+                ->after('store_url'); // adds column after store_url
             $table->timestamp('activated_at')->nullable();
             $table->timestamp('deactivated_at')->nullable();
 

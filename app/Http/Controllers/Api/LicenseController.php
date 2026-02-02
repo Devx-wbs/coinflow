@@ -8,6 +8,7 @@ use App\Models\License;
 use Carbon\Carbon;
 use App\Models\Store;
 use App\Models\LicenseActivation;
+use App\Models\PluginVersion;
 
 class LicenseController extends Controller
 {
@@ -49,6 +50,12 @@ class LicenseController extends Controller
     #Activation licence logic
     public function verify(Request $request)
     {
+        $request->validate([
+            'license_key' => 'required|string',
+            'store_url'   => 'required|string',
+            'plugin_id'   => 'required|exists:plugin_versions,id'
+        ]);
+
         $license = License::where('license_key', $request->license_key)->first();
 
         if (!$license) {
@@ -63,6 +70,16 @@ class LicenseController extends Controller
                 'success' => false,
                 'message' => 'License expired',
                 'expiration_date' => $license->expiration_date
+            ]);
+        }
+
+
+        $plugin = PluginVersion::find($request->plugin_id);
+
+        if (!$plugin) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid plugin version'
             ]);
         }
 
@@ -89,7 +106,9 @@ class LicenseController extends Controller
                     'total_activations' => $license->max_activations,
                     'used_activations' => $activeCount,
                     'remaining_activations' => $license->max_activations - $activeCount,
-                    'expiration_date' => $license->expiration_date
+                    'expiration_date' => $license->expiration_date,
+                    'plugin_version' => $plugin->version,
+                    'plugin_id' => $plugin->id,
                 ]);
             }
 
@@ -104,6 +123,7 @@ class LicenseController extends Controller
             $activation->deactivated_at = null;
             $activation->status = 'active';
             $activation->activated_at = Carbon::now();
+            $activation->plugin_id = $plugin->id;
             $activation->save();
 
             $activeCount++; // ✅ correct increment
@@ -123,6 +143,7 @@ class LicenseController extends Controller
             LicenseActivation::create([
                 'license_id'   => $license->id,
                 'store_url'    => $request->store_url,
+                'plugin_id'    => $plugin->id, // ✅ Store plugin_id
                 'status'       => 'active',
                 'activated_at' => now(),
             ]);
@@ -136,7 +157,9 @@ class LicenseController extends Controller
             'total_activations' => $license->max_activations,
             'used_activations' => $activeCount,
             'remaining_activations' => $license->max_activations == 0 ? 'Unlimited' : max(0, $license->max_activations - $activeCount),
-            'expiration_date' => $license->expiration_date
+            'expiration_date' => $license->expiration_date,
+            'plugin_version' => $plugin->version,
+            'plugin_id' => $plugin->id,
         ]);
     }
 
