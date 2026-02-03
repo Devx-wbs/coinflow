@@ -74,4 +74,21 @@ class License extends Model
     }
 
 
+
+    protected function validateLicense($licenseKey)
+    {
+        $license = License::where('license_key', $licenseKey)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$license) {
+            abort(response()->json([
+                'status' => false,
+                'message' => 'Invalid or inactive License'
+            ], 401));
+        }
+
+        return $license;
+    }
+
 }

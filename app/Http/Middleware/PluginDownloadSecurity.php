@@ -64,7 +64,7 @@ class PluginDownloadSecurity
         |--------------------------------------------------------------------------
         */
 
-        if ($license->status != 1) {
+        if ($license->status != 'active') {
             return response()->json([
                 'success' => false,
                 'message' => 'License is inactive or expired.'

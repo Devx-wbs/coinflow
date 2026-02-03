@@ -1,4 +1,4 @@
-  <body>
+   <body>
 
    @include('home-fronted.include.header')
    <style>
@@ -93,6 +93,18 @@ min-width: 72px;
   transform: translateY(-2px);
 }
 
+.download-btn {
+    background: #0ea5e9;
+    color: #fff;
+    border: none;
+    transition: background 0.2s;
+    padding: 1.5rem;
+    border-radius: 6px;
+
+  }
+
+
+
    </style>
  
     <!-- Header end -->
@@ -114,7 +126,7 @@ min-width: 72px;
         </p>
       
 
-     @foreach ($plans as $plan)
+     <!-- @foreach ($plans as $plan)
           <form action="{{ route('buyplan.store') }}" method="POST">
               @csrf
               <input type="hidden" name="plan_id" value="{{ $plan->id }}">
@@ -122,7 +134,14 @@ min-width: 72px;
                   Download Plugin 
               </button>
           </form>
-      @endforeach
+      @endforeach -->
+
+      @if(isset($latestPlugin))
+      <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
+        class="download-btn">
+        Download Latest Plugin Zip
+      </a>
+      @endif
 
 
         <div class="hero-image">

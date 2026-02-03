@@ -17,14 +17,6 @@ class PluginApiController extends Controller
     {
         $licenseKey = $request->query('license_key');
 
-        $license = $this->validateLicense($licenseKey);
-        if (!$license) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid or inactive License'
-            ], 401);
-        }
-
         $latest = PluginVersion::orderBy('released_at', 'desc')
             ->orderBy('id', 'desc')
             ->first();
@@ -36,20 +28,12 @@ class PluginApiController extends Controller
                 'message' => 'No plugin versions available'
             ], 404);
         }
-
-        $installedVersion = $request->query('current_version');
-        $updateRequired = $installedVersion
-            ? version_compare($installedVersion, $latest->version, '<')
-            : false;
-
         return response()->json([
             'status' => true,
             'latest_version' => $latest->version,
             'released_at' => $latest->released_at->format('Y-m-d'),
             'download_url' => route('plugin.download', $latest->id)
-                . "?license_key={$licenseKey}",
-            'update_required' => $updateRequired,
-            'message' => $updateRequired ? 'New update available' : 'You are using the latest version'
+                . "?license_key={$licenseKey}"
         ]);
     }
 
@@ -60,12 +44,6 @@ class PluginApiController extends Controller
     {
         $licenseKey = $request->query('license_key');
         $license = $this->validateLicense($licenseKey);
-        if (!$license) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid or inactive License'
-            ], 401);
-        }
 
         $versions = PluginVersion::orderBy('released_at', 'desc')->get();
 
@@ -89,13 +67,7 @@ class PluginApiController extends Controller
         $licenseKey = $request->query('license_key');
 
         $license = $this->validateLicense($licenseKey);
-        if (!$license) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid or inactive License'
-            ], 401);
-        }
-
+       
         $plugin = PluginVersion::find($id);
 
         if (!$plugin) {
@@ -124,13 +96,6 @@ class PluginApiController extends Controller
 
         $license = $this->validateLicense($licenseKey);
 
-        if (!$license) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Invalid or inactive License'
-            ], 401);
-        }
-
         $plugin = PluginVersion::find($id);
 
         if (!$plugin || !Storage::exists($plugin->zip_path)) {
@@ -148,8 +113,17 @@ class PluginApiController extends Controller
      */
     protected function validateLicense($licenseKey)
     {
-        return License::where('license_key', $licenseKey)
-            ->where('status', 'active') // only active licenses
+        $license = License::where('license_key', $licenseKey)
+            ->where('status', 'active')
             ->first();
+
+        if (!$license) {
+            abort(response()->json([
+                'status' => false,
+                'message' => 'Invalid or inactive License'
+            ], 401));
+        }
+
+        return $license;
     }
 }

@@ -89,18 +89,15 @@ Route::post('/tickets/create', [TicketController::class, 'store']);       // cre
 Route::get('/tickets/view/{id}', [TicketController::class, 'show']);
 Route::get('/tickets', [TicketController::class, 'index']); 
 
-  // update ticket (only if no reply)
+  // plugin update 
 
 Route::prefix('plugin')->group(function () {
     // Latest plugin version info
     Route::get('/latest', [PluginApiController::class, 'latest']);
-
     // All versions list
     Route::get('/versions', [PluginApiController::class, 'index']);
-
     // Single version view
     Route::get('/versions/{id}', [PluginApiController::class, 'view']);
-
     // Secure download
     Route::get('/download/{id}', [PluginApiController::class, 'download'])
         ->name('plugin.download');
