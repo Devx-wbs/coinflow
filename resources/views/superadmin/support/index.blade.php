@@ -6,7 +6,7 @@ use App\Models\Support;
 @endphp
 <h4 class="mb-3">Customer Support</h4>
 
-<a href="{{ route('support-create') }}" class="btn btn-primary">
+<a href="{{ route('support.create') }}" class="btn btn-primary">
         + Add Ticket
     </a>
 
@@ -59,8 +59,8 @@ use App\Models\Support;
             </td>
             <td>{{ $support->created_at->format('Y-m-d') }}</td>
             <td>
-                <a class="btn btn-primary" href="{{ route('support-show', $support->id) }}">View</a>
-                <a class="btn btn-danger" href="{{ route('support-destroy', $support->id) }}">Delete</a>
+                <a class="btn btn-primary" href="{{ route('support.show', $support->id) }}">View</a>
+                <a class="btn btn-danger" href="{{ route('support.destroy', $support->id) }}">Delete</a>
             </td>
         </tr>
         @empty

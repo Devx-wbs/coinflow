@@ -118,10 +118,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('support')->group(function () {
         Route::post('/{id}/reply', [SupportController::class, 'reply'])->name('support.reply');
         Route::get('/', [SupportController::class, 'index'])->name('support');
-        Route::get('/create', [SupportController::class, 'create'])->name('support-create');
-        Route::post('/store', [SupportController::class, 'store'])->name('support-store');
-        Route::get('/view/{id}', [SupportController::class, 'show'])->name('support-show');
-        Route::get('/delete/{id}', [SupportController::class, 'destroy'])->name('support-destroy');
+        Route::get('/create', [SupportController::class, 'create'])->name('support.create');
+        Route::post('/store', [SupportController::class, 'store'])->name('support.store');
+        Route::get('/view/{id}', [SupportController::class, 'show'])->name('support.show');
+        Route::get('/delete/{id}', [SupportController::class, 'destroy'])->name('support.destroy');
         Route::post('/{id}/assign', [SupportController::class, 'assignTo'])->name('support.assign');
         Route::post('/{id}/status', [SupportController::class, 'updateStatus'])->name('support.updateStatus'); // ✅ added
     });

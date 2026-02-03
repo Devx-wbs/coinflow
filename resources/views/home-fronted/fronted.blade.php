@@ -258,7 +258,7 @@ min-width: 72px;
                             @csrf
                             <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                             <button type="submit" class="subscribe-btn">
-                                Subscribedd
+                                Subscribe
                             </button>
                         </form>
 
