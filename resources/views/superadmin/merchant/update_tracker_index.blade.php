@@ -18,7 +18,7 @@ use App\Models\PluginVersion;
                 </div>
                 <div class="d-flex gap-2">
 
-
+                    @if($latestVersion)
                     <form method="POST"
                         action="{{ route('update-tracker.sendNotice', $latestVersion->id) }}">
                         @csrf
@@ -27,8 +27,7 @@ use App\Models\PluginVersion;
                             Send Update Notice
                         </button>
                     </form>
-
-
+                    @endif
 
                     <a href="{{ route('update-tracker.export') }}"
                         class="btn btn-outline-secondary btn-sm">
