@@ -16,10 +16,10 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-Permission::whereIn('name', [
-    'license_management',
-    'license_managment'
-])->delete();
+        Permission::whereIn('name', [
+            'license_management',
+            'license_managment'
+        ])->delete();
         $permissions = [
             // Dashboard
             'dashboard',
@@ -53,6 +53,42 @@ Permission::whereIn('name', [
             'user-role-permission.edit',
             'user-role-permission.update',
             'user-role-permission.destroy',
+            //logs 
+
+            'logs.deleteAll',
+            'logs.index',
+            'logs.show',
+            'logs.delete',
+            'logs.export',
+
+            //support tickets
+
+            'support.reply',
+            'support',
+            'support.create',
+            'support.store',
+            'support.show',
+            'support.destroy',
+            'support.assign',
+            'support.updateStatus',
+
+            // push notification
+
+            'push.notice.index',
+            'push.notice.store',
+            'push.notice.show',
+            'push.notice.send',
+            'push.notice.update',
+            'push.notice.edit',
+
+            // plugin update tracker
+            'update-tracker.index',
+            'update-tracker.add',
+            'update-tracker.delete',
+            'update-tracker.export',
+            'update-tracker.sendNotice'
+
+
         ];
 
         foreach ($permissions as $permission) {
@@ -84,5 +120,4 @@ Permission::whereIn('name', [
             'logout'
         ]);
     }
-    
 }
