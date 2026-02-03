@@ -136,12 +136,18 @@ min-width: 72px;
           </form>
       @endforeach -->
 
-      @if(isset($latestPlugin))
-      <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
-        class="download-btn">
-        Download Latest Plugin Zip
-      </a>
-      @endif
+       @if($license && isset($latestPlugin))
+         <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
+           class="download-btn">
+           Download Latest Plugin Zip
+         </a>
+         @elseif(! $license)
+         <a href="#plans-section" class="download-btn">
+           Purchase Plan
+         </a>
+         @endif
+
+      
 
 
         <div class="hero-image">
@@ -207,7 +213,7 @@ min-width: 72px;
     <!-- ---------------- -->
 
     <!--Plans-Section Start  -->
-    <section class="plans-section">
+    <section class="plans-section" id="plans-section">
       <div class="container">
         <div class="plans-header text-center">
           <h2>Flexible Plans for Every Store</h2>
