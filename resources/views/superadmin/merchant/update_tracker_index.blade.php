@@ -294,9 +294,6 @@ use App\Models\PluginVersion;
 
 </div>
 
-@endsection
-
-
 <!-- Add Plugin Modal -->
 <div class="modal fade" id="addPluginModal" tabindex="-1" aria-labelledby="addPluginModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -374,3 +371,7 @@ use App\Models\PluginVersion;
         </form>
     </div>
 </div>
+
+@endsection
+
+
