@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PluginApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LicenseController;
 use App\Http\Controllers\Api\PluginUserController;
@@ -90,7 +91,20 @@ Route::get('/tickets', [TicketController::class, 'index']);
 
   // update ticket (only if no reply)
 
+Route::prefix('plugin')->group(function () {
+    // Latest plugin version info
+    Route::get('/latest', [PluginApiController::class, 'latest']);
 
+    // All versions list
+    Route::get('/versions', [PluginApiController::class, 'index']);
+
+    // Single version view
+    Route::get('/versions/{id}', [PluginApiController::class, 'view']);
+
+    // Secure download
+    Route::get('/download/{id}', [PluginApiController::class, 'download'])
+        ->name('plugin.download');
+});
 
 Route::post('/verify-deactivation-license', [LicenseController::class, 'deactivateStore']);
 Route::post('/verify-activation-license', [LicenseController::class, 'verify']);
