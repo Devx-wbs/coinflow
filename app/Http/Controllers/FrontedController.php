@@ -18,36 +18,52 @@ class FrontedController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
-
-
-        if (!Auth::check()) {
-            $plans = Plan::where('is_active', 1)->get();
-            return view('home-fronted.fronted', compact('plans'));
-        }
-
-        $user = Auth::user();
-        // Active subscription nikaalo
-        $subscription = Subscription::where('user_id', $user->id)
-            ->where('status', 'active')
-            ->whereDate('end_date', '>=', Carbon::today())
-            ->with('plan') // Plan relation
-            ->first();
-
-        // Active plans ko fetch karenge
         $plans = Plan::where('is_active', 1)->get();
-        $license = License::where('user_id', $user->id)
-            ->where('status', 'active')
-            ->whereDate('expiration_date', '>=', Carbon::today())
-            ->first();
+
+        // Always define variables first
+        $license = null;
+        $subscription = null;
 
         $latestPlugin = PluginVersion::orderBy('released_at', 'desc')
             ->orderBy('id', 'desc')
             ->first();
 
-        return view('home-fronted.fronted', compact('plans', 'subscription', 'license', 'latestPlugin'));
+        // Guest user
+        if (!Auth::check()) {
+            return view('home-fronted.fronted', compact(
+                'plans',
+                'license',
+                'subscription',
+                'latestPlugin'
+            ));
+        }
+
+        // Logged-in user
+        $user = Auth::user();
+
+        $subscription = Subscription::where('user_id', $user->id)
+            ->where('status', 'active')
+            ->whereDate('end_date', '>=', Carbon::today())
+            ->with('plan')
+            ->first();
+
+        $license = License::where('user_id', $user->id)
+            ->where('status', 'active')
+            ->whereDate('expiration_date', '>=', Carbon::today())
+            ->first();
+
+        return view('home-fronted.fronted', compact(
+            'plans',
+            'subscription',
+            'license',
+            'latestPlugin'
+        ));
     }
+
 
 
 
