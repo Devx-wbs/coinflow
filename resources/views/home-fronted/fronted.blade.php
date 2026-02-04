@@ -139,9 +139,9 @@ min-width: 72px;
        @if($license && isset($latestPlugin))
          <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
            class="download-btn">
-           Download Latest Plugin Zip
+           Download Latest Plugin
          </a>
-         @elseif(! $license)
+         @else
          <a href="#plans-section" class="download-btn">
            Purchase Plan
          </a>
