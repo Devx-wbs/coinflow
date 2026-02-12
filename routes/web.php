@@ -44,6 +44,12 @@ Route::post('/reset-password', [ChangePasswordController::class, 'changePassword
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
 
+Route::get('/contact-us', [SupportController::class, 'form'])
+    ->name('contact.form');
+
+Route::post('/contact-us', [SupportController::class, 'saveform'])
+    ->name('contact.store');
+
 // Pricing page
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 

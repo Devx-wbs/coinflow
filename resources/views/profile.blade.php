@@ -1,4 +1,10 @@
-@extends('layouts.user_type.auth')
+@php
+$layout = Auth::user()->role == 1
+    ? 'layouts.user_type.auth'
+    : 'layouts.frontend';
+@endphp
+
+@extends($layout)
 
 @section('content')
 
@@ -40,6 +46,8 @@
       </div>
     </div>
 
+    
+
     {{-- Change Password Card --}}
     <div class="card shadow-sm border-0 rounded-4">
       <div class="card-header bg-white border-0 pb-0">
@@ -79,6 +87,9 @@
         @endif
 
       </div>
+
+
+       
     </div>
 
   </div>
