@@ -67,7 +67,7 @@ class PluginApiController extends Controller
         $licenseKey = $request->query('license_key');
 
         $license = $this->validateLicense($licenseKey);
-       
+
         $plugin = PluginVersion::find($id);
 
         if (!$plugin) {
@@ -96,16 +96,32 @@ class PluginApiController extends Controller
 
         $license = $this->validateLicense($licenseKey);
 
+
         $plugin = PluginVersion::find($id);
 
         if (!$plugin || !Storage::exists($plugin->zip_path)) {
+
             return response()->json([
                 'status' => false,
                 'message' => 'Plugin not found'
             ], 404);
         }
 
-        return Storage::download($plugin->zip_path, "coinflow-{$plugin->version}.zip");
+
+        $filePath = storage_path('app/private/' . $plugin->zip_path);
+
+        if (!file_exists($filePath)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'File not found on server'
+            ], 404);
+        }
+
+        return response()->download(
+            $filePath,
+            "coinflow-{$plugin->version}.zip",
+            ['Content-Type' => 'application/zip']
+        );
     }
 
     /**
