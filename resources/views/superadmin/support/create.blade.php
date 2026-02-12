@@ -4,7 +4,7 @@
 
 <h4 class="mb-4">Create Support Ticket</h4>
 
-<form action="{{ route('support-store') }}" method="POST">
+<form action="{{ route('support.store') }}" method="POST">
     @csrf
 
     <div class="mb-3">

@@ -8,6 +8,7 @@ use App\Models\Support;
 use App\Models\SupportReply;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class SupportController extends Controller
@@ -182,5 +183,35 @@ class SupportController extends Controller
                 'time' => $reply->created_at->format('Y-m-d H:i')
             ]
         ]);
+    }
+
+
+    public function form()
+    {
+        return view('home-fronted.contact', ['categories'  => Support::categories()]);
+    }
+
+    public function saveform(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email'     => 'required|email|max:255',
+            'category_id' => 'required|integer',
+            'subject'   => 'required|string|max:255',
+            'message'   => 'required|string'
+        ]);
+
+        Support::create([
+            'user_id'     => Auth::check() ? Auth::id() : null,
+            'full_name'   => $request->full_name,
+            'email'       => $request->email,
+            'subject'     => $request->subject,
+            'description' => $request->message,
+            'category_id' => 1, // default category
+            'priority'    => 1, // default medium
+            'status'      => Support::STATUS_INACTIVE,
+        ]);
+
+        return back()->with('success', 'Your ticket has been submitted successfully.');
     }
 }
