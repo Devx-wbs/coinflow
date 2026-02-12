@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
             // 'country' => 'nullable|string|max:100',
-            'store_name' => 'required|string|max:255',
+            // 'store_name' => 'required|string|max:255',
         ]);
     
         // create user
@@ -38,7 +38,7 @@ class RegisterController extends Controller
             'email'        => $validated['email'],
             'phone'        => $validated['phone'] ?? null,
             'country'      => $validated['country'] ?? null,
-            'store_name' => $validated['store_name'] ?? null,
+            // 'store_name' => $validated['store_name'] ?? null,
             'password'     => bcrypt($validated['password']),
             'role'         => 0, // default merchant role
         ]);

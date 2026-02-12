@@ -1,119 +1,189 @@
-@extends('layouts.user_type.guest')
+@extends('layouts.frontend')
+
+@section('title','Sign Up')
 
 @section('content')
 
-  <main class="main-content mt-0">
-    <section>
-      <div class="page-header min-vh-75">
-        <div class="container">
-          <div class="row">
+<section class="register-section">
+    <div class="register-wrapper">
 
-            <!-- LEFT SIDE FORM -->
-            <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-              <div class="card card-plain mt-8">
-                <div class="card-header pb-0 text-left bg-transparent">
-                  <h3 class="font-weight-bolder text-info text-gradient">Create Account</h3>
-                  <p class="mb-0">Register below to get started 🚀</p>
+        <!-- LEFT CARD -->
+        <div class="register-card">
+            <h2>Create your CoinFlow account</h2>
+            <p>Get started with crypto payments</p>
+
+            {!! NoCaptcha::renderJs() !!}
+
+            <form method="POST" action="{{ route('register.post') }}">
+                @csrf
+
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your full name" value="{{ old('name') }}">
+
+                @error('name')
+                <span class="error">{{ $message }}</span>
+                @enderror
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+
+                @error('email')
+                <span class="error">{{ $message }}</span>
+                @enderror
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Create a password">
+
+                <label>Confirm Password</label>
+                <input type="password" name="password_confirmation" placeholder="Re-enter password">
+
+                <!-- reCAPTCHA -->
+                <div class="captcha-box">
+                    {!! NoCaptcha::display() !!}
                 </div>
-                <div class="card-body">
-                  <form method="POST" action="{{ route('register') }}" role="form text-left">
-                    @csrf
 
-                    <!-- Full Name -->
-                    <div class="mb-3">
-                      <input type="text" name="name" class="form-control" placeholder="Full Name"
-                             value="{{ old('name') }}" required autofocus>
-                      @error('name')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <!-- Email -->
-                    <div class="mb-3">
-                      <input type="email" name="email" class="form-control" placeholder="Email Address"
-                             value="{{ old('email') }}" required>
-                      @error('email')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="mb-3">
-                      <input type="text" name="phone" class="form-control" placeholder="Phone (optional)"
-                             value="{{ old('phone') }}">
-                      @error('phone')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <!-- Country -->
-                    <!--<div class="mb-3">-->
-                    <!--  <input type="text" name="country" class="form-control" placeholder="Country (optional)"-->
-                    <!--         value="{{ old('country') }}">-->
-                    <!--  @error('country')-->
-                    <!--    <p class="text-danger text-xs mt-2">{{ $message }}</p>-->
-                    <!--  @enderror-->
-                    <!--</div>-->
-
-                    <!-- Company Name -->
-                    <div class="mb-3">
-                      <input type="text" name="store_name" class="form-control" placeholder="Store Name"
-                             value="{{ old('store_name') }}">
-                      @error('store_name')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <!-- Password -->
-                    <div class="mb-3">
-                      <input type="password" name="password" class="form-control" placeholder="Password" required>
-                      @error('password')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div class="mb-3">
-                      <input type="password" name="password_confirmation" class="form-control"
-                             placeholder="Confirm Password" required>
-                    </div>
-
-                    <!-- Terms -->
-                    <div class="form-check form-check-info text-left mb-3">
-                      <input class="form-check-input" type="checkbox" id="terms" required>
-                      <label class="form-check-label" for="terms">
-                        I agree to the <a href="#" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                      </label>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="text-center">
-                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign Up</button>
-                    </div>
-                  </form>
+                <div class="terms-row">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
                 </div>
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="text-sm mt-3 mb-0">
+
+                <button type="submit" class="register-btn">Create Account</button>
+
+                <p class="bottom-text">
                     Already have an account?
-                    <a href="{{ route('login') }}" class="text-info text-gradient font-weight-bold">Sign in</a>
-                  </p>
-                </div>
-              </div>
-            </div>
+                    <a href="{{ route('login') }}">Sign in</a>
+                </p>
 
-            <!-- RIGHT SIDE IMAGE -->
-            <div class="col-md-7 d-none d-md-block">
-              <div class="oblique position-absolute top-0 h-100 end-0">
-                <div class="oblique-image bg-cover position-absolute fixed-top h-100 z-index-0"
-                     style="background-image: url('{{ asset('assets/img/curved-images/coinflow.png') }}')">
-                </div>
-              </div>
-            </div>
-
-          </div>
+            </form>
         </div>
-      </div>
-    </section>
-  </main>
+
+        <!-- RIGHT SIDE IMAGE -->
+        <div class="register-image">
+            <img src="{{ asset('images/signup.png') }}" alt="crypto mockup">
+        </div>
+
+    </div>
+</section>
 
 @endsection
+
+<style>
+
+  .register-section {
+    padding: 120px 0;
+    background: linear-gradient(180deg, #eef4ff 0%, #f7faff 100%);
+}
+
+.register-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+    background: #f2f6ff;
+    padding: 60px;
+    border-radius: 30px;
+}
+
+.register-card {
+    background: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    width: 450px;
+    box-shadow: 0 20px 60px rgba(20, 148, 255, 0.08);
+}
+
+.register-card h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.register-card p {
+    margin-bottom: 30px;
+    color: #6c757d;
+}
+
+.register-card label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+    color: #333;
+}
+
+.register-card input {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.register-card input:focus {
+    border-color: #1494FF;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(90deg, #1494FF, #2a7de1);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(20, 148, 255, 0.3);
+}
+
+.terms-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 15px 0;
+    font-size: 13px;
+}
+
+.terms-row a {
+    color: #1494FF;
+    text-decoration: none;
+}
+
+.bottom-text {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.register-image img {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .register-wrapper {
+        flex-direction: column;
+        padding: 40px;
+    }
+
+    .register-image {
+        display: none;
+    }
+
+    .register-card {
+        width: 100%;
+    }
+}
+
+</style>
