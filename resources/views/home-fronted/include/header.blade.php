@@ -53,7 +53,7 @@
               </div>
               <div class="dropdown-menu">
 
-                <a href="{{ route('profile.show') }}" class="dropdown-item">
+                <a href="/profile" class="dropdown-item">
                   Profile Setting
                 </a>
 

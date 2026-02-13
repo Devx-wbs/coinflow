@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
     });
 
+    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
         });
     Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
@@ -176,7 +180,5 @@ Route::middleware('auth')->group(function () {
 
     // update profile
 
-    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    
 });
