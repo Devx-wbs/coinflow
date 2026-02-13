@@ -1,309 +1,278 @@
-   <body>
+@extends('layouts.frontend')
 
-   @include('home-fronted.include.header')
-   <style>
-    .pro-plan-card {
-  border: 1px solid #EAEAEA;
-  background-color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  width: 385px;
-  height: 454px;
-  border-radius: 20px;
-  padding: 0 29px;
-}
-.plan-title {
-  font-weight: 600;
-  font-size: 30px;
-  text-align: center;
-  color: #4D4D4D;
-  padding-top: 54px;
-  padding-bottom: 16px;
-}
-/* Price */
-.plan-price {
-  padding-bottom: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-.price-amount {
-  font-weight: 600;
-  font-size: 32px;
-  color: #1494FF;
-}
-.price-duration {
-  color: #4D4D4D;
-  font-weight: 400;
-  font-size: 16px;
-}
-/* Divider */
-.plan-divider {
-  border: none;
-  border-top: 1px solid #D4D4D4;
-  padding-bottom: 36px;
-}
-/* Plan details */
-.plan-details {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px 0;
-  color: #444;
-  font-size: 15px;
-}
-.plan-details li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #666666;
-  font-weight: 400;
-  font-size: 14px;
-  padding-bottom: 20px;
-}
-.detail-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.detail-value {
- color:#666666;
-min-width: 72px;
-}
-/* Check icon */
-.check_icon {
-  width: 18px;
-  height: 18px;
-}
-/* Subscribe Button */
-.subscribe-btn {
-  font-weight: 500;
-  font-size: 14px;
-  text-align: center;
-  width: 311px;
-  height: 36px;
-  border-radius: 4px;
-  padding: 8px 16px;
-  color: #F5F5F5;
-  background-color: #1494FF;
-  border: none;
-  cursor: pointer;
-}
-.subscribe-btn:hover {
-  background: #0056D9;
-  transform: translateY(-2px);
-}
+@section('title','Login')
 
-.download-btn {
-    background: #0ea5e9;
-    color: #fff;
-    border: none;
-    transition: background 0.2s;
-    padding: 1.5rem;
-    border-radius: 6px;
-
-  }
+@section('content')
 
 
 
-   </style>
- 
-    <!-- Header end -->
+<main class="main-content mt-0">
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
+  <!-- Header end -->
 
-    <!-- Hero Section Start -->
-    <section class="hero-section">
-      <div class="container text-center">
-        <h1>
-          Simplify Crypto Payments
-          <span> for Your Store </span>
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+
+  <!-- Hero Section Start -->
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content-left">
+        <div class="hero-badge">Built for Modern Online Stores</div>
+        <h1 class="hero-heading-left">
+          Simplify Crypto Payments for Your Store
         </h1>
-        <p>
-          Integrate CoinFlow in minutes and start accepting digital
-          <span>currencies securely</span>
+        <p class="hero-paragraph-left">
+          Integrate CoinFlow in minutes and start accepting digital currencies
+          securely
         </p>
-      
+        <div class="hero-buttons-left">
+          <a href="#" class="btn-primary">Download Plugin</a>
+        </div>
 
-     <!-- @foreach ($plans as $plan)
-          <form action="{{ route('buyplan.store') }}" method="POST">
-              @csrf
-              <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-              <button type="submit" class="btn">
-                  Download Plugin 
-              </button>
-          </form>
-      @endforeach -->
-
-       @if($license && isset($latestPlugin))
-         <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
-           class="download-btn">
-           Download Latest Plugin
-         </a>
-         @else
-         <a href="#plans-section" class="download-btn">
-           Purchase Plan
-         </a>
-         @endif
-
-      
-
-
-        <div class="hero-image">
-          <picture>
-            <source
-              media="(max-width: 999px)"
-              srcset="{{ asset('images/mobile_hero.png') }}"
-            />
-            <img src="{{ asset('images/image2.png') }}" alt="hero-image" />
-          </picture>
+        <div class="social-proof">
+          <div class="proof-item">
+            <img src="{{ asset('images/hero_customers.png') }}" alt="Happy Customers" class="proof-img-customers" />
+            <div class="proof-text">
+              <strong>3000+</strong><br>Happy Customers
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="proof-item">
+            <div class="proof-rating-text">
+              <strong>4.5/5</strong><br>
+              <div class="star-rating">
+                <img src="{{ asset('images/hero_stars.png') }}" alt="Stars" class="proof-img-stars" /> Rating
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-    <!-- Hero Section End -->
+      <div class="hero-image-right">
+        <img src="{{ asset('images/hero_right.png') }}" alt="CoinFlow App Interface" />
+      </div>
+    </div>
+  </section>
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
 
-    <!-- Features Section Start -->
-    <section class="features-section">
-      <div class="container text-center">
-        <h2>Powerful Features to Simplify Crypto Payments</h2>
-        <p class="subtitle">
+
+
+  <!-- Hero Section End -->
+
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+
+  <!-- Features Section Start -->
+
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header">
+        <div class="features-badge">Powerful Capabilities</div>
+        <h2 class="global-heading features-title">
+          Powerful Features to Simplify Crypto Payments
+        </h2>
+        <p class="global-subheading features-subtitle">
           Everything your store needs to accept crypto payments seamlessly
         </p>
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="icon" aria-hidden="true">
-              <img src="{{ asset('images/Layer_1.png') }}" alt="Secure Transactions" />
-            </div>
-            <h3>Secure Transactions</h3>
-            <p>End-to-end encryption and compliance built-in</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <!-- Shield Icon -->
+            <img src="{{ asset('images/sec_vec_a.png') }}" alt="Secure Transactions" />
           </div>
-          <div class="feature-item">
-            <div class="icon" aria-hidden="true">
-              <img src="{{ asset('images/Layer_2.png') }}" alt="Instant Settlements" />
-            </div>
-            <h3>Instant Settlements</h3>
-            <p>Receive funds quickly without long waits</p>
+          <h3 class="feature-title">Secure Transactions</h3>
+          <p class="feature-desc">End-to-end encryption and compliance built-in</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <!-- Handshake/Money Icon -->
+            <img src="{{ asset('images/sec_vec_b.png') }}" alt="Instant Settlements" />
           </div>
-          <div class="feature-item">
-            <div class="icon" aria-hidden="true">
-              <img src="{{ asset('images/Layer_3.png') }}" alt="Global Currencies" />
-            </div>
-            <h3>Global Currencies</h3>
-            <p>Support for BTC, ETH, USDT and more</p>
+          <h3 class="feature-title">Instant Settlements</h3>
+          <p class="feature-desc">Receive funds quickly without long waits</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <!-- Globe Icon -->
+            <img src="{{ asset('images/sec_vec_c.png') }}" alt="Global Currencies" />
           </div>
-          <div class="feature-item">
-            <div class="icon" aria-hidden="true">
-              <img src="{{ asset('images/Layer_4.png') }}" alt="Real-Time Analytics" />
-            </div>
-            <h3>Real-Time Analytics</h3>
-            <p>Track payments and revenue in real time</p>
+          <h3 class="feature-title">Global Currencies</h3>
+          <p class="feature-desc">Support for BTC, ETH, USDT and more</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <!-- Chart Icon -->
+            <img src="{{ asset('images/sec_vec_d.png') }}" alt="Real-Time Analytics" />
           </div>
+          <h3 class="feature-title">Real-Time Analytics</h3>
+          <p class="feature-desc">Track payments and revenue in real time</p>
         </div>
       </div>
-    </section>
-    <!-- Features Section End -->
+    </div>
+  </section>
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
+  <!-- Features Section End -->
 
-    <!--Plans-Section Start  -->
-    <section class="plans-section" id="plans-section">
-      <div class="container">
-        <div class="plans-header text-center">
-          <h2>Flexible Plans for Every Store</h2>
-          <p class="subtitle">
-            Start free and scale as your business grows. Choose a plan that fits
-            your needs and unlock more features with CoinFlow.
-          </p>
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+
+  <!--Plans-Section Start  -->
+
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing-header">
+        <div class="features-badge">Pricing That Scales With You</div>
+        <h2 class="global-heading pricing-title">
+          Flexible Plans for Every Store
+        </h2>
+        <p class="global-subheading pricing-subtitle">
+          Start free and scale as your business grows. Choose a plan that fits your needs and unlock more features
+          with
+          CoinFlow.
+        </p>
+      </div>
+
+      @foreach($plans as $plan)
+
+      <div class="pricing-content">
+        <div class="pricing-image-left">
+          <img src="{{ asset('images/thr_a.png') }}" alt="CoinFlow Mobile App" />
         </div>
-        <div class="image-section">
-          @foreach($plans as $plan)
-          <div class="plan-media">
-            <img src="{{ asset('images/plan_img1.png') }}" alt="Plan preview 1" />
+        <div class="pricing-card-right">
+          <div class="pricing-card-header">
+            <h3 class="plan-name">{{ Str::title(preg_replace('/[^A-Za-z\s]/', '', $plan->name)) }}</h3>
+            <div class="plan-price">
+              <span class="currency">$</span>{{ number_format($plan->price ) }}<span class="period">/ {{ $plan->duration }}{{ $plan->duration_type }}</span>
+            </div>
+            <p class="plan-desc">
+              {{ $plan->description }}
+              lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+            </p>
           </div>
-          <div class="pro-plan-card">
-       <h3 class="plan-title">{{ Str::title(preg_replace('/[^A-Za-z\s]/', '', $plan->name)) }}</h3>
+          <ul class="plan-features">
+            <li>
+              <span class="check-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="10" fill="#00E096" />
+                  <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="feature-label">Max activations :</span>
+              <span class="feature-value">{{ $plan->max_activations }}</span>
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="10" fill="#00E096" />
+                  <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="feature-label">License type :</span>
+              <span class="feature-value">{{ $plan->license_type }}</span>
+            </li>
+            <li>
+              <span class="check-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="10" fill="#00E096" />
+                  <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="feature-label">Trial days:</span>
+              <span class="feature-value">{{ $plan->trial_days }}</span>
+            </li>
+          </ul>
+          <form action="{{ route('buyplan.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+            <button type="submit" class="subscribe-btn">
+              Subscribe
+            </button>
+          </form>
 
-        <div class="plan-price">
-          <span class="price-amount">${{ number_format($plan->price ) }}</span>
-          <span class="price-duration">/ {{ $plan->duration }}{{ $plan->duration_type }} </span>
         </div>
-        <hr class="plan-divider" />
-        <ul class="plan-details">
-          <li>
-            <div class="detail-left">
-              <img src="{{ asset('images/check.png') }}" alt="" class="check_icon">Max activations: 
-            </div>
-            <span class="detail-value">{{ $plan->max_activations }}</span>
-          </li>
-          <li>
-            <div class="detail-left">
-              <img src="{{ asset('images/check.png') }}" alt="" class="check_icon"> License type: 
-            </div>
-            <span class="detail-value">{{ $plan->license_type }} </span>
-          </li>
-          <li>
-            <div class="detail-left">
-              <img src="{{ asset('images/check.png') }}" alt="" class="check_icon">Trial days: 
-            <span class="detail-value">{{ $plan->trial_days }}</span>
-          </li>
-        </ul>
-         <form action="{{ route('buyplan.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-                            <button type="submit" class="subscribe-btn">
-                                Subscribe
-                            </button>
-                        </form>
 
-         
         @endforeach
+
       </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
 
-    <!-- Work Section start -->
 
-    <section class="works-section">
+
+
+
+
+
+
+
+
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+
+  <!-- Work Section start -->
+
+  <section class="how-it-works" id="how-it-works">
       <div class="container">
         <div class="how-content">
-          <!-- Left Side Image -->
-          <div class="how-image">
-            <img src="{{ asset('images/Export_left_img.png') }}" alt="Checkout with Crypto" />
+          <div class="how-image-left">
+            <img src="{{ asset('images/for_a.png') }}" alt="How CoinFlow Works" />
           </div>
-          <!-- Right Side Text -->
-          <div class="how-text">
-            <h2>How It Works</h2>
-            <p>
-              Everything your store needs to accept crypto payments seamlessly.
+          <div class="how-text-right">
+            <div class="how-badge">Get Started in Minutes</div>
+            <h2 class="global-heading how-title">How It Works</h2>
+            <p class="global-subheading how-subtitle">
+              Everything your store needs to accept crypto payments seamlessly
             </p>
-            <div class="steps">
-              <div class="step">
-                <img src="{{ asset('images/work_icon1.png') }}" alt="Plugin Icon" />
-                <span>Install the CoinFlow Plugin</span>
+
+            <div class="steps-list">
+              <!-- Step 1 -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="{{ asset('images/for_r_a.png') }}" alt="Install Plugin" />
+                </div>
+                <div class="step-text">Install the CoinFlow Plugin</div>
               </div>
-              <div class="step">
-                <img src="{{ asset('images/work_icon2.png') }}" alt="Wallet Icon" />
-                <span>Connect Your Wallet</span>
+
+              <!-- Step 2 -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="{{ asset('images/for_r_b.png') }}" alt="Connect Wallet" />
+                </div>
+                <div class="step-text">Connect Your Wallet</div>
               </div>
-              <div class="step">
-                <img src="{{ asset('images/work_icon3.png') }}" alt="Payments Icon" />
-                <span>Start Accepting Payments</span>
+
+              <!-- Step 3 -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="{{ asset('images/for_r_c.png') }}" alt="Start Accepting" />
+                </div>
+                <div class="step-text">Start Accepting Payments</div>
               </div>
-              <div class="step">
-                <img src="{{ asset('images/work_icon4.png') }}" alt="Earnings Icon" />
-                <span>Track Your Earnings</span>
+
+              <!-- Step 4 -->
+              <div class="step-item">
+                <div class="step-icon">
+                  <img src="{{ asset('images/for_r_d.png') }}" alt="Track Earnings" />
+                </div>
+                <div class="step-text">Track Your Earnings</div>
               </div>
             </div>
           </div>
@@ -311,459 +280,466 @@ min-width: 72px;
       </div>
     </section>
 
-    <!-- Work Section end -->
+  
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
+  <!-- Work Section end -->
 
-    <!-- Why choose Coin flow section Start-->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
 
-    <section class="why-choose">
+  <!-- Why choose Coin flow section Start-->
+
+  <section class="why-choose" id="why-choose">
       <div class="container">
-        <div class="why-header text-center">
-          <h2>Why Choose CoinFlow?</h2>
-          <p>
-            CoinFlow simplifies cryptocurrency payments for online stores by
-            providing a secure, transparent, and easy-to-manage payment
-            experience.
+        <div class="why-header">
+          <div class="features-badge">Trusted by Growing Businesses</div>
+          <h2 class="global-heading why-title">Why Choose CoinFlow?</h2>
+          <p class="global-subheading why-subtitle">
+            CoinFlow simplifies cryptocurrency payments for online stores by providing a secure, transparent, and
+            easy-to-manage payment experience.
           </p>
         </div>
+
         <div class="why-grid">
+          <!-- Card 1 -->
           <div class="why-card">
             <div class="why-icon">
-              <img src="{{ asset('images/coinflow_sec_img1.png') }}" alt="Low Fees Icon" />
+              <!-- Using inferred icon name fif_a.png based on user request -->
+              <img src="{{ asset('images/fif_a.png') }}" alt="Low Fees" />
             </div>
-            <h3>Low Transaction Fees</h3>
-            <p>
-              Keep more of your earnings with CoinFlow’s minimal transaction
-              fees.
-              <br />Unlike traditional payment gateways, we eliminate
-              unnecessary intermediaries — ensuring you pay less while your
-              customers enjoy seamless checkout experiences.
+            <h3 class="why-card-title">Low Transaction Fees</h3>
+            <p class="why-card-desc">
+              Keep more of your earnings with CoinFlow's minimal transaction fees.
+              Unlike traditional payment gateways, we eliminate unnecessary intermediaries – ensuring you pay less while
+              your customers enjoy seamless checkout experiences.
             </p>
           </div>
+
+          <!-- Card 2 -->
           <div class="why-card">
             <div class="why-icon">
-              <img src="{{ asset('images/coinflow_sec_img2.png') }}" alt="Support Icon" />
+              <img src="{{ asset('images/fif_b.png') }}" alt="24/7 Support" />
             </div>
-            <h3>24/7 Merchant Support</h3>
-            <p>
-              Our dedicated support team is available round the clock to help
-              you troubleshoot, optimize, or upgrade your crypto payment setup.
-              <br />
-              From onboarding to technical assistance, we’re always here when
-              you need us.
+            <h3 class="why-card-title">24/7 Merchant Support</h3>
+            <p class="why-card-desc">
+              Our dedicated support team is available round the clock to help you troubleshoot, optimize, or upgrade
+              your
+              crypto payment setup.
+              From onboarding to technical assistance, we're always here when you need us.
             </p>
           </div>
+
+          <!-- Card 3 -->
           <div class="why-card">
             <div class="why-icon">
-              <img src="{{ asset('images/coinflow_sec_img3.png') }}" alt="Reporting Icon" />
+              <img src="{{ asset('images/fif_c.png') }}" alt="Transparent Reporting" />
             </div>
-            <h3>Transparent Reporting</h3>
-            <p>
-              Get full visibility into every transaction with real-time
-              analytics and clear reporting tools. <br />
-              CoinFlow ensures complete transparency — no hidden fees, no
-              complicated statements — just straightforward data you can trust.
+            <h3 class="why-card-title">Transparent Reporting</h3>
+            <p class="why-card-desc">
+              Get full visibility into every transaction with real-time analytics and clear reporting tools.
+              CoinFlow ensures complete transparency – no hidden fees, no complicated statements – just straightforward
+              data you can trust.
             </p>
           </div>
         </div>
       </div>
     </section>
-    <!-- Why choose Coin flow section End-->
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
+  
+  <!-- Why choose Coin flow section End-->
 
-    <!-- merchant section start -->
-    <section class="testimonials-section">
-      <div class="testimonials-header">
-        <h2>What Our Merchants Say</h2>
-      </div>
-      <div class="testimonials-slider">
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            Integrating CoinFlow into our store was effortless. We started
-            accepting crypto payments from customers worldwide in minutes.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Sethy Hipskyy"
-            />
-            <div class="meta">
-              <strong>Sethy Hipskyy</strong>
-              <span>CEO Universal</span>
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+
+  <!-- merchant section start -->
+
+  <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="testimonials-wrapper">
+          <div class="testimonials-inner">
+            <div class="testimonials-header">
+              <div class="testimonials-badge">Loved by Merchants</div>
+              <h2 class="global-heading testimonials-title">
+                What Our Merchants Say
+              </h2>
+              <p class="global-subheading testimonials-subtitle">
+                CoinFlow simplifies cryptocurrency payments for online stores.
+              </p>
+            </div>
+
+            <div class="testimonials-slider-mask">
+              <div class="testimonials-track">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                  <div class="quote-icon">
+                    <img src="{{ asset('images/six_comma.png') }}" alt="Quote" />
+                  </div>
+                  <div class="stars">
+                    <img src="{{ asset('images/six_stars.png') }}" alt="5 Stars" />
+                  </div>
+                  <p class="testimonial-text">
+                    CoinFlow made crypto transactions simple and reliable. The instant settlement feature is incredible
+                    –
+                    no
+                    more long waits for funds.
+                  </p>
+                  <div class="reviewer-info">
+                    <img src="{{ asset('images/six_review.png') }}" alt="Justus Menke" class="reviewer-img" />
+                    <div class="reviewer-details">
+                      <div class="reviewer-name">Justus Menke</div>
+                      <div class="reviewer-role">CEO Eronaman</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                  <div class="quote-icon">
+                    <img src="{{ asset('images/six_comma.png') }}" alt="Quote" />
+                  </div>
+                  <div class="stars">
+                    <img src="{{ asset('images/six_stars.png') }}" alt="5 Stars" />
+                  </div>
+                  <p class="testimonial-text">
+                    Our customers love having more payment options. The dashboard insights and real-time analytics help
+                    us
+                    track everything effortlessly.
+                  </p>
+                  <div class="reviewer-info">
+                    <img src="{{ asset('images/six_review.png') }}" alt="Britain Eriksen" class="reviewer-img" />
+                    <div class="reviewer-details">
+                      <div class="reviewer-name">Britain Eriksen</div>
+                      <div class="reviewer-role">CEO Universal</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                  <div class="quote-icon">
+                    <img src="{{ asset('images/six_comma.png') }}" alt="Quote" />
+                  </div>
+                  <div class="stars">
+                    <img src="{{ asset('images/six_stars.png') }}" alt="5 Stars" />
+                  </div>
+                  <p class="testimonial-text">
+                    CoinFlow has redefined how we accept payments online. The integration with our existing systems was
+                    smooth and hassle-free.
+                  </p>
+                  <div class="reviewer-info">
+                    <img src="{{ asset('images/six_review.png') }}" alt="Britain Eriksen" class="reviewer-img" />
+                    <div class="reviewer-details">
+                      <div class="reviewer-name">Britain Eriksen</div>
+                      <div class="reviewer-role">CEO Universal</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="testimonial-card">
+                  <div class="quote-icon">
+                    <img src="{{ asset('images/six_comma.png') }}" alt="Quote" />
+                  </div>
+                  <div class="stars">
+                    <img src="{{ asset('images/six_stars.png') }}" alt="5 Stars" />
+                  </div>
+                  <p class="testimonial-text">
+                    CoinFlow has redefined how we accept payments online. The integration with our existing systems was
+                    smooth and hassle-free.
+                  </p>
+                  <div class="reviewer-info">
+                    <img src="{{ asset('images/six_review.png') }}" alt="Britain Eriksen" class="reviewer-img" />
+                    <div class="reviewer-details">
+                      <div class="reviewer-name">Britain Eriksen</div>
+                      <div class="reviewer-role">CEO Universal</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="nav-arrow nav-prev" id="prevBtn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="#1494FF" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="nav-arrow nav-next" id="nextBtn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#1494FF" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
             </div>
           </div>
-        </article>
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            The instant settlement feature is incredible — no more long waits
-            for funds. Transactions are simple and reliable.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Justus Menke"
-            />
-            <div class="meta">
-              <strong>Justus Menke</strong>
-              <span>CEO Eronann</span>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            Our customers love having more payment options. The dashboard
-            insights and real-time analytics help us grow.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Britain Eriksen"
-            />
-            <div class="meta">
-              <strong>Britain Eriksen</strong>
-              <span>CEO Universal</span>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            CoinFlow redefined how we accept payments online. Integration with
-            our existing systems was smooth.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Britain Eriksen"
-            />
-            <div class="meta">
-              <strong>Britain Eriksen</strong>
-              <span>CEO Universal</span>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            CoinFlow redefined how we accept payments online. Integration with
-            our existing systems was smooth.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Britain Eriksen"
-            />
-            <div class="meta">
-              <strong>Britain Eriksen</strong>
-              <span>CEO Universal</span>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <img
-            class="quote-img"
-            src="{{ asset('images/comma_merchant.svg') }}"
-            alt=""
-            aria-hidden="true"
-          />
-          <img class="rating-stars" src="{{ asset('images/five_star.svg') }}" alt="5 stars" />
-          <p class="testimonial-text">
-            CoinFlow redefined how we accept payments online. Integration with
-            our existing systems was smooth.
-          </p>
-          <div class="author">
-            <img
-              class="avatar"
-              src="{{ asset('images/profile_logo_merchant.svg') }}"
-              alt="Britain Eriksen"
-            />
-            <div class="meta">
-              <strong>Britain Eriksen</strong>
-              <span>CEO Universal</span>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
-    <!-- merchant section end -->
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
 
-    <!-- Pricing Intro Section Started -->
-    <section class="pricing-intro">
+    <!-- Section 7: Simple, Transparent Pricing -->
+    <section class="simple-pricing" id="simple-pricing">
       <div class="container">
-        <div class="pricing-content">
-          <!-- Left Text Section -->
-          <div class="pricing-text">
-            <h2>Simple, Transparent Pricing</h2>
-            <p>
-              No surprises — just straightforward plans designed to scale with
-              your business.
+        <div class="simple-pricing-wrapper">
+          <div class="simple-pricing-content">
+            <div class="simple-pricing-badge">No Hidden Costs</div>
+            <h2 class="global-heading simple-pricing-title">
+              Simple, Transparent Pricing
+            </h2>
+            <p class="global-subheading simple-pricing-description">
+              No surprises, just straightforward plans designed to scale with your business. Whether you're a small
+              store
+              getting started with crypto payments or a growing platform handling higher volumes, CoinFlow offers
+              transparent pricing that adapts to your needs without hidden fees or complexity
             </p>
-            <button class="view-btn">View Plans</button>
+            <a href="#pricing" class="btn btn-primary">View Plans</a>
           </div>
-          <!-- Right Image Section -->
-          <div class="pricing-media">
-            <img src="{{ asset('images/pricing_sec_img.svg') }}" alt="Pricing Preview" />
+          <div class="simple-pricing-image">
+            <img src="{{ asset('images/sev_a.png') }}" alt="Simple Pricing" />
           </div>
         </div>
       </div>
     </section>
-    <!-- Pricing Intro Section End-->
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-
-    <!-- Blog Section Started -->
-    <section class="blog-section">
+    <!-- Section 8: Start Accepting Crypto Today -->
+    <section class="start-today" id="start-today">
       <div class="container">
-        <div class="blog-header text-center">
-          <h2>Latest from the Blog</h2>
-          <p>
-            Insights, guides, and crypto-commerce trends — stay ahead with
-            expert tips from CoinFlow.
-          </p>
-        </div>
-        <div class="blog-grid">
-          <!-- Blog Card 1 -->
-          <div class="blog-card">
-            <img
-              src="{{ asset('images/blog_img1.png') }}"
-              alt="Blog Image 1"
-              class="blog-img"
-            />
-            <div class="blog-content">
-              <div class="blog-meta">
-                <img src="{{ asset('images/blog_icon1.png') }}" alt="icon" class="blog-icon" />
-                <span>May 03, 2025</span>
-              </div>
-              <h3>5 Ways to Increase Sales by Accepting Crypto Payments</h3>
-              <p>
-                Discover how top online stores are boosting conversions and
-                attracting new customers.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
+        <div class="start-today-wrapper">
+          <div class="start-today-inner">
+            <div class="start-today-image">
+              <img src="{{ asset('images/eig_phone.png') }}" alt="Start Accepting Crypto" />
             </div>
-          </div>
-          <!-- Blog Card 2 -->
-          <div class="blog-card">
-            <img
-              src="{{ asset('images/blog_img2.png') }}"
-              alt="Blog Image 2"
-              class="blog-img"
-            />
-            <div class="blog-content">
-              <div class="blog-meta">
-                <img src="{{ asset('images/blog_icon1.png') }}" alt="icon" class="blog-icon" />
-                <span>May 03, 2025</span>
-              </div>
-              <h3>Getting Started with CoinFlow: A Step-by-Step Setup Guide</h3>
-              <p>
-                Learn how to install the plugin, connect your wallet, and start
-                accepting payments.
+            <div class="start-today-content">
+              <div class="start-today-badge">Start Accepting Crypto Today</div>
+              <h2 class="global-heading start-today-title">
+                Start Accepting Crypto Today
+              </h2>
+              <p class="global-subheading start-today-description">
+                Join thousands of merchants simplifying crypto payments with CoinFlow. Get started in minutes, integrate
+                seamlessly with your store, and start accepting crypto securely without complexity.
               </p>
-              <a href="#" class="read-more">Read More →</a>
-            </div>
-          </div>
-          <!-- Blog Card 3 -->
-          <div class="blog-card">
-            <img
-              src="{{ asset('images/blog_img3.png') }}"
-              alt="Blog Image 3"
-              class="blog-img"
-            />
-            <div class="blog-content">
-              <div class="blog-meta">
-                <img src="{{ asset('images/blog_icon1.png') }}" alt="icon" class="blog-icon" />
-                <span>May 03, 2025</span>
-              </div>
-              <h3>The Future of Crypto Commerce: What Merchants Should Know</h3>
-              <p>
-                From stablecoins to Layer 2 solutions — explore the technologies
-                shaping tomorrow.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
-            </div>
-          </div>
-          <!-- Blog Card 4 -->
-          <div class="blog-card">
-            <img
-              src="{{ asset('images/blog_img4.png') }}"
-              alt="Blog Image 4"
-              class="blog-img"
-            />
-            <div class="blog-content">
-              <div class="blog-meta">
-                <img src="{{ asset('images/blog_icon1.png') }}" alt="icon" class="blog-icon" />
-                <span>May 03, 2025</span>
-              </div>
-              <h3>5 Ways to Increase Sales by Accepting Crypto Payments</h3>
-              <p>
-                Discover how top online stores are boosting conversions and
-                attracting new customers.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#register" class="btn btn-secondary">Start Today</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Blog Section End-->
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
 
-    <!-- Download Section Start -->
-    <section class="download-section">
+  
+
+
+
+  <!-- FAQ Section started -->
+
+
+  <section class="faq-section" id="faq">
       <div class="container">
-        <div class="download-card">
-          <h2>Start Accepting Crypto Today</h2>
-          <p>Join 100+ merchants simplifying crypto payments with CoinFlow</p>
-          <div class="download-actions">
-            <a href="#" class="btn primary">Download Plugin</a>
-            <a href="#" class="btn ghost">Contact Sales</a>
-          </div>
+        <div class="faq-header">
+          <div class="faq-badge">Need More Information?</div>
+          <h2 class="global-heading faq-title">Frequently Asked Questions</h2>
         </div>
-      </div>
-    </section>
-    <!-- Download Section End -->
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-
-    <!-- FAQ Section started -->
-    <section class="faq-section">
-      <div class="container">
-        <h2 class="faq-title">Frequently Asked Questions</h2>
         <div class="faq-container">
-          <!-- FAQ Item 1 -->
-          <div class="faq-item">
+          <!-- FAQ Item 1 (Active) -->
+          <div class="faq-item active">
             <div class="faq-question">
-              <img src="{{ asset('images/faqplus_icon.png') }}" alt="icon" class="faq-icon" />
+              <img src="{{ asset('images/nin_sub.png') }}" alt="Collapse" class="faq-icon" />
               <h3>How does CoinFlow work with my eCommerce store?</h3>
             </div>
             <div class="faq-answer">
-              <p>
-                CoinFlow integrates seamlessly with platforms like Shopify,
-                WooCommerce, and Magento. Once installed, it allows you to
-                accept crypto payments directly from customers using supported
-                wallets.
-              </p>
+              <p>CoinFlow integrates seamlessly with platforms like Shopify, WooCommerce, and Magento. Once installed,
+                it
+                allows you to accept crypto payments directly from customers using supported wallets.</p>
             </div>
           </div>
+
           <!-- FAQ Item 2 -->
           <div class="faq-item">
             <div class="faq-question">
-              <img src="{{ asset('images/faqplus_icon.png') }}" alt="icon" class="faq-icon" />
+              <img src="{{ asset('images/nin_plus.png') }}" alt="Expand" class="faq-icon" />
               <h3>What cryptocurrencies does CoinFlow support?</h3>
             </div>
             <div class="faq-answer">
-              <p>
-                CoinFlow supports a wide range of cryptocurrencies including
-                BTC, ETH, USDT, and many more to make payments convenient for
-                customers.
-              </p>
+              <p>CoinFlow supports major cryptocurrencies including Bitcoin, Ethereum, Litecoin, and many stablecoins
+                like
+                USDC and USDT.</p>
             </div>
           </div>
+
           <!-- FAQ Item 3 -->
           <div class="faq-item">
             <div class="faq-question">
-              <img src="{{ asset('images/faqplus_icon.png') }}" alt="icon" class="faq-icon" />
+              <img src="{{ asset('images/nin_plus.png') }}" alt="Expand" class="faq-icon" />
               <h3>How long do crypto transactions take to process?</h3>
             </div>
             <div class="faq-answer">
-              <p>
-                Transaction time varies depending on network congestion but
-                usually takes between a few seconds to a few minutes.
-              </p>
+              <p>Transaction speeds depend on the blockchain network but typically range from a few seconds to a few
+                minutes.</p>
             </div>
           </div>
+
           <!-- FAQ Item 4 -->
           <div class="faq-item">
             <div class="faq-question">
-              <img src="{{ asset('images/faqplus_icon.png') }}" alt="icon" class="faq-icon" />
+              <img src="{{ asset('images/nin_plus.png') }}" alt="Expand" class="faq-icon" />
               <h3>Are there any hidden fees?</h3>
             </div>
             <div class="faq-answer">
-              <p>
-                No hidden charges — CoinFlow maintains complete transparency
-                with all transaction fees clearly displayed upfront.
-              </p>
+              <p>No, CoinFlow prides itself on transparency. We charge a flat nominal fee per transaction with zero
+                hidden
+                costs.</p>
             </div>
           </div>
+
           <!-- FAQ Item 5 -->
           <div class="faq-item">
             <div class="faq-question">
-              <img src="{{ asset('images/faqplus_icon.png') }}" alt="icon" class="faq-icon" />
+              <img src="{{ asset('images/nin_plus.png') }}" alt="Expand" class="faq-icon" />
               <h3>Can I withdraw earnings in fiat currency?</h3>
             </div>
             <div class="faq-answer">
-              <p>
-                Yes, you can convert and withdraw your crypto earnings into fiat
-                currency directly through supported exchanges or wallets.
-              </p>
+              <p>Yes, you can easily convert and withdraw your crypto earnings into your local fiat currency directly to
+                your bank account.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ---------------- -->
-    <!-- ---------------- -->
-    <!-- ---------------- -->
 
+  
 
-     @include('home-fronted.include.footer')
-    </div>
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+  <!-- ---------------- -->
+</main>
+@endsection
 
+<script>
+    // Header Scroll Logic
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      const scrollThreshold = window.innerHeight * 0.1;
 
- 
+      if (window.scrollY > scrollThreshold) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile Menu Logic
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', () => {
+        mobileToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.classList.toggle('no-scroll'); // Prevent background scrolling
+      });
+
+      // Close menu when a link is clicked
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileToggle.classList.remove('active');
+          mobileMenu.classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        });
+      });
+    }
+
+    // FAQ Accordion Logic
+    document.addEventListener('DOMContentLoaded', function () {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      if (faqQuestions.length > 0) {
+        faqQuestions.forEach(question => {
+          question.addEventListener('click', () => {
+            const item = question.parentElement;
+            const icon = question.querySelector('.faq-icon');
+
+            // Close all other items
+            document.querySelectorAll('.faq-item').forEach(otherItem => {
+              if (otherItem !== item) {
+                otherItem.classList.remove('active');
+                const otherIcon = otherItem.querySelector('.faq-icon');
+                if (otherIcon) otherIcon.src = '{{ asset('images/nin_plus.png') }}';
+              }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+
+            // Update icon
+            if (item.classList.contains('active')) {
+              icon.src = '{{ asset('images/nin_sub.png') }}';
+            } else {
+              icon.src = '{{ asset('images/nin_plus.png') }}';
+            }
+          });
+        });
+      }
+    });
+
+    // Testimonials Slider Logic
+    document.addEventListener('DOMContentLoaded', function () {
+      const track = document.querySelector('.testimonials-track');
+      const cards = document.querySelectorAll('.testimonial-card');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      if (!track || cards.length === 0 || !prevBtn || !nextBtn) return;
+
+      let currentIndex = 0;
+      const gap = 32; // 2rem gap
+
+      function getMoveAmount() {
+        const cardWidth = cards[0].offsetWidth;
+        return cardWidth + gap;
+      }
+
+      function updateSlider() {
+        const move = getMoveAmount() * currentIndex;
+        track.style.transform = `translateX(-${move}px)`;
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const isMobile = window.innerWidth <= 992;
+        const visibleItems = isMobile ? 1 : 3;
+        const maxIndex = Math.max(0, cards.length - visibleItems);
+
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+        } else {
+          currentIndex = 0; // Loop back to start
+        }
+        updateSlider();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        const isMobile = window.innerWidth <= 992;
+        const visibleItems = isMobile ? 1 : 3;
+        const maxIndex = Math.max(0, cards.length - visibleItems);
+
+        if (currentIndex > 0) {
+          currentIndex--;
+        } else {
+          currentIndex = maxIndex; // Loop to end
+        }
+        updateSlider();
+      });
+
+      // Handle resize
+      window.addEventListener('resize', () => {
+        currentIndex = 0;
+        track.style.transform = `translateX(0)`;
+      });
+    });
+  </script>
