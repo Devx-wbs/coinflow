@@ -29,6 +29,7 @@ class User extends Authenticatable
         'store_name',
         'role',
         'status',
+        'image'
     ];
 
     /**
@@ -74,5 +75,32 @@ class User extends Authenticatable
         return $this->getAllPermissions()
             ->pluck('name')
             ->contains(fn($perm) => str_starts_with($perm, $prefix));
+    }
+
+
+    public function storages()
+    {
+        return $this->morphMany(Storage::class, 'model');
+    }
+
+    public function profileImage()
+    {
+        return $this->morphOne(Storage::class, 'model')
+            ->where('file_type', 'image');
+    }
+
+    public function imageFile()
+    {
+        return $this->belongsTo(Storage::class, 'image');
+    }
+
+
+    public function getProfileImageUrlAttribute()
+    {
+        if ($this->imageFile && $this->imageFile->file_path) {
+            return asset('storage/' . $this->imageFile->file_path);
+        }
+
+        return asset('images/default-user.png');
     }
 }

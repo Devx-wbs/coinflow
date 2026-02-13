@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\StorageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,19 +18,65 @@ class ProfileController extends Controller
     }
 
     // Update Profile (Name)
-    public function update(Request $request)
+    // public function update(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //     ]);
+
+    //     $user = Auth::user();
+    //     $user->update(['name' => $request->name]);
+
+    //     return back()->with('success', 'Profile updated successfully.');
+
+
+    // }
+
+
+    public function update(Request $request, StorageService $storageService)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'  => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $user = Auth::user();
-        $user->update(['name' => $request->name]);
+
+        $user->update([
+            'name' => $request->name
+        ]);
+
+        if ($request->hasFile('image')) {
+
+            // ✅ Delete old image (DB + file)
+            if ($user->image) {
+
+                $oldStorage = \App\Models\Storage::find($user->image);
+
+                if ($oldStorage) {
+                    $storageService->delete($oldStorage);
+                }
+
+                // IMPORTANT: clear old id before new upload
+                $user->update(['image' => null]);
+            }
+
+            // ✅ Upload new file
+            $storage = $storageService->upload(
+                $request->file('image'),
+                $user,
+                'profile_images'
+            );
+
+            // ✅ Save storage id in user table
+            $user->image = $storage->id;
+            $user->save();
+        }
 
         return back()->with('success', 'Profile updated successfully.');
-
-
     }
+
+
 
     // Change Password
     public function changePassword(Request $request)
@@ -50,10 +97,5 @@ class ProfileController extends Controller
         ]);
 
         return back()->with('password_success', 'Password changed successfully.');
-
     }
-
-
-
-    
 }
