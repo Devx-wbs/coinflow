@@ -43,7 +43,7 @@ $layout = Auth::user()->role == 1
 
         <hr>
 
-        <form action="{{ route('profile.update') }}" 
+        <form action="/profile/update" 
               method="POST" 
               enctype="multipart/form-data">
           @csrf
@@ -87,7 +87,7 @@ $layout = Auth::user()->role == 1
 
         <h5 class="fw-bold mb-3">Change Password</h5>
 
-        <form action="{{ route('profile.changePassword') }}" method="POST">
+        <form action="/profile/change-password" method="POST">
           @csrf
 
           <div class="mb-3">

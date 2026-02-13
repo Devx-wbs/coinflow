@@ -13,24 +13,10 @@ class ProfileController extends Controller
     // Show Profile Page
     public function showProfile()
     {
-        // ✅ Remove extra space in view name and ensure correct folder path
         return view('profile');
     }
 
-    // Update Profile (Name)
-    // public function update(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //     ]);
-
-    //     $user = Auth::user();
-    //     $user->update(['name' => $request->name]);
-
-    //     return back()->with('success', 'Profile updated successfully.');
-
-
-    // }
+  
 
 
     public function update(Request $request, StorageService $storageService)
