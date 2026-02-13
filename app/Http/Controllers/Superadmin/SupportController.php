@@ -188,7 +188,7 @@ class SupportController extends Controller
 
     public function form()
     {
-        return view('home-fronted.contact', ['categories'  => Support::categories()]);
+        return view('home-fronted.contact');
     }
 
     public function saveform(Request $request)
@@ -196,7 +196,6 @@ class SupportController extends Controller
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email'     => 'required|email|max:255',
-            'category_id' => 'required|integer',
             'subject'   => 'required|string|max:255',
             'message'   => 'required|string'
         ]);
@@ -207,7 +206,7 @@ class SupportController extends Controller
             'email'       => $request->email,
             'subject'     => $request->subject,
             'description' => $request->message,
-            'category_id' => 1, // default category
+            'category_id' => 3, 
             'priority'    => 1, // default medium
             'status'      => Support::STATUS_INACTIVE,
         ]);

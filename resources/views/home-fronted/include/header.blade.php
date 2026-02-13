@@ -18,7 +18,7 @@
           <!-- Logo -->
           <div class="logo">
             <a href="{{ url('/') }}" class="dropdown-item">
-            <img src="{{ asset('images/coinflow_logo.png') }}" alt="Coinflow Logo">
+              <img src="{{ asset('images/coinflow_logo.png') }}" alt="Coinflow Logo">
             </a>
           </div>
           <div class="links">
@@ -42,7 +42,11 @@
 
             <div class="user-dropdown" id="userDropdown">
               <div class="user-name">
-                <i class="fas fa-user-circle"></i>
+                <img src="{{ Auth::user()->profile_image_url }}"
+                  class="rounded-circle"
+                  width="35"
+                  height="35"
+                  style="object-fit: cover;">
                 {{ Auth::user()->name }}
 
                 <i class="fas fa-chevron-down"></i>

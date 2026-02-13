@@ -18,43 +18,62 @@
                 @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
-                 
+
                 </div>
                 @endif
-
+                
                 <form action="{{ route('contact.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="full_name" value="{{ old('full_name') }}">
+                        <input type="text"
+                            name="full_name"
+                            class="@error('full_name') is-invalid @enderror"
+                            value="{{ old('full_name', auth()->check() ? auth()->user()->name : '') }}">
+
+                        @error('full_name')
+                        <div class="field-error">{{ $message }}</div>
+                        @enderror
                     </div>
+
 
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input type="email" name="email" value="{{ old('email') }}">
+                        <input type="email"
+                            name="email"
+                            class="@error('email') is-invalid @enderror"
+                            value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}">
+
+                        @error('email')
+                        <div class="field-error">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    {{-- ✅ Category Added --}}
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select name="category_id">
-                            <option value="">-- Select Category --</option>
-                            @foreach(\App\Models\Support::categories() as $key => $value)
-                            <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="form-group">
                         <label>Subject</label>
-                        <input type="text" name="subject" value="{{ old('subject') }}">
+                        <input type="text"
+                            name="subject"
+                            class="@error('subject') is-invalid @enderror"
+                            value="{{ old('subject') }}">
+
+                        @error('subject')
+                        <div class="field-error">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea name="message" rows="4">{{ old('message') }}</textarea>
+                        <textarea name="message"
+                            rows="4"
+                            class="@error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+
+                        @error('message')
+                        <div class="field-error">{{ $message }}</div>
+                        @enderror
                     </div>
+
 
                     <button type="submit" class="submit-btn">
                         Send Request
@@ -196,5 +215,15 @@
         .contact-right {
             margin-top: 40px;
         }
+    }
+
+    .is-invalid {
+        border-color: #e3342f !important;
+    }
+
+    .field-error {
+        color: #e3342f;
+        font-size: 13px;
+        margin-top: 4px;
     }
 </style>
