@@ -195,6 +195,8 @@ use App\Models\PluginVersion;
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Category</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">State</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Media</th>
                             <th class="text-secondary opacity-7">Actions</th>
                         </tr>
                     </thead>
@@ -260,6 +262,36 @@ use App\Models\PluginVersion;
                                 </span>
                             </td>
 
+                            <td>
+                                @if($plugin->description)
+                                {{ Str::limit($plugin->description, 50) }}
+
+                                @if(strlen($plugin->description) > 50)
+                                <a href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#descModal{{ $plugin->id }}"
+                                    class="text-primary">
+                                    View
+                                </a>
+                                @endif
+                                @endif
+                            </td>
+
+                            <td>
+                                @if($plugin->screenshot)
+
+
+                                <a href="{{ asset('storage/' . $plugin->screenshot->file_path) }}"
+                                    download
+                                    class="btn btn-sm btn-success">
+                                    Download
+                                </a>
+                                @else
+                                <span class="text-muted">No Image</span>
+                                @endif
+                            </td>
+
+
                             <!-- Actions -->
                             <td>
                                 <!-- Download -->
@@ -267,6 +299,7 @@ use App\Models\PluginVersion;
                                     class="btn btn-success btn-sm">
                                     Download
                                 </a>
+
 
                                 <!-- Delete -->
                                 <form action="{{ route('update-tracker.delete', $plugin->id) }}"
@@ -284,6 +317,28 @@ use App\Models\PluginVersion;
                         </tr>
 
                         @endforeach
+
+                        @foreach($plugins as $plugin)
+                        <div class="modal fade" id="descModal{{ $plugin->id }}" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">
+                                            Description - {{ $plugin->version }}
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        {!! nl2br(e($plugin->description)) !!}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+s
                     </tbody>
 
                 </table>
@@ -355,6 +410,22 @@ use App\Models\PluginVersion;
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description"
+                            class="form-control"
+                            rows="4"></textarea>
+                    </div>
+
+                    <!-- Screenshot -->
+                    <div class="mb-3">
+                        <label class="form-label">Plugin Screenshot</label>
+                        <input type="file"
+                            name="screenshot"
+                            class="form-control"
+                            accept="image/*">
+                    </div>
+
                 </div>
 
                 <!-- Footer -->
@@ -373,5 +444,3 @@ use App\Models\PluginVersion;
 </div>
 
 @endsection
-
-

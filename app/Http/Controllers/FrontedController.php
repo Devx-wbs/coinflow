@@ -153,4 +153,14 @@ class FrontedController extends Controller
     {
         //
     }
+
+    public function privacyPolicy()
+    {
+        return view('home-fronted.privacy-policy');
+    }
+
+    public function termsConditions()
+    {
+        return view('home-fronted.terms-conditions');
+    }
 }

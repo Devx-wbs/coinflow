@@ -50,6 +50,9 @@ Route::get('/contact-us', [SupportController::class, 'form'])
 Route::post('/contact-us', [SupportController::class, 'saveform'])
     ->name('contact.store');
 
+Route::get('/privacy-policy', [FrontedController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/terms-conditions', [FrontedController::class, 'termsConditions'])->name('terms.conditions');
+
 // Pricing page
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 

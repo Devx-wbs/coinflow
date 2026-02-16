@@ -11,6 +11,7 @@ use App\Models\LicenseActivation;
 use App\Models\License;
 use App\Models\PluginUpdateNotice;
 use App\Models\PluginVersion;
+use App\Services\StorageService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -127,7 +128,10 @@ class MerchantController extends Controller
     {
         // 1️⃣ Get all plugin versions with activation count
 
-        $plugins = PluginVersion::withCount('activations')
+
+
+        $plugins = PluginVersion::with(['screenshot'])
+            ->withCount('activations')
             ->orderBy('released_at', 'desc')
             ->orderBy('id', 'desc')
             ->get();
@@ -174,12 +178,14 @@ class MerchantController extends Controller
     }
 
 
-    public function add_plugin(Request $request)
+    public function add_plugin(Request $request, StorageService $storageService)
     {
         $request->validate([
             'version' => 'required|string|unique:plugin_versions,version',
             'zip' => 'required|file|mimes:zip',
             'released_at' => 'required|date',
+            'description' => 'nullable|string',
+            'screenshot' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         // Extension
@@ -194,16 +200,26 @@ class MerchantController extends Controller
             $fileName
         );
 
-        DB::transaction(function () use ($request, $zipPath) {
+        DB::transaction(function () use ($request, $zipPath, $storageService) {
 
             $newPlugin = PluginVersion::create([
                 'version' => $request->version,
                 'zip_path' => $zipPath,
                 'released_at' => $request->released_at,
+                'description' => $request->description,
                 'state_id' => PluginVersion::STATE_ACTIVE,
                 'type_id' => PluginVersion::TYPE_LATEST,
                 'category_id' => $request->category_id
             ]);
+
+            // 🔥 Upload screenshot using your StorageService
+            if ($request->hasFile('screenshot')) {
+                $storageService->upload(
+                    $request->file('screenshot'),
+                    $newPlugin,
+                    'plugin_screenshots'
+                );
+            }
 
             PluginVersion::where('id', '!=', $newPlugin->id)
                 ->where('type_id', PluginVersion::TYPE_LATEST)
@@ -211,6 +227,7 @@ class MerchantController extends Controller
                     'type_id' => PluginVersion::TYPE_OUTDATED
                 ]);
         });
+
 
         return redirect()->back()->with('success', 'Plugin uploaded successfully!');
     }
@@ -289,7 +306,7 @@ class MerchantController extends Controller
     public function sendUpdateNotice($pluginVersionId)
     {
         $latestVersion = PluginVersion::findOrFail($pluginVersionId);
-       
+
 
         // Find stores NOT using latest version
         $outdatedStores = LicenseActivation::where('plugin_id', '!=', $latestVersion->id)
@@ -311,7 +328,7 @@ class MerchantController extends Controller
                 ]
             );
 
-            
+
 
             // Dispatch only if still pending
             if ($notice->status == PluginUpdateNotice::STATUS_PENDING) {
