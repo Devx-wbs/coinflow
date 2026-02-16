@@ -102,7 +102,7 @@
                     <div class="terms-row">
                         <input type="checkbox" id="terms" required>
                         <label for="terms">
-                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            I agree to the <a href="{{ route('terms.conditions') }}">Terms of Service</a> and <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
                         </label>
                     </div>
 

@@ -71,8 +71,8 @@
                     <div class="auth-footer">
                         <p>Don't have an account? <a href="{{ route('register') }}">Create an account</a></p>
                         <p style="margin-top: 10px; color: #999; font-size: 11px;">
-                            By signing in, you agree to our <a href="#"
-                                style="color:#999; text-decoration: underline;">Terms of Service</a> and <a href="#"
+                            By signing in, you agree to our <a href="{{ route('terms.conditions') }}"
+                                style="color:#999; text-decoration: underline;">Terms of Service</a> and <a href="{{ route('privacy.policy') }}"
                                 style="color:#999; text-decoration: underline;">Privacy Policy</a>
                         </p>
                     </div>

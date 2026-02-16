@@ -28,36 +28,36 @@ class PluginApiController extends Controller
                 'message' => 'No plugin versions available'
             ], 404);
         }
+
+
         return response()->json([
             'status' => true,
-            'latest_version' => $latest->version,
-            'released_at' => $latest->released_at->format('Y-m-d'),
-            'download_url' => route('plugin.download', $latest->id)
-                . "?license_key={$licenseKey}"
+            'data' => $latest
         ]);
     }
 
     /**
      * List All Versions
      */
+
+
     public function index(Request $request)
     {
         $licenseKey = $request->query('license_key');
-        $license = $this->validateLicense($licenseKey);
+        $this->validateLicense($licenseKey);
 
-        $versions = PluginVersion::orderBy('released_at', 'desc')->get();
-
-        $versions->transform(function ($version) use ($licenseKey) {
-            $version->download_url = route('plugin.download', $version->id)
-                . "?license_key={$licenseKey}";
-            return $version;
-        });
+        $versions = PluginVersion::with('screenshot')
+            ->orderBy('released_at', 'desc')
+            ->get();
 
         return response()->json([
             'status' => true,
             'data' => $versions
         ]);
     }
+
+
+
 
     /**
      * View Single Version

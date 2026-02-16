@@ -12,12 +12,50 @@ class PluginVersion extends Model
         'released_at',
         'state_id',
         'category_id',
-        'type_id'
+        'type_id',
+        'description'
     ];
 
     protected $casts = [
         'released_at' => 'date',
     ];
+
+    protected $appends = [
+        'image_url',
+        'download_url',
+        'released_date'
+    ];
+    protected $hidden = [
+        'screenshot'
+    ];
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->screenshot) {
+            return null;
+        }
+
+        return asset('storage/' . $this->screenshot->file_path);
+    }
+
+    public function getDownloadUrlAttribute()
+    {
+        $licenseKey = request()->query('license_key');
+
+        if (!$licenseKey) {
+            return null;
+        }
+
+        return route('plugin.download', $this->id)
+            . "?license_key={$licenseKey}";
+    }
+
+    public function getReleasedDateAttribute()
+    {
+        return $this->released_at
+            ? $this->released_at->format('Y-m-d')
+            : null;
+    }
 
     public function activations()
     {
@@ -90,7 +128,7 @@ class PluginVersion extends Model
     }
 
 
-     public const TYPE_LATEST = 1;
+    public const TYPE_LATEST = 1;
     public const TYPE_OUTDATED   = 0;
 
     public static function types(): array
@@ -106,7 +144,7 @@ class PluginVersion extends Model
         return self::types()[$this->type_id] ?? 'Unknown';
     }
 
-     public function getTypeBadgeClassAttribute(): string
+    public function getTypeBadgeClassAttribute(): string
     {
         return match ($this->type_id) {
             self::TYPE_LATEST   => 'bg-success',
@@ -115,4 +153,15 @@ class PluginVersion extends Model
         };
     }
 
+    public function storages()
+    {
+        return $this->morphMany(Storage::class, 'model');
+    }
+
+    // If you want only screenshot image
+    public function screenshot()
+    {
+        return $this->morphOne(Storage::class, 'model')
+            ->where('file_type', 'image');
+    }
 }
