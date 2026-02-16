@@ -193,6 +193,7 @@ class SupportController extends Controller
 
     public function saveform(Request $request)
     {
+    
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email'     => 'required|email|max:255',
