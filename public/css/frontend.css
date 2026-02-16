@@ -216,7 +216,7 @@ a {
   /* Top padding, no bottom padding as image might touch bottom */
   display: flex;
   align-items: center;
-  background: url('public/hero_bg.png') no-repeat center center;
+  background: url('/images/hero_bg.png') no-repeat center center;
   background-size: cover;
   min-height: calc(100vh - var(--nav-height));
   overflow: hidden;
@@ -968,7 +968,7 @@ a {
 }
 
 .testimonials-wrapper {
-  background: url('public/six_bg.png') no-repeat center center;
+  background: url('/images/six_bg.png') no-repeat center center;
   background-size: cover;
   border-radius: 40px;
   padding: 4rem 1rem;
