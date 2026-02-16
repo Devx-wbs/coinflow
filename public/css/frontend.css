@@ -1264,7 +1264,7 @@ a {
 }
 
 .start-today-wrapper {
-  background: url('public/eig_bg.png') no-repeat center center;
+  background: url("/images/eig_bg.png") no-repeat center center;
   background-size: cover;
   border-radius: 40px;
   padding: 4rem 2rem;
