@@ -16,7 +16,7 @@
                     <p>Log in to your CoinFlow account</p>
                 </div>
 
-               {{-- ✅ reCAPTCHA script ko yahan load karo --}}
+                {{-- ✅ reCAPTCHA script ko yahan load karo --}}
                 {!! NoCaptcha::renderJs() !!}
                 <form method="POST" action="{{ route('login.post') }}">
                     @csrf
@@ -28,15 +28,26 @@
                     <div class="form-group password-group">
                         <label class="form-label">Password</label>
                         <div style="position: relative;">
-                            <input type="password" class="form-control"  name="password" placeholder="Create a Password">
-                            <span class="toggle-password">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
-                                        fill="#9CA3AF" />
+                            <input type="password" id="password" class="form-control" name="password" placeholder="Create a Password">
+
+                            <span class="toggle-password" id="togglePassword">
+                                <!-- Eye Open -->
+                                <svg id="eyeOpen" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                                        stroke="#9CA3AF" stroke-width="2" />
+                                    <circle cx="12" cy="12" r="3" stroke="#9CA3AF" stroke-width="2" />
+                                </svg>
+
+                                <!-- Eye Closed -->
+                                <svg id="eyeClose" width="20" height="20" viewBox="0 0 24 24" fill="none" style="display:none;">
+                                    <path d="M3 3L21 21" stroke="#9CA3AF" stroke-width="2" />
+                                    <path d="M10.5 6.5C11 6.5 11.5 6.5 12 6.5C17 6.5 21.27 9.61 23 14C22.29 15.77 21.25 17.31 19.96 18.56"
+                                        stroke="#9CA3AF" stroke-width="2" />
+                                    <path d="M1 14C2.73 9.61 7 6.5 12 6.5"
+                                        stroke="#9CA3AF" stroke-width="2" />
                                 </svg>
                             </span>
+
                         </div>
                     </div>
 
@@ -74,6 +85,26 @@
             </div>
 
         </div>
+        <script>
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            const eyeOpen = document.getElementById('eyeOpen');
+            const eyeClose = document.getElementById('eyeClose');
+
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                if (type === 'text') {
+                    eyeOpen.style.display = "none";
+                    eyeClose.style.display = "block";
+                } else {
+                    eyeOpen.style.display = "block";
+                    eyeClose.style.display = "none";
+                }
+            });
+        </script>
+
     </section>
 
 </main>
@@ -129,310 +160,310 @@
         gap: 60px;
     }
 
-    
+
 
 
 
     /* start */
 
     /* 1920px Background Wrapper */
-        .login-bg-wrapper {
-            width: 100%;
-            max-width: 1920px;
-            background: url("{{ asset('images/hero_bg.png') }}") no-repeat center center;
-            background-size: cover;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
-            margin: 0 auto;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            min-height: 800px;
-            /* Use min-height to allow content to grow */
-            position: relative;
-        }
+    .login-bg-wrapper {
+        width: 100%;
+        max-width: 1920px;
+        background: url("{{ asset('images/hero_bg.png') }}") no-repeat center center;
+        background-size: cover;
+        border-radius: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+        margin: 0 auto;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        min-height: 800px;
+        /* Use min-height to allow content to grow */
+        position: relative;
+    }
 
-        /* 1440px Content Container */
+    /* 1440px Content Container */
+    .login-content-container {
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 60px 80px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Left Side - Login Card */
+    .login-left {
+        flex: 1;
+        max-width: 480px;
+        /* Constrain width of the form card */
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        z-index: 2;
+        border: 1px solid #1494FF21;
+    }
+
+    /* Right Side - Illustration */
+    .login-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        padding-left: 40px;
+        max-width: 600px;
+    }
+
+    .login-hero-img {
+        max-width: 100%;
+        height: auto;
+        max-height: 700px;
+        /* Prevent overly large image */
+        object-fit: contain;
+        /* Optional animation or transform for "floating" effect */
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    }
+
+    /* LOGO */
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #1C1C1C;
+    }
+
+    .brand-logo img {
+        height: 32px;
+        width: auto;
+    }
+
+    /* Form Header */
+    .login-header {
+        margin-bottom: 20px;
+    }
+
+    .login-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #191D23;
+    }
+
+    .login-header p {
+        color: #666666;
+        font-size: 18px;
+    }
+
+    /* Form Inputs */
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 16px;
+        color: #191D23;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 52px;
+        padding: 0 16px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        color: #333;
+        outline: none;
+        transition: all 0.2s;
+        background: #FAFAFA;
+        /* Slightly distinct input background */
+    }
+
+    .form-control:focus {
+        border-color: #1494FF;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(20, 148, 255, 0.1);
+    }
+
+    .password-group {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #999;
+        font-size: 18px;
+    }
+
+    /* Recaptcha Placeholder */
+    .recaptcha-box {
+        background: #F9FAFB;
+        border: 1px solid #D1D5DB;
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        /* Full width inside card */
+        margin-bottom: 32px;
+    }
+
+    .recaptcha-check {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .recaptcha-logo {
+        text-align: center;
+        font-size: 9px;
+        color: #555;
+        line-height: 1.2;
+    }
+
+    /* Remember Me */
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+
+    /* Custom Checkbox Style */
+    .custom-checkbox {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s;
+    }
+
+    .custom-checkbox:checked {
+        background-color: #1494FF;
+        border-color: #1494FF;
+    }
+
+    .custom-checkbox:checked::after {
+        content: "✓";
+        color: white;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+    }
+
+    .custom-checkbox:hover {
+        border-color: #1494FF;
+    }
+
+    .remember-label {
+        font-size: 14px;
+        color: #555;
+        user-select: none;
+        font-weight: 500;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+        width: 100%;
+        height: 52px;
+        background: linear-gradient(90deg, #1394FF 0%, #35A3FF 100%);
+        /* Gradient button */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-submit:hover {
+        background: #0077E5;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(20, 148, 255, 0.3);
+    }
+
+    /* Footer Links */
+    .auth-footer {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+        text-align: left;
+        /* Keep aligned left */
+    }
+
+    .auth-footer a {
+        color: #1494FF;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
         .login-content-container {
-            width: 100%;
-            max-width: 1440px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 60px 80px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Left Side - Login Card */
-        .login-left {
-            flex: 1;
-            max-width: 480px;
-            /* Constrain width of the form card */
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            z-index: 2;
-            border: 1px solid #1494FF21;
-        }
-
-        /* Right Side - Illustration */
-        .login-right {
-            flex: 1;
-            display: flex;
-            align-items: center;
+            padding: 40px;
+            flex-direction: column;
             justify-content: center;
-            position: relative;
-            z-index: 1;
-            padding-left: 40px;
-            max-width: 600px;
+            gap: 40px;
         }
 
-        .login-hero-img {
-            max-width: 100%;
+        .login-left {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-right {
+            display: none;
+            /* Hide image on smaller screens to keep focus on form */
+        }
+
+        .login-bg-wrapper {
             height: auto;
-            max-height: 700px;
-            /* Prevent overly large image */
-            object-fit: contain;
-            /* Optional animation or transform for "floating" effect */
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+            min-height: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .login-bg-wrapper {
+            border-radius: 20px;
         }
 
-        /* LOGO */
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #1C1C1C;
+        .login-left {
+            padding: 30px 20px;
         }
-
-        .brand-logo img {
-            height: 32px;
-            width: auto;
-        }
-
-        /* Form Header */
-        .login-header {
-            margin-bottom: 20px;
-        }
-
-        .login-header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #191D23;
-        }
-
-        .login-header p {
-            color: #666666;
-            font-size: 18px;
-        }
-
-        /* Form Inputs */
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 16px;
-            color: #191D23;
-        }
-
-        .form-control {
-            width: 100%;
-            height: 52px;
-            padding: 0 16px;
-            border: 1px solid #E5E7EB;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            color: #333;
-            outline: none;
-            transition: all 0.2s;
-            background: #FAFAFA;
-            /* Slightly distinct input background */
-        }
-
-        .form-control:focus {
-            border-color: #1494FF;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(20, 148, 255, 0.1);
-        }
-
-        .password-group {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #999;
-            font-size: 18px;
-        }
-
-        /* Recaptcha Placeholder */
-        .recaptcha-box {
-            background: #F9FAFB;
-            border: 1px solid #D1D5DB;
-            border-radius: 6px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            /* Full width inside card */
-            margin-bottom: 32px;
-        }
-
-        .recaptcha-check {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .recaptcha-logo {
-            text-align: center;
-            font-size: 9px;
-            color: #555;
-            line-height: 1.2;
-        }
-
-        /* Remember Me */
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            cursor: pointer;
-        }
-
-        /* Custom Checkbox Style */
-        .custom-checkbox {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .custom-checkbox:checked {
-            background-color: #1494FF;
-            border-color: #1494FF;
-        }
-
-        .custom-checkbox:checked::after {
-            content: "✓";
-            color: white;
-            font-size: 12px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-        }
-
-        .custom-checkbox:hover {
-            border-color: #1494FF;
-        }
-
-        .remember-label {
-            font-size: 14px;
-            color: #555;
-            user-select: none;
-            font-weight: 500;
-        }
-
-        /* Submit Button */
-        .btn-submit {
-            width: 100%;
-            height: 52px;
-            background: linear-gradient(90deg, #1394FF 0%, #35A3FF 100%);
-            /* Gradient button */
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn-submit:hover {
-            background: #0077E5;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(20, 148, 255, 0.3);
-        }
-
-        /* Footer Links */
-        .auth-footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-            text-align: left;
-            /* Keep aligned left */
-        }
-
-        .auth-footer a {
-            color: #1494FF;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .login-content-container {
-                padding: 40px;
-                flex-direction: column;
-                justify-content: center;
-                gap: 40px;
-            }
-
-            .login-left {
-                width: 100%;
-                max-width: 450px;
-            }
-
-            .login-right {
-                display: none;
-                /* Hide image on smaller screens to keep focus on form */
-            }
-
-            .login-bg-wrapper {
-                height: auto;
-                min-height: auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .login-bg-wrapper {
-                border-radius: 20px;
-            }
-
-            .login-left {
-                padding: 30px 20px;
-            }
-        }
+    }
 </style>

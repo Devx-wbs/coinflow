@@ -44,30 +44,47 @@
                     <!-- Password -->
                     <div class="form-group password-group">
                         <label class="form-label">Password</label>
-                        <div style="position: relative;">
-                            <input type="password"  name="password" class="form-control" placeholder="Create a Password">
+                        <div class="password-wrapper">
+                            <input type="password" name="password" class="form-control password-input" placeholder="Create a Password">
+
                             <span class="toggle-password">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
-                                        fill="#9CA3AF" />
+                                <!-- Eye Open -->
+                                <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                                        stroke="#9CA3AF" stroke-width="2" />
+                                    <circle cx="12" cy="12" r="3" stroke="#9CA3AF" stroke-width="2" />
+                                </svg>
+
+                                <!-- Eye Close -->
+                                <svg class="eye-close" width="20" height="20" viewBox="0 0 24 24" fill="none" style="display:none;">
+                                    <path d="M3 3L21 21" stroke="#9CA3AF" stroke-width="2" />
+                                    <path d="M10.5 6.5C11 6.5 11.5 6.5 12 6.5C17 6.5 21.27 9.61 23 14"
+                                        stroke="#9CA3AF" stroke-width="2" />
                                 </svg>
                             </span>
                         </div>
                     </div>
 
+
                     <!-- Confirm Password -->
                     <div class="form-group password-group">
                         <label class="form-label">Confirm Password</label>
-                        <div style="position: relative;">
-                            <input type="password" name="password_confirmation"  class="form-control" placeholder="Re- Enter Your Password">
+                        <div class="password-wrapper">
+                            <input type="password" name="password_confirmation" class="form-control password-input" placeholder="Re-enter Password">
+
                             <span class="toggle-password">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
-                                        fill="#9CA3AF" />
+                                <!-- Eye Open -->
+                                <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                                        stroke="#9CA3AF" stroke-width="2" />
+                                    <circle cx="12" cy="12" r="3" stroke="#9CA3AF" stroke-width="2" />
+                                </svg>
+
+                                <!-- Eye Close -->
+                                <svg class="eye-close" width="20" height="20" viewBox="0 0 24 24" fill="none" style="display:none;">
+                                    <path d="M3 3L21 21" stroke="#9CA3AF" stroke-width="2" />
+                                    <path d="M10.5 6.5C11 6.5 11.5 6.5 12 6.5C17 6.5 21.27 9.61 23 14"
+                                        stroke="#9CA3AF" stroke-width="2" />
                                 </svg>
                             </span>
                         </div>
@@ -75,19 +92,19 @@
 
                     <!-- Fake Recaptcha Section -->
                     <div class="captcha-box">
-                    {!! NoCaptcha::display() !!}
-                </div>
+                        {!! NoCaptcha::display() !!}
+                    </div>
 
 
                     <!-- Terms Checkbox -->
-                   
+
 
                     <div class="terms-row">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                    </label>
-                </div>
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn-submit">Create Account</button>
@@ -107,11 +124,52 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            document.querySelectorAll(".toggle-password").forEach(function(toggle) {
+
+                toggle.addEventListener("click", function() {
+
+                    const wrapper = this.closest(".password-wrapper");
+                    const input = wrapper.querySelector(".password-input");
+                    const eyeOpen = wrapper.querySelector(".eye-open");
+                    const eyeClose = wrapper.querySelector(".eye-close");
+
+                    if (input.type === "password") {
+                        input.type = "text";
+                        eyeOpen.style.display = "none";
+                        eyeClose.style.display = "block";
+                    } else {
+                        input.type = "password";
+                        eyeOpen.style.display = "block";
+                        eyeClose.style.display = "none";
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+
 </section>
 
 @endsection
 
 <style>
+    .password-wrapper {
+        position: relative;
+    }
+
+    .password-wrapper .toggle-password {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
     /* 1920px Background Wrapper */
     .register-bg-wrapper {
         width: 100%;
@@ -397,6 +455,4 @@
             padding: 24px 20px;
         }
     }
-
-   
 </style>
