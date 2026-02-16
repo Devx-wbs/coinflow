@@ -5,185 +5,398 @@
 @section('content')
 
 <section class="register-section">
-    <div class="register-wrapper">
+    <div class="register-bg-wrapper">
 
-        <!-- LEFT CARD -->
-        <div class="register-card">
-            <h2>Create your CoinFlow account</h2>
-            <p>Get started with crypto payments</p>
+        <!-- 1440px Content Container -->
+        <div class="register-content-container">
 
-            {!! NoCaptcha::renderJs() !!}
+            <!-- Left Side: Form Card -->
+            <div class="register-left">
+                <div class="register-header">
+                    <h1>Create your CoinFlow account</h1>
+                    <p>Get started with crypto payments</p>
+                </div>
 
-            <form method="POST" action="{{ route('register.post') }}">
-                @csrf
+                {!! NoCaptcha::renderJs() !!}
 
-                <label>Full Name</label>
-                <input type="text" name="name" placeholder="Enter your full name" value="{{ old('name') }}">
+                <form method="POST" action="{{ route('register.post') }}">
+                    @csrf
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter your full name" value="{{ old('name') }}">
+                    </div>
+                    @error('name')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
 
-                @error('name')
-                <span class="error">{{ $message }}</span>
-                @enderror
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}">
+                    </div>
 
-                <label>Email</label>
-                <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                    @error('email')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
 
-                @error('email')
-                <span class="error">{{ $message }}</span>
-                @enderror
 
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Create a password">
+                    <!-- Password -->
+                    <div class="form-group password-group">
+                        <label class="form-label">Password</label>
+                        <div style="position: relative;">
+                            <input type="password"  name="password" class="form-control" placeholder="Create a Password">
+                            <span class="toggle-password">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
+                                        fill="#9CA3AF" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
 
-                <label>Confirm Password</label>
-                <input type="password" name="password_confirmation" placeholder="Re-enter password">
+                    <!-- Confirm Password -->
+                    <div class="form-group password-group">
+                        <label class="form-label">Confirm Password</label>
+                        <div style="position: relative;">
+                            <input type="password" name="password_confirmation"  class="form-control" placeholder="Re- Enter Your Password">
+                            <span class="toggle-password">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
+                                        fill="#9CA3AF" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
 
-                <!-- reCAPTCHA -->
-                <div class="captcha-box">
+                    <!-- Fake Recaptcha Section -->
+                    <div class="captcha-box">
                     {!! NoCaptcha::display() !!}
                 </div>
 
-                <div class="terms-row">
+
+                    <!-- Terms Checkbox -->
+                   
+
+                    <div class="terms-row">
                     <input type="checkbox" id="terms" required>
                     <label for="terms">
                         I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
                     </label>
                 </div>
 
-                <button type="submit" class="register-btn">Create Account</button>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-submit">Create Account</button>
 
-                <p class="bottom-text">
-                    Already have an account?
-                    <a href="{{ route('login') }}">Sign in</a>
-                </p>
+                    <!-- Footer -->
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
+                    </div>
+                </form>
+            </div>
 
-            </form>
+            <!-- Right Side: Image -->
+            <div class="register-right">
+                <img src="{{ asset('images/regi_right.png') }}" alt="Crypto Registration Illustration" class="register-hero-img">
+            </div>
+
         </div>
-
-        <!-- RIGHT SIDE IMAGE -->
-        <div class="register-image">
-            <img src="{{ asset('images/signup.png') }}" alt="crypto mockup">
-        </div>
-
     </div>
+
 </section>
 
 @endsection
 
 <style>
-
-  .register-section {
-    padding: 120px 0;
-    background: linear-gradient(180deg, #eef4ff 0%, #f7faff 100%);
-}
-
-.register-wrapper {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 80px;
-    background: #f2f6ff;
-    padding: 60px;
-    border-radius: 30px;
-}
-
-.register-card {
-    background: #fff;
-    padding: 50px;
-    border-radius: 20px;
-    width: 450px;
-    box-shadow: 0 20px 60px rgba(20, 148, 255, 0.08);
-}
-
-.register-card h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.register-card p {
-    margin-bottom: 30px;
-    color: #6c757d;
-}
-
-.register-card label {
-    font-size: 14px;
-    margin-bottom: 6px;
-    display: block;
-    color: #333;
-}
-
-.register-card input {
-    width: 100%;
-    height: 46px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 0 15px;
-    margin-bottom: 15px;
-    transition: 0.2s;
-}
-
-.register-card input:focus {
-    border-color: #1494FF;
-    outline: none;
-}
-
-.register-btn {
-    width: 100%;
-    height: 48px;
-    background: linear-gradient(90deg, #1494FF, #2a7de1);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: 500;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-.register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(20, 148, 255, 0.3);
-}
-
-.terms-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0 15px 0;
-    font-size: 13px;
-}
-
-.terms-row a {
-    color: #1494FF;
-    text-decoration: none;
-}
-
-.bottom-text {
-    margin-top: 15px;
-    font-size: 14px;
-    text-align: center;
-}
-
-.register-image img {
-    width: 100%;
-    max-width: 500px;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .register-wrapper {
-        flex-direction: column;
-        padding: 40px;
-    }
-
-    .register-image {
-        display: none;
-    }
-
-    .register-card {
+    /* 1920px Background Wrapper */
+    .register-bg-wrapper {
         width: 100%;
+        max-width: 1920px;
+        background: url("{{ asset('images/hero_bg.png') }}") no-repeat center center;
+        background-size: cover;
+        border-radius: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+        margin: 0 auto;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        min-height: 900px;
+        /* Taller for registration form */
+        position: relative;
     }
-}
 
+    /* 1440px Content Container */
+    .register-content-container {
+        width: 100%;
+        max-width: 1440px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 60px 80px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Left Side - Register Card */
+    .register-left {
+        flex: 1;
+        max-width: 480px;
+        /* Constrain width of the form card */
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        z-index: 2;
+        border: 1px solid #1494FF21;
+    }
+
+    /* Right Side - Illustration */
+    .register-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        padding-left: 40px;
+        max-width: 600px;
+    }
+
+    .register-hero-img {
+        max-width: 100%;
+        height: auto;
+        max-height: 700px;
+        object-fit: contain;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    }
+
+    /* Form Header */
+    .register-header {
+        margin-bottom: 20px;
+    }
+
+    .register-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #191D23;
+    }
+
+    .register-header p {
+        color: #666666;
+        font-size: 14px;
+    }
+
+    /* Form Inputs */
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #191D23;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 48px;
+        padding: 0 16px;
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        color: #333;
+        outline: none;
+        transition: all 0.2s;
+        background: #FAFAFA;
+    }
+
+    .form-control:focus {
+        border-color: #1494FF;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(20, 148, 255, 0.1);
+    }
+
+    .password-group {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #999;
+        z-index: 10;
+    }
+
+    /* Recaptcha Placeholder */
+    .recaptcha-box {
+        background: #F9FAFB;
+        border: 1px solid #D1D5DB;
+        border-radius: 6px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .recaptcha-check {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .recaptcha-logo {
+        text-align: center;
+        font-size: 9px;
+        color: #555;
+        line-height: 1.2;
+    }
+
+    /* Terms Checkbox */
+    .terms-check {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 24px;
+        cursor: pointer;
+    }
+
+    .custom-checkbox {
+        appearance: none;
+        min-width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s;
+        margin-top: 2px;
+    }
+
+    .custom-checkbox:checked {
+        background-color: #1494FF;
+        border-color: #1494FF;
+    }
+
+    .custom-checkbox:checked::after {
+        content: "✓";
+        color: white;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: bold;
+    }
+
+    .custom-checkbox:hover {
+        border-color: #1494FF;
+    }
+
+    .terms-label {
+        font-size: 12px;
+        color: #555;
+        user-select: none;
+        line-height: 1.4;
+    }
+
+    .terms-label a {
+        color: #1494FF;
+        text-decoration: none;
+    }
+
+    .terms-label a:hover {
+        text-decoration: underline;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(90deg, #1394FF 0%, #35A3FF 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+        box-shadow: 0 4px 12px rgba(20, 148, 255, 0.2);
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(20, 148, 255, 0.3);
+    }
+
+    /* Footer Links */
+    .auth-footer {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #666;
+        text-align: left;
+    }
+
+    .auth-footer a {
+        color: #1494FF;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .register-content-container {
+            padding: 40px;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .register-left {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .register-right {
+            display: none;
+        }
+
+        .register-bg-wrapper {
+            height: auto;
+            min-height: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .register-bg-wrapper {
+            border-radius: 20px;
+        }
+
+        .register-left {
+            padding: 24px 20px;
+        }
+    }
+
+   
 </style>
