@@ -169,7 +169,8 @@
                 const supportId = this.getAttribute('data-support-id');
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                fetch(`/support/support/${supportId}/assign`, {
+                
+                    fetch("{{ route('support.assign', $support->id) }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

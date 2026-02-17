@@ -16,6 +16,7 @@ use App\Http\Controllers\BuyplanController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\DownloadZipController;
+use App\Http\Controllers\PluginController;
 use App\Http\Controllers\PushNoticeController;
 use App\Http\Controllers\Superadmin\SupportController;
 
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
@@ -101,27 +103,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/global-stats', [MerchantController::class, 'global_stats_index'])->name('global-stats');
 
 
-    
+
 
 
 
     //update plugin
 
-
     Route::prefix('update-tracker')->group(function () {
         // Dashboard Page
-        Route::get('/', [MerchantController::class, 'update_tracker_index'])->name('update-tracker.index');
+        Route::get('/', action: [PluginController::class, 'update_tracker_index'])->name('update-tracker.index');
         // Add Plugin Version
-        Route::post('/add', [MerchantController::class, 'add_plugin'])->name('update-tracker.add');
+        Route::post('/add', [PluginController::class, 'add_plugin'])->name('update-tracker.add');
         // Delete Plugin Version
-        Route::delete('/delete/{id}', [MerchantController::class, 'destroy'])->name('update-tracker.delete');
+        Route::delete('/delete/{id}', [PluginController::class, 'destroy'])->name('update-tracker.delete');
         // Export Plugin Report
-        Route::get('/export', [MerchantController::class, 'exportPluginReport'])->name('update-tracker.export');
+        Route::get('/export', [PluginController::class, 'exportPluginReport'])->name('update-tracker.export');
 
         // Send Update Notice Emails
-        Route::post('/send-notice/{pluginVersion}', [MerchantController::class, 'sendUpdateNotice'])->name('update-tracker.sendNotice');
+        Route::post('/send-notice/{pluginVersion}', [PluginController::class, 'sendUpdateNotice'])->name('update-tracker.sendNotice');
         // Download Plugin ZIP
-        // Route::get('/download/{id}', [MerchantController::class, 'download'])->name('update-tracker.download');
+        Route::get('/download/{id}', [PluginController::class, 'download'])->name('update-tracker.download');
+
+        Route::put('/update/{id}', [PluginController::class, 'update'])
+            ->name('update-tracker.update');
     });
 
 
@@ -183,5 +187,5 @@ Route::middleware('auth')->group(function () {
 
     // update profile
 
-    
+
 });

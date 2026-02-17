@@ -150,8 +150,10 @@
             </div>
 
             {{-- Pagination --}}
-            <div class="mt-3">
-                {{ $logs->withQueryString()->links() }}
+
+
+            <div class="card shadow-sm px-3 py-2">
+                {{ $logs->withQueryString()->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>

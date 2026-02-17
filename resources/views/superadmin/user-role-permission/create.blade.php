@@ -46,35 +46,44 @@
                 <hr class="my-4">
 
                 {{-- Permissions Table --}}
-                <h6 class="mb-3">Assign Permissions</h6>
-                <div class="table-responsive">
+               
 
+<div id="permission-section">
 
-                    <table class="table table-bordered align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="text-center">Action</th>
-                                <th>Permission Name</th>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="mb-0 fw-semibold">Assign Permissions</h6>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($permissions as $permission)
-                            <tr>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="select-all">
+            <label class="form-check-label fw-medium" for="select-all">
+                Select All
+            </label>
+        </div>
+    </div>
 
-                                <td class="text-center">
-                                    <input type="checkbox"
-                                        name="permissions[]"
-                                        value="{{ $permission->name }}">
-                                </td>
-                                <td>{{ $permission->name }}</td>
+    <div class="permission-box p-3 rounded">
+        <div class="row">
+            @foreach($permissions as $permission)
+                <div class="col-md-4 mb-2">
+                    <div class="form-check permission-item">
+                        <input class="form-check-input permission-checkbox"
+                               type="checkbox"
+                               name="permissions[]"
+                               value="{{ $permission->name }}"
+                               id="perm_{{ $loop->index }}">
 
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                        <label class="form-check-label" for="perm_{{ $loop->index }}">
+                            {{ ucfirst(str_replace('-', ' ', $permission->name)) }}
+                        </label>
+                    </div>
                 </div>
+            @endforeach
+        </div>
+    </div>
+
+</div>
+
+               
 
                 <div class="d-flex justify-content-end mt-4">
                     <a href="{{ route('user-role-permission') }}" class="btn btn-secondary me-2">Cancel</a>
@@ -87,3 +96,39 @@
 </div>
 
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const roleSelect = document.querySelector("select[name='role']");
+        const permissionSection = document.getElementById("permission-section");
+        const selectAll = document.getElementById("select-all");
+        const checkboxes = document.querySelectorAll(".permission-checkbox");
+
+        function togglePermissionSection() {
+            const selectedText = roleSelect.options[roleSelect.selectedIndex].text.toLowerCase();
+
+            if (selectedText === 'admin') {
+                permissionSection.style.display = "none";
+                checkboxes.forEach(cb => cb.checked = false);
+                if (selectAll) selectAll.checked = false;
+            } else {
+                permissionSection.style.display = "block";
+            }
+        }
+
+        // Run on change
+        roleSelect.addEventListener("change", togglePermissionSection);
+
+        // Run on page load
+        togglePermissionSection();
+
+        // Select All logic
+        if (selectAll) {
+            selectAll.addEventListener("change", function() {
+                checkboxes.forEach(cb => cb.checked = this.checked);
+            });
+        }
+
+    });
+</script>

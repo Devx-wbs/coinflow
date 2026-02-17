@@ -294,6 +294,13 @@ use App\Models\PluginVersion;
 
                             <!-- Actions -->
                             <td>
+                                <!-- Edit -->
+<button type="button"
+    class="btn btn-warning btn-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#editPluginModal{{ $plugin->id }}">
+    Edit
+</button>
                                 <!-- Download -->
                                 <a href="{{ route('update-tracker.download', $plugin->id) }}"
                                     class="btn btn-success btn-sm">
@@ -338,7 +345,6 @@ use App\Models\PluginVersion;
                             </div>
                         </div>
                         @endforeach
-s
                     </tbody>
 
                 </table>
@@ -443,4 +449,99 @@ s
     </div>
 </div>
 
+@foreach($plugins as $plugin)
+<div class="modal fade" id="editPluginModal{{ $plugin->id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <form action="{{ route('update-tracker.update', $plugin->id) }}"
+              method="POST"
+              enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Edit Plugin Version - {{ $plugin->version }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Version -->
+                    <div class="mb-3">
+                        <label class="form-label">Version</label>
+                        <input type="text"
+                               name="version"
+                               class="form-control"
+                               value="{{ $plugin->version }}"
+                               required readonly>
+                    </div>
+
+                   
+
+                    <!-- Release Date -->
+                    <div class="mb-3">
+                        <label class="form-label">Release Date</label>
+                        <input type="date"
+                               name="released_at"
+                               class="form-control"
+                               value="{{ $plugin->released_at->format('Y-m-d') }}"
+                               required>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="category_id"
+                                class="form-select"
+                                required>
+                            @foreach(PluginVersion::categories() as $id => $name)
+                                <option value="{{ $id }}"
+                                    {{ $plugin->category_id == $id ? 'selected' : '' }}>
+                                    {{ $name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea name="description"
+                                  class="form-control"
+                                  rows="4">{{ $plugin->description }}</textarea>
+                    </div>
+
+                    <!-- Screenshot -->
+                    <div class="mb-3">
+                        <label class="form-label">Replace Screenshot</label>
+                        <input type="file"
+                               name="screenshot"
+                               class="form-control"
+                               accept="image/*">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        Update Plugin
+                    </button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+@endforeach
+
 @endsection
+
+

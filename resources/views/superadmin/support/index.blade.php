@@ -7,8 +7,8 @@ use App\Models\Support;
 <h4 class="mb-3">Customer Support</h4>
 
 <a href="{{ route('support.create') }}" class="btn btn-primary">
-        + Add Ticket
-    </a>
+    + Add Ticket
+</a>
 
 <form method="GET" class="row mb-3">
     <div class="col-md-8">
@@ -48,8 +48,8 @@ use App\Models\Support;
         @forelse($supports as $support)
         <tr>
             <td>TK-{{ str_pad($support->id, 3, '0', STR_PAD_LEFT) }}</td>
-            <td>{{ $support->user->name ?? '-' }}</td>
-            <td>{{ $support->user->email ?? '-' }}</td>
+            <td>{{ $support->full_name ?? '-' }}</td>
+            <td>{{ $support->email ?? '-' }}</td>
             <td>{{ $support->subject }}</td>
             <td>{{ $support->category_name }}</td>
             <td>
@@ -70,7 +70,9 @@ use App\Models\Support;
         @endforelse
     </tbody>
 </table>
-
-{{ $supports->links() }}
+>
+<div class="card shadow-sm px-3 py-2">
+    {{ $supports->withQueryString()->links('pagination::bootstrap-5') }}
+</div>
 
 @endsection
