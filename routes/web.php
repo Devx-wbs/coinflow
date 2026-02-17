@@ -20,63 +20,69 @@ use App\Http\Controllers\PluginController;
 use App\Http\Controllers\PushNoticeController;
 use App\Http\Controllers\Superadmin\SupportController;
 
-Route::get('/', [FrontedController::class, 'index']);
+Route::domain('coinflowspay.com')->group(function () {
+    // all frontend routes
+    Route::get('/', [FrontedController::class, 'index']);
 
-Route::get('/update-tracker/download/{id}', [MerchantController::class, 'download'])
-    ->middleware('plugin.download.secure')
-    ->name('update-tracker.download');
+    Route::get('/update-tracker/download/{id}', [MerchantController::class, 'download'])
+        ->middleware('plugin.download.secure')
+        ->name('update-tracker.download');
 
-Route::get('/plan-detail', [FrontedController::class, 'plan_detail'])->name('plan-detail');
+    Route::get('/plan-detail', [FrontedController::class, 'plan_detail'])->name('plan-detail');
 
 
-// Login form
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    // Login form
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
-// Handle login
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+    // Handle login
+    Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-//reset password
-Route::get('/resetpassword', [ResetController::class, 'create'])->name('reset.password');
-Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('forgot.password');
-Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
-Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+    //reset password
+    Route::get('/resetpassword', [ResetController::class, 'create'])->name('reset.password');
+    Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('forgot.password');
+    Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
+    Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
-// Registrations
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
+    // Registrations
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.post');
 
-Route::get('/contact-us', [SupportController::class, 'form'])
-    ->name('contact.form');
+    Route::get('/contact-us', [SupportController::class, 'form'])
+        ->name('contact.form');
 
-Route::post('/contact-us', [SupportController::class, 'saveform'])
-    ->name('contact.store');
+    Route::post('/contact-us', [SupportController::class, 'saveform'])
+        ->name('contact.store');
 
-Route::get('/privacy-policy', [FrontedController::class, 'privacyPolicy'])->name('privacy.policy');
-Route::get('/terms-conditions', [FrontedController::class, 'termsConditions'])->name('terms.conditions');
+    Route::get('/privacy-policy', [FrontedController::class, 'privacyPolicy'])->name('privacy.policy');
+    Route::get('/terms-conditions', [FrontedController::class, 'termsConditions'])->name('terms.conditions');
+
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+        #Payment stripe buy
+        Route::prefix('buyplan')->group(function () {
+            Route::get('/', [BuyplanController::class, 'create'])->name('buyplan.create');
+            Route::post('/store', [BuyplanController::class, 'store'])->name('buyplan.store');
+            Route::get('/success', [BuyplanController::class, 'success'])->name('buyplan.success');
+            Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
+        });
+
+        Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
+        Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    });
+});
+
+
 
 // Pricing page
 // Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
 
 // Routes protected by auth middleware
-Route::middleware('auth')->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    #Payment stripe buy
-    Route::prefix('buyplan')->group(function () {
-        Route::get('/', [BuyplanController::class, 'create'])->name('buyplan.create');
-        Route::post('/store', [BuyplanController::class, 'store'])->name('buyplan.store');
-        Route::get('/success', [BuyplanController::class, 'success'])->name('buyplan.success');
-        Route::get('/cancel', [BuyplanController::class, 'cancel'])->name('buyplan.cancel');
-    });
 
-    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
-    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-
-        });
-    Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
+Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
