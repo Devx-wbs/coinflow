@@ -35,14 +35,14 @@ class SupportController extends Controller
             $query->where('status', $request->status);
         }
 
-        $supports = $query->paginate(10);
+        $supports = $query->paginate(2);
 
         return view('superadmin.support.index', compact('supports'));
     }
 
     public function create()
     {
-        $staffUsers = User::whereIn('role', [2, 3])->get();
+        $staffUsers = User::whereIn('role', [1, 2, 3])->get();
 
         return view('superadmin.support.create', [
             'categories'  => Support::categories(),
@@ -51,9 +51,10 @@ class SupportController extends Controller
     }
 
 
+
+
     public function store(Request $request)
     {
-
         $request->validate([
             'subject'     => 'required|string|max:255',
             'description' => 'required|string',
@@ -61,9 +62,12 @@ class SupportController extends Controller
             'priority'    => 'required|integer',
         ]);
 
+        $user = auth()->user();
 
         Support::create([
-            'user_id'     => auth()->id(),
+            'user_id'     => $user->id,
+            'full_name'   => $user->name,  
+            'email'       => $user->email,
             'subject'     => $request->subject,
             'description' => $request->description,
             'category_id' => $request->category_id,
@@ -72,13 +76,14 @@ class SupportController extends Controller
             'status'      => Support::STATUS_INACTIVE,
         ]);
 
-        return redirect()->route(route: 'support')
+        return redirect()->route('support')
             ->with('success', 'Support ticket created successfully');
     }
 
+
     public function show($id)
     {
-        $staffUsers = User::whereIn('role', [2, 3])->get();
+        $staffUsers = User::whereIn('role', [1, 2, 3])->get();
         $support = Support::findOrFail($id);
         $status = Support::statuses();
         return view('superadmin.support.show', compact('support', 'staffUsers', 'status'));
@@ -193,7 +198,7 @@ class SupportController extends Controller
 
     public function saveform(Request $request)
     {
-    
+
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email'     => 'required|email|max:255',
@@ -207,7 +212,7 @@ class SupportController extends Controller
             'email'       => $request->email,
             'subject'     => $request->subject,
             'description' => $request->message,
-            'category_id' => 3, 
+            'category_id' => 3,
             'priority'    => 1, // default medium
             'status'      => Support::STATUS_INACTIVE,
         ]);
