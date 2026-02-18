@@ -24,7 +24,9 @@
                         <label class="form-label">Email Address</label>
                         <input type="email" name="email" class="form-control" placeholder="xyz@gmail.com">
                     </div>
-
+                    @error('email')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
                     <div class="form-group password-group">
                         <label class="form-label">Password</label>
                         <div style="position: relative;">
@@ -51,18 +53,24 @@
                         </div>
                     </div>
 
+                    @error('password')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
+
                     {{-- ✅ reCAPTCHA widget --}}
                     <div class="form-group mt-3">
                         {!! NoCaptcha::display() !!}
-                        @error('g-recaptcha-response')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                        @enderror
+
                     </div>
+                    @error('g-recaptcha-response')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
                     <!-- Remember Me -->
                     <label class="remember-me">
                         <input type="checkbox" class="custom-checkbox" checked>
                         <span class="remember-label">Remember me</span>
                     </label>
+
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn-submit">Sign In</button>

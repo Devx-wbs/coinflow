@@ -64,7 +64,9 @@
                             </span>
                         </div>
                     </div>
-
+                    @error('password')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
 
                     <!-- Confirm Password -->
                     <div class="form-group password-group">
@@ -89,11 +91,17 @@
                             </span>
                         </div>
                     </div>
+                    @error('password_confirmation')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
 
                     <!-- Fake Recaptcha Section -->
                     <div class="captcha-box">
                         {!! NoCaptcha::display() !!}
                     </div>
+                    @error('g-recaptcha-response')
+                    <span class="field-error">{{ $message }}</span>
+                    @enderror
 
 
                     <!-- Terms Checkbox -->
