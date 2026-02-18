@@ -208,6 +208,16 @@
               <span class="feature-value">{{ $plan->trial_days }}</span>
             </li>
           </ul>
+
+          @if($subscription && $subscription->plan_id == $plan->id && $license)
+
+          <a href="{{ route('update-tracker.download', $latestPlugin->id) }}?license_key={{ $license->license_key }}"
+            class="btn-primary btn-full">
+            Download Plugin
+          </a>
+
+          @else
+
           <form action="{{ route('buyplan.store') }}" method="POST">
             @csrf
             <input type="hidden" name="plan_id" value="{{ $plan->id }}">
@@ -215,6 +225,8 @@
               Subscribe
             </button>
           </form>
+
+          @endif
 
         </div>
 
