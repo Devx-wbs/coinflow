@@ -45,10 +45,57 @@ class LoginController extends Controller
 
 
 
+    // public function login(Request $request)
+    // {
+    //     // Validate login input
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //         'g-recaptcha-response' => 'required|captcha',
+    //     ], [
+    //         'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
+    //         'g-recaptcha-response.captcha' => 'Captcha verification failed. Please try again.',
+    //     ]);
+
+    //     if (Auth::attempt($credentials)) {
+    //         $request->session()->regenerate();
+
+    //         $user = Auth::user();
+
+    //         // Super Admin → dashboard
+    //         if ($user->role == 1) {
+    //             return redirect()->route('dashboard');
+    //         }
+
+    //         // Normal user → website home
+    //         if ($user->role == 0) {
+    //             return redirect('/');
+    //         }
+
+    //         // ✅ Dynamic redirect based on user's permissions
+    //         $permissions = $user->getAllPermissions()->pluck('name');
+
+    //         foreach ($permissions as $permission) {
+    //             if (\Route::has($permission)) {
+    //                 return redirect()->route($permission);
+    //             }
+    //         }
+
+    //         // Fallback if no permission has a route
+    //         return redirect('/');
+    //     }
+
+    //     // Invalid credentials
+    //     return back()->withErrors([
+    //         'email' => 'These credentials do not match our records.',
+    //     ]);
+    // }
+
+
     public function login(Request $request)
     {
-        // Validate login input
-        $credentials = $request->validate([
+        // First validate everything (including captcha)
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
             'g-recaptcha-response' => 'required|captcha',
@@ -57,22 +104,22 @@ class LoginController extends Controller
             'g-recaptcha-response.captcha' => 'Captcha verification failed. Please try again.',
         ]);
 
+        // Only take email & password for login
+        $credentials = $request->only('email', 'password');
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             $user = Auth::user();
 
-            // Super Admin → dashboard
             if ($user->role == 1) {
                 return redirect()->route('dashboard');
             }
 
-            // Normal user → website home
             if ($user->role == 0) {
                 return redirect('/');
             }
 
-            // ✅ Dynamic redirect based on user's permissions
             $permissions = $user->getAllPermissions()->pluck('name');
 
             foreach ($permissions as $permission) {
@@ -81,11 +128,9 @@ class LoginController extends Controller
                 }
             }
 
-            // Fallback if no permission has a route
             return redirect('/');
         }
 
-        // Invalid credentials
         return back()->withErrors([
             'email' => 'These credentials do not match our records.',
         ]);
@@ -97,7 +142,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-       return redirect()->route('login');
+        return redirect()->route('login');
     }
 
 
