@@ -81,4 +81,30 @@ class Notification extends Model
                 return collect(); // empty collection if unknown
         }
     }
+
+    public function getStatusBadgeClassAttribute()
+    {
+        return match ($this->status) {
+            'sent'      => 'bg-success',
+            'queued'   => 'bg-info',
+            'draft'     => 'bg-secondary',
+            'failed'    => 'bg-danger',
+            'scheduled' => 'bg-warning text-dark',
+            'pending'   => 'bg-primary',
+            default     => 'bg-light text-dark',
+        };
+    }
+
+    public function getStatusBadgeClassForQueueAttribute()
+    {
+        return match ($this->status) {
+            'sent'      => 'bg-success',
+            'queued'   => 'bg-info',
+            'draft'     => 'bg-secondary',
+            'failed'    => 'bg-danger',
+            'scheduled' => 'bg-warning text-dark',
+            'pending'   => 'bg-primary',
+            default     => 'bg-light text-dark',
+        };
+    }
 }

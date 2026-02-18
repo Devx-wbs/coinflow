@@ -53,7 +53,7 @@ use App\Models\Support;
             <td>{{ $support->subject }}</td>
             <td>{{ $support->category_name }}</td>
             <td>
-                <span class="badge bg-{{ $support->status === Support::STATUS_CLOSED ? 'success' : 'warning' }}">
+                <span class="badge {{ $support->status_badge_class }}">
                     {{ $support->status_name }}
                 </span>
             </td>
@@ -70,7 +70,7 @@ use App\Models\Support;
         @endforelse
     </tbody>
 </table>
->
+
 <div class="card shadow-sm px-3 py-2">
     {{ $supports->withQueryString()->links('pagination::bootstrap-5') }}
 </div>

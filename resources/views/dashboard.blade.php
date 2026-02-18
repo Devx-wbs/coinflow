@@ -12,7 +12,7 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Earnings</p>
               <h5 class="font-weight-bolder mb-0">
                 ${{ number_format($totalAmount, 2) }}
-                <p class="text-success text-sm font-weight-bolder">+12 From last month</p>
+                
               </h5>
             </div>
           </div>
@@ -34,7 +34,6 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Today’s Transactions</p>
               <h5 class="font-weight-bolder mb-0">
                 {{ $todayTransactions}}
-                <p class="text-success text-sm font-weight-bolder">+12 From last month</p>
               </h5>
             </div>
           </div>
@@ -56,7 +55,6 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Stores</p>
               <h5 class="font-weight-bolder mb-0">
                 {{ $stores->count() }}
-                <p class="text-success text-sm font-weight-bolder">+12 From last month</p>
               </h5>
             </div>
           </div>
@@ -78,7 +76,6 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Active Licenses</p>
               <h5 class="font-weight-bolder mb-0">
                 {{ $licenses->where('status', 'active')->count() }}
-                <p class="text-success text-sm font-weight-bolder">+12 From last month</p>
               </h5>
             </div>
           </div>
@@ -98,7 +95,7 @@
 
 <div class="row mt-2">
   <!-- Line Chart -->
-  <div class="col-lg-6">
+  <div class="col-lg-12">
     <div class="card z-index-2">
       <div class="card-header pb-0">
         <h6>Transaction Volume & Earnings</h6>
@@ -116,19 +113,9 @@
   </div>
 
   <!-- Donut Chart -->
-  <div class="col-lg-6">
-    <div class="card z-index-2">
-      <div class="card-header pb-0">
-        <h6>Plan Distribution</h6>
-        <p class="text-sm">Current distribution of subscription plans across stores</p>
-      </div>
-      <div class="card-body">
-        <div class="d-flex justify-content-center align-items-center" style="height:300px;">
-          <canvas id="donutChart"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
+  
+
+
 </div>
 @if(Auth::check() && Auth::user()->role == 1)
 <div class="card mt-4" style="border-radius:14px; background:#fff; border:none;box-shadow:0 4px 24px rgba(0,0,0,0.03);">

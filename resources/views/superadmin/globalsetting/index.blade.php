@@ -67,29 +67,7 @@
 </div>
 
         
-        <!-- Transaction Fee Settings -->
-        <div class="card mb-4 px-3 py-4">
-            <div class="mb-4">
-                <span class="h5"><i class="fas fa-dollar-sign me-2"></i>Transaction Fee Settings</span>
-            </div>
-            <form>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label mb-1 fw-bold">Fee Type</label>
-                        <div class="form-control" readonly>Percentage</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label mb-1 fw-bold">Fee Value (%)</label>
-                        <input id="feeValue" type="number" class="form-control" value="{{ $fee }}" step="0.01" min="0">
-                    </div>
-                </div>
-                <div class="mb-3" style="margin-left:2px;" id="currentFeeText">
-                    <span class="text-muted">Current fee: {{ $fee }}% per transaction</span>
-                </div>
-
-                <button id="saveFeeBtn" class="btn btn-primary" type="button">Send Fee Setting</button>
-            </form>
-        </div>
+      
 
         <!-- Supported Cryptocurrencies -->
         <div class="card px-3 py-4">

@@ -108,7 +108,7 @@ use App\Models\Notification;
                 </form>
 
             </div>
-           
+
             @endif
 
         </div>
@@ -119,36 +119,44 @@ use App\Models\Notification;
 
 
 <!-- Notification Logs -->
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h5 class="mb-3">Notification Logs</h5>
-            <table class="table align-middle">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th>Sent At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($logs as $log)
-                    <tr>
-                        <td>{{ $log->user->name ?? 'N/A' }}</td>
-                        <td>{{ $log->user->email ?? 'N/A' }}</td>
-                        <td>{{ $log->status ?? 'N/A' }}</td>
-                        <td>{{ $log->created_at ? $log->created_at->format('d M Y, h:i:s A') : 'Pending' }}</td>
-                        <td>{{ $log->updated_at ? $log->updated_at->format('d M Y, h:i:s A') : 'Pending' }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" class="text-center text-muted">No logs found.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h5 class="mb-3">Notification Logs</h5>
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Sent At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($logs as $log)
+                <tr>
+                    <td>{{ $log->user->name ?? 'N/A' }}</td>
+                    <td>{{ $log->user->email ?? 'N/A' }}</td>
+                    <td>
+                        @if($log->status)
+                        <span class="badge {{ $log->status_badge_class }}">
+                            {{ ucfirst($log->status) }}
+                        </span>
+                        @else
+                        <span class="badge bg-secondary">N/A</span>
+                        @endif
+                    </td>
+                    <td>{{ $log->created_at ? $log->created_at->format('d M Y, h:i:s A') : 'Pending' }}</td>
+                    <td>{{ $log->updated_at ? $log->updated_at->format('d M Y, h:i:s A') : 'Pending' }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No logs found.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 @endsection
