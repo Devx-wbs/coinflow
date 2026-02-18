@@ -24,7 +24,7 @@ Route::domain('coinflowspay.com')->group(function () {
     // all frontend routes
     Route::get('/', [FrontedController::class, 'index']);
 
-    Route::get('/update-tracker/download/{id}', [MerchantController::class, 'download'])
+    Route::get('/update-tracker/download/{id}', [PluginController::class, 'download'])
         ->middleware('plugin.download.secure')
         ->name('update-tracker.download');
 
