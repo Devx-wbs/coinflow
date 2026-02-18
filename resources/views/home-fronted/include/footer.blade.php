@@ -10,16 +10,16 @@
         <div class="footer-links">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#features">Features</a></li>
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/#pricing') }}">Pricing</a></li>
+            <li><a href="{{ url('/#features') }}">Features</a></li>
             <li><a href="{{ route('contact.form') }}">Contact</a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="{{ url('/#faq') }}">FAQ</a></li>
             <li><a href="{{ route('contact.form') }}">Contact Us</a></li>
             <li><a href="{{ route('terms.conditions') }}">Terms of Service</a></li>
           </ul>
