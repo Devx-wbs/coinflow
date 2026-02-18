@@ -5,11 +5,32 @@
     </a>
     <nav>
       <ul class="nav-links">
-        <li><a href="{{ url('/') }}" class="active">Home</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="{{ route('contact.form') }}">Contact</a></li>
+        <ul class="nav-links">
+
+    <li>
+        <a href="{{ url('/') }}" id="nav-home">Home</a>
+    </li>
+
+    <li>
+        <a href="{{ url('/#pricing') }}" id="nav-pricing">Pricing</a>
+    </li>
+
+    <li>
+        <a href="{{ url('/#features') }}" id="nav-features">Features</a>
+    </li>
+
+    <li>
+        <a href="{{ route('contact.form') }}"
+           class="{{ request()->routeIs('contact.form') ? 'active' : '' }}">
+            Contact
+        </a>
+    </li>
+
+</ul>
+
+        
       </ul>
+      
     </nav>
 
 
@@ -139,4 +160,42 @@
       dropdown.querySelector('.dropdown-menu').classList.remove('active');
     }
   });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const home = document.getElementById("nav-home");
+    const pricing = document.getElementById("nav-pricing");
+    const features = document.getElementById("nav-features");
+
+    // 🔥 IMPORTANT: Only apply active logic on homepage
+    if (window.location.pathname !== "/") {
+        return; // stop here if not homepage
+    }
+
+    function setActive() {
+        home.classList.remove("active");
+        pricing.classList.remove("active");
+        features.classList.remove("active");
+
+        const hash = window.location.hash;
+
+        if (hash === "#pricing") {
+            pricing.classList.add("active");
+        } 
+        else if (hash === "#features") {
+            features.classList.add("active");
+        } 
+        else {
+            home.classList.add("active");
+        }
+    }
+
+    setActive();
+    window.addEventListener("hashchange", setActive);
+});
+
+
+
 </script>
