@@ -8,7 +8,7 @@ $layout = Auth::user()->role == 1
 
 @section('content')
 
-<div class="container py-5">
+<div class="container profile_space">
 
   <div class="row justify-content-center">
     <div class="col-lg-8">
@@ -184,3 +184,11 @@ $layout = Auth::user()->role == 1
 </script>
 
 @endsection
+
+
+
+<style>
+  .profile_space {
+    padding: 100px 0 !important;
+  }
+</style>

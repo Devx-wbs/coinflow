@@ -88,6 +88,10 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
 
     Route::post('/login', [LoginController::class, 'adminLogin'])
         ->name('admin.login.post');
+
+    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
+        Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
