@@ -4,14 +4,14 @@
 
 @section('content')
 
-<section class="page-header py-5 bg-light">
+<section class="page-header header_padding bg-light">
     <div class="container">
         <h1 class="fw-bold">Terms & Conditions</h1>
         <p class="text-muted">Last Updated: {{ date('F Y') }}</p>
     </div>
 </section>
 
-<section class="py-5">
+<section class="pb-5">
     <div class="container">
 
         <p>
@@ -54,4 +54,42 @@
 
         <h4 class="mt-4">6. Limitation of Liability</h4>
         <p>
-            We shall not be liable for any indirect, incidental, or consequenti
+            We shall not be liable for any indirect, incidental, or consequential damages 
+            arising from the use of our services.
+        </p>
+
+        <h4 class="mt-4">7. Termination</h4>
+        <p>
+            We reserve the right to suspend or terminate accounts 
+            that violate these terms.
+        </p>
+
+        <h4 class="mt-4">8. Governing Law</h4>
+        <p>
+            These Terms shall be governed by the laws of India.
+        </p>
+
+        <h4 class="mt-4">9. Changes to Terms</h4>
+        <p>
+            We may update these Terms & Conditions at any time. 
+            Continued use of the website indicates acceptance of changes.
+        </p>
+
+        <h4 class="mt-4">10. Contact Information</h4>
+        <p>
+            For any queries regarding these Terms, contact us at:
+            <strong>support@coinflowspay.com</strong>
+        </p>
+
+    </div>
+</section>
+
+@endsection
+
+
+
+            <style>
+.header_padding {
+    padding: 8rem 0 1rem 0;
+}
+            </style>
