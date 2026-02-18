@@ -22,4 +22,17 @@ class NotificationLog extends Model
     {
         return $this->belongsTo(Notification::class);
     }
+
+    public function getStatusBadgeClassAttribute()
+    {
+        return match ($this->status) {
+            'sent'       => 'bg-success',
+            'delivered'  => 'bg-success',
+            'pending'    => 'bg-warning text-dark',
+            'processing' => 'bg-info text-dark',
+            'failed'     => 'bg-danger',
+            'bounced'    => 'bg-danger',
+            default      => 'bg-secondary',
+        };
+    }
 }

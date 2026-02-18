@@ -31,7 +31,7 @@
 
                             @foreach ($roles as $role)
                             <option value="{{ $role->id }}"
-                               {{ $user->role == $role->id ? 'selected' : '' }}>
+                                {{ $user->role == $role->id ? 'selected' : '' }}>
                                 {{ $role->name}}
                             </option>
                             @endforeach
@@ -48,31 +48,46 @@
 
                 <hr class="my-4">
 
-                <h6 class="mb-3">Assign Permissions</h6>
+                
 
-                <div class="table-responsive">
-                    <table class="table table-bordered align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="text-center">Action</th>
-                                <th>Permission Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+               
+
+                <div id="permission-section">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0 fw-semibold">Assign Permissions</h6>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="select-all">
+                            <label class="form-check-label fw-medium" for="select-all">
+                                Select All
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="permission-box p-3 rounded">
+                        <div class="row">
                             @foreach($permissions as $permission)
-                            <tr>
-                                <td class="text-center">
-                                    <input type="checkbox"
+                            <div class="col-md-4 mb-2">
+                                <div class="form-check permission-item">
+                                    <input class="form-check-input permission-checkbox"
+                                        type="checkbox"
                                         name="permissions[]"
                                         value="{{ $permission->name }}"
+                                        id="perm_{{ $loop->index }}"
                                         {{ in_array($permission->name, $userPermissions) ? 'checked' : '' }}>
-                                </td>
-                                <td>{{ $permission->name }}</td>
-                            </tr>
+
+                                    <label class="form-check-label" for="perm_{{ $loop->index }}">
+                                        {{ ucfirst(str_replace('-', ' ', $permission->name)) }}
+                                    </label>
+                                </div>
+                            </div>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
+
                 </div>
+
 
 
                 <div class="d-flex justify-content-end mt-4">
@@ -84,3 +99,39 @@
     </div>
 </div>
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const roleSelect = document.querySelector("select[name='role_id']");
+        const permissionSection = document.getElementById("permission-section");
+        const selectAll = document.getElementById("select-all");
+        const checkboxes = document.querySelectorAll(".permission-checkbox");
+
+        function togglePermissionSection() {
+            const selectedText = roleSelect.options[roleSelect.selectedIndex].text.toLowerCase();
+
+            if (selectedText === 'admin') {
+                permissionSection.style.display = "none";
+                checkboxes.forEach(cb => cb.checked = false);
+                if (selectAll) selectAll.checked = false;
+            } else {
+                permissionSection.style.display = "block";
+            }
+        }
+
+        // Run on change
+        roleSelect.addEventListener("change", togglePermissionSection);
+
+        // Run on page load
+        togglePermissionSection();
+
+        // Select All logic
+        if (selectAll) {
+            selectAll.addEventListener("change", function() {
+                checkboxes.forEach(cb => cb.checked = this.checked);
+            });
+        }
+
+    });
+</script>

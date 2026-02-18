@@ -14,71 +14,71 @@ use App\Models\Notification;
     </div>
 
     <!-- Analytics Cards -->
- 
+
 
     <div class="row g-3 mb-5">
 
-    {{-- Total Notices --}}
-    <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="text-sm text-muted">Total Notices</span>
-                    <i class="fa fa-bell"></i>
-                </div>
+        {{-- Total Notices --}}
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-sm text-muted">Total Notices</span>
+                        <i class="fa fa-bell"></i>
+                    </div>
 
-                <h5 class="fw-bold mb-1">{{ $stats['total_notices'] }}</h5>
-                <span class="text-sm text-muted">Created overall</span>
+                    <h5 class="fw-bold mb-1">{{ $stats['total_notices'] }}</h5>
+                    <span class="text-sm text-muted">Created overall</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    {{-- Total Delivered --}}
-    <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="text-sm text-muted">Total Emails Delivered</span>
-                    <i class="fa fa-envelope-open"></i>
+        {{-- Total Delivered --}}
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-sm text-muted">Total Emails Delivered</span>
+                        <i class="fa fa-envelope-open"></i>
+                    </div>
+
+                    <h5 class="fw-bold mb-1">{{ $stats['total_delivered'] }}</h5>
+                    <span class="text-sm text-muted">Across all notices</span>
                 </div>
-
-                <h5 class="fw-bold mb-1">{{ $stats['total_delivered'] }}</h5>
-                <span class="text-sm text-muted">Across all notices</span>
             </div>
         </div>
-    </div>
 
-    {{-- Delivered This Month --}}
-    <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="text-sm text-muted">Delivered This Month</span>
-                    <i class="fa fa-calendar-check"></i>
+        {{-- Delivered This Month --}}
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-sm text-muted">Delivered This Month</span>
+                        <i class="fa fa-calendar-check"></i>
+                    </div>
+
+                    <h5 class="fw-bold mb-1">{{ $stats['delivered_this_month'] }}</h5>
+                    <span class="text-sm text-muted">Current month</span>
                 </div>
-
-                <h5 class="fw-bold mb-1">{{ $stats['delivered_this_month'] }}</h5>
-                <span class="text-sm text-muted">Current month</span>
             </div>
         </div>
-    </div>
 
-    {{-- Draft Notices --}}
-    <div class="col-md-3 col-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                    <span class="text-sm text-muted">Draft Notices</span>
-                    <i class="fa fa-file-alt"></i>
+        {{-- Draft Notices --}}
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-sm text-muted">Draft Notices</span>
+                        <i class="fa fa-file-alt"></i>
+                    </div>
+
+                    <h5 class="fw-bold mb-1">{{ $stats['draft_notices'] }}</h5>
+                    <span class="text-sm text-muted">Saved drafts</span>
                 </div>
-
-                <h5 class="fw-bold mb-1">{{ $stats['draft_notices'] }}</h5>
-                <span class="text-sm text-muted">Saved drafts</span>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 
     <!-- Action Buttons -->
@@ -184,10 +184,12 @@ use App\Models\Notification;
                         </td>
 
                         <td>
-                            <span class="badge bg-success">
+                            <span class="badge {{ $notice->status_badge_class }}">
                                 {{ ucfirst($notice->status) }}
                             </span>
                         </td>
+
+
 
                         <td>
                             <a href="{{ route('push.notice.show', $notice->id) }}" class="btn btn-sm btn-outline-primary">
@@ -206,13 +208,13 @@ use App\Models\Notification;
             </table>
 
             <!-- Pagination -->
-            
+
 
             <div class="d-flex justify-content-center mt-4">
-                        <div class="card shadow-sm px-3 py-2">
-                            {{ $notifications->withQueryString()->links('pagination::bootstrap-5') }}
-                        </div>
-                    </div>
+                <div class="card shadow-sm px-3 py-2">
+                    {{ $notifications->withQueryString()->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
     @endif

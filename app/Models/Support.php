@@ -112,7 +112,18 @@ class Support extends Model
 
 
     public function reply()
-{
-    return $this->hasOne(SupportReply::class);
-}
+    {
+        return $this->hasOne(SupportReply::class);
+    }
+
+    public function getStatusBadgeClassAttribute(): string
+    {
+        return match ($this->status) {
+            self::STATUS_INACTIVE    => 'bg-secondary',
+            self::STATUS_ACTIVE      => 'bg-success',
+            self::STATUS_IN_PROGRESS => 'bg-info text-dark',
+            self::STATUS_CLOSED      => 'bg-dark',
+            default                  => 'bg-light text-dark',
+        };
+    }
 }
