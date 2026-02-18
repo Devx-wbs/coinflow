@@ -7,30 +7,30 @@
       <ul class="nav-links">
         <ul class="nav-links">
 
-    <li>
-        <a href="{{ url('/') }}" id="nav-home">Home</a>
-    </li>
+          <li>
+            <a href="{{ url('/') }}" id="nav-home">Home</a>
+          </li>
 
-    <li>
-        <a href="{{ url('/#pricing') }}" id="nav-pricing">Pricing</a>
-    </li>
+          <li>
+            <a href="{{ url('/#pricing') }}" id="nav-pricing">Pricing</a>
+          </li>
 
-    <li>
-        <a href="{{ url('/#features') }}" id="nav-features">Features</a>
-    </li>
+          <li>
+            <a href="{{ url('/#features') }}" id="nav-features">Features</a>
+          </li>
 
-    <li>
-        <a href="{{ route('contact.form') }}"
-           class="{{ request()->routeIs('contact.form') ? 'active' : '' }}">
-            Contact
-        </a>
-    </li>
+          <li>
+            <a href="{{ route('contact.form') }}"
+              class="{{ request()->routeIs('contact.form') ? 'active' : '' }}">
+              Contact
+            </a>
+          </li>
 
-</ul>
+        </ul>
 
-        
+
       </ul>
-      
+
     </nav>
 
 
@@ -94,7 +94,7 @@
           @endif
 
 
-          
+
           <div class="dropdown-divider"></div>
 
           <form method="POST" action="{{ route('logout') }}">
@@ -163,7 +163,7 @@
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const home = document.getElementById("nav-home");
     const pricing = document.getElementById("nav-pricing");
@@ -171,31 +171,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 🔥 IMPORTANT: Only apply active logic on homepage
     if (window.location.pathname !== "/") {
-        return; // stop here if not homepage
+      return; // stop here if not homepage
     }
 
     function setActive() {
-        home.classList.remove("active");
-        pricing.classList.remove("active");
-        features.classList.remove("active");
+      home.classList.remove("active");
+      pricing.classList.remove("active");
+      features.classList.remove("active");
 
-        const hash = window.location.hash;
+      const hash = window.location.hash;
 
-        if (hash === "#pricing") {
-            pricing.classList.add("active");
-        } 
-        else if (hash === "#features") {
-            features.classList.add("active");
-        } 
-        else {
-            home.classList.add("active");
-        }
+      if (hash === "#pricing") {
+        pricing.classList.add("active");
+      } else if (hash === "#features") {
+        features.classList.add("active");
+      } else {
+        home.classList.add("active");
+      }
     }
 
     setActive();
     window.addEventListener("hashchange", setActive);
-});
-
-
-
+  });
 </script>
