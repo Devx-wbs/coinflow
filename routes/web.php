@@ -82,7 +82,12 @@ Route::domain('coinflowspay.com')->group(function () {
 Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
     // Route::middleware('route.permission')->group(function () {});
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
+        ->name('admin.login');
+
+    Route::post('/login', [LoginController::class, 'adminLogin'])
+        ->name('admin.login.post');
     Route::prefix('plans')->group(function () {
         Route::get('/', [PlanController::class, 'index'])->name('plans-index');
         Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
