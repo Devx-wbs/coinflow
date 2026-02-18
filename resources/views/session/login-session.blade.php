@@ -157,7 +157,7 @@
     }
 
     .login-section {
-        padding: 100px 0;
+        padding: 130px 0;
         background: #f5f8ff;
     }
 

@@ -204,10 +204,11 @@
     .form-label {
         display: block;
         margin-bottom: 8px;
-        font-weight: 600;
-        font-size: 14px;
+        font-weight: 500;
+        font-size: 16px;
         color: #191D23;
     }
+
 
     .form-control {
         width: 100%;
@@ -301,6 +302,4 @@
             padding: 24px 20px;
         }
     }
-
-   
 </style>

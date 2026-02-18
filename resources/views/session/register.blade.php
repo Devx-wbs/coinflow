@@ -178,6 +178,18 @@
         cursor: pointer;
     }
 
+    .terms-row {
+        padding: 20px 0;
+    }
+
+    .register-section {
+        padding-top: 50px;
+    }
+
+    .terms-row label {
+        margin-left: 10px !important;
+    }
+
     /* 1920px Background Wrapper */
     .register-bg-wrapper {
         width: 100%;
@@ -202,7 +214,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 60px 80px;
+        padding: 130px 80px;
         position: relative;
         z-index: 2;
     }
