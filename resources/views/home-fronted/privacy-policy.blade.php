@@ -4,14 +4,14 @@
 
 @section('content')
 
-<section class="page-header py-5 bg-light">
+<section class="page-header header_padding bg-light">
     <div class="container">
         <h1 class="fw-bold">Privacy Policy</h1>
         <p class="text-muted">Last Updated: {{ date('F Y') }}</p>
     </div>
 </section>
 
-<section class="py-5">
+<section class="pb-5">
     <div class="container">
 
         <p>
@@ -97,4 +97,11 @@
     </div>
 </section>
 
+
+
 @endsection
+            <style>
+.header_padding {
+    padding: 8rem 0 1rem 0;
+}
+            </style>
