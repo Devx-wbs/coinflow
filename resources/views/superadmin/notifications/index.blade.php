@@ -92,6 +92,11 @@ use App\Models\Notification;
             class="btn btn-outline-secondary {{ $tab == 'history' ? 'active' : '' }}">
             Notice History
         </a>
+
+        <a href="{{ route('push.notice.index', ['tab' => 'draft']) }}"
+            class="btn btn-outline-secondary {{ $tab == 'draft' ? 'active' : '' }}">
+            Draft Notices
+        </a>
     </div>
 
 
@@ -220,6 +225,77 @@ use App\Models\Notification;
     @endif
 
 
+
+    @if($tab == 'draft')
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="mb-4">Draft Notices</h5>
+
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Audience</th>
+                        <th>Created Date</th>
+                        <th width="150">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse($notifications as $notice)
+                    <tr>
+                        <td>
+                            <strong>{{ $notice->title }}</strong><br>
+                            <small class="text-muted">
+                                {{ Str::limit($notice->message, 50) }}
+                            </small>
+                        </td>
+
+                        <td>
+                            <span class="badge bg-light text-dark">
+                                {{ Notification::getTargetLabel($notice->role_id) }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ $notice->created_at->format('d M Y, h:i A') }}
+                        </td>
+
+                        <td>
+                            <a href="{{ route('push.notice.edit', $notice->id) }}"
+                                class="btn btn-sm btn-outline-primary">
+                                Edit
+                            </a>
+
+                            <form method="POST"
+                                action="{{ route('push.notice.send', $notice->id) }}"
+                                class="d-inline">
+                                @csrf
+                                <button type="submit"
+                                    class="btn btn-sm btn-success">
+                                    Send
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            No draft notices found.
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center mt-4">
+                <div class="card shadow-sm px-3 py-2">
+                    {{ $notifications->withQueryString()->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
 
 

@@ -1915,6 +1915,17 @@ body.no-scroll {
     text-align: center;
     gap: 3rem;
   }
+  .why-card {
+    text-align: left;
+  }
+
+  .footer-brand {
+flex: 1 1 110px;
+}
+.footer-description {
+
+width: 50%;
+}
 
   .hero-content-left {
     align-items: center;
@@ -2280,4 +2291,6 @@ body.no-scroll {
 ul.plan-features {
    padding-left: 0;
 }
-    
+  
+
+
