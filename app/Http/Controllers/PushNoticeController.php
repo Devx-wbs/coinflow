@@ -30,9 +30,10 @@ class PushNoticeController extends Controller
             'status'  => $isDraft ? 'draft' : 'queued',
         ]);
 
+       
         if ($isDraft) {
             return redirect()
-                ->route('push.notice.show', $notification->id)
+                ->route('push.notice.index', ['tab' => 'draft'])
                 ->with('success', 'Notification saved as draft.');
         }
         $users = Notification::getUsersByTarget($request->role_id);
@@ -55,10 +56,20 @@ class PushNoticeController extends Controller
     {
         $tab = $request->get('tab', 'create');
 
-        $notifications = Notification::latest()->paginate(10);
+        $query = Notification::latest();
+
+        // 🔹 Filter based on tab
+        if ($tab === 'draft') {
+            $query->where('status', 'draft');
+        } elseif ($tab === 'history') {
+            $query->whereIn('status', ['queued', 'sent']);
+        }
+
+        $notifications = $query->paginate(10);
+
         $targetAudiences = Notification::targetAudiences();
 
-        // ✅ Dashboard Stats
+        // Dashboard Stats
         $stats = [
             'total_notices' => Notification::count(),
 
@@ -79,6 +90,7 @@ class PushNoticeController extends Controller
             'stats'
         ));
     }
+
 
     public function show(Notification $notification)
     {
