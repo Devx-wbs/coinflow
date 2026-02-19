@@ -284,10 +284,7 @@
             max-width: 500px;
         }
 
-        .contact-right {
-            display: none;
-            /* Hide image on smaller screens */
-        }
+        
 
         .contact-bg-wrapper {
             height: auto;
@@ -303,5 +300,17 @@
         .contact-left {
             padding: 24px 20px;
         }
+
+        .contact-container {
+            padding: 30px;
+            flex-direction: column-reverse;
+            gap: 30px;
+        }
+
+        .contact-right {
+            padding-left: 0px;
+            width: 50%;
+        }
+
     }
 </style>

@@ -2254,9 +2254,6 @@ body.no-scroll {
       padding: 8px 0;
     }
 
-    .user-dropdown:hover .dropdown-menu {
-      display: block;
-    }
 
     .dropdown-menu button {
       background: none;
