@@ -289,8 +289,8 @@
   .license-input {
     flex: 1;
     height: 48px;
-    background: #F9FAFB;
-    border: 1px solid #EAECF0;
+    /* background: #F9FAFB; */
+    /* border: 1px solid #EAECF0; */
     border-radius: 8px;
     padding: 0 16px;
     font-family: 'Poppins', sans-serif;
@@ -349,7 +349,7 @@
   }
 
   .btn-secondary:hover {
-    background: #EAECF0;
+    background: #0077E5 !important;
   }
 
   .cancel-plan-link {
