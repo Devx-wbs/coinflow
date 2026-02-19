@@ -9,7 +9,6 @@ use App\Http\Controllers\Superadmin\DashboardController;
 use App\Http\Controllers\Superadmin\MerchantController;
 use App\Http\Controllers\Superadmin\GlobalSettingController;
 use App\Http\Controllers\Superadmin\UserRolePermissionController;
-use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\BuyplanController;

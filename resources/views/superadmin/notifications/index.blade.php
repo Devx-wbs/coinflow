@@ -303,3 +303,10 @@ use App\Models\Notification;
 
 </div>
 @endsection
+
+<style>
+    .btn-outline-secondary.active {
+        background-color: #1594FE !important;
+        color: #fff !important;
+    }
+</style>

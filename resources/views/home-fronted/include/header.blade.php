@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
     flex-direction: column;
 }
 
-  @media screen and (max-width:400px) {
+  @media screen and (max-width:922px) {
 
   .container.navbar-container {
     width: 90%;

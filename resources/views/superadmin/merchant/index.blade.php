@@ -56,7 +56,7 @@
                                         <!-- Owner -->
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                                {{ \Illuminate\Support\Str::limit($user->name, limit: 50) }}
                                             </div>
                                         </td>
 

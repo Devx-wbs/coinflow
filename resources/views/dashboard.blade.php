@@ -1,5 +1,4 @@
 @extends('layouts.user_type.auth')
-
 @section('content')
 
 <div class="row">
@@ -12,12 +11,12 @@
               <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Earnings</p>
               <h5 class="font-weight-bolder mb-0">
                 ${{ number_format($totalAmount, 2) }}
-                
+
               </h5>
             </div>
           </div>
           <div class="col-4 text-end">
-            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+            <div class="icon icon-shape bg-gradient-dashboard shadow text-center border-radius-md">
               <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
             </div>
           </div>
@@ -38,7 +37,7 @@
             </div>
           </div>
           <div class="col-4 text-end">
-            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+            <div class="icon icon-shape bg-gradient-dashboard shadow text-center border-radius-md">
               <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
             </div>
           </div>
@@ -59,7 +58,7 @@
             </div>
           </div>
           <div class="col-4 text-end">
-            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+            <div class="icon icon-shape bg-gradient-dashboard shadow text-center border-radius-md">
               <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
             </div>
           </div>
@@ -80,7 +79,7 @@
             </div>
           </div>
           <div class="col-4 text-end">
-            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+            <div class="icon icon-shapebg-gradient-dashboard shadow text-center border-radius-md">
               <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
             </div>
           </div>
@@ -113,7 +112,7 @@
   </div>
 
   <!-- Donut Chart -->
-  
+
 
 
 </div>
@@ -309,4 +308,9 @@
   .hidden-store {
     display: none;
   }
+
+  .bg-gradient-dashboard {
+    background-image: linear-gradient(310deg, #1896FE, #83C7FF);
+  }
+
 </style>

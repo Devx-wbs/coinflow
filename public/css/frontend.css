@@ -153,6 +153,7 @@ a {
   /* Increased z-index to ensure it's on top */
   transition: background-color 0.3s ease;
   /* Smooth transition */
+  height: unset;
 }
 
 .navbar.scrolled {
@@ -897,7 +898,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  text-align: left;
+  text-align: left !important;
 }
 
 .why-card:hover {
@@ -1924,7 +1925,7 @@ flex: 1 1 110px;
 }
 .footer-description {
 
-width: 50%;
+width: 56%;
 }
 
   .hero-content-left {
@@ -2292,5 +2293,11 @@ ul.plan-features {
    padding-left: 0;
 }
   
+header.navbar.scrolled .container {
+padding: 10px 0;
+}
 
 
+ul.nav-links {
+ margin-bottom: 0;
+}
