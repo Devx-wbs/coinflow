@@ -14,7 +14,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+                        <input type="text" name="name" class="form-control" placeholder="Enter name" required   maxlength="50" >
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email</label>

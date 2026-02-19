@@ -115,32 +115,8 @@
             }, 4000);
         }
 
-        // ---------- FEE SETTINGS ----------
-        const feeValueInput = document.getElementById('feeValue');
-        const currentFeeText = document.getElementById('currentFeeText');
-
-        feeValueInput.addEventListener('input', () => {
-            currentFeeText.innerHTML = `<span class="text-muted">Current fee: ${feeValueInput.value}% per transaction</span>`;
-        });
-
-        document.getElementById('saveFeeBtn').addEventListener('click', () => {
-            const feeValue = document.getElementById('feeValue').value;
-
-            fetch('{{ route('save-fee') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({ fee_value: feeValue })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) showAlert('success', data.message);
-                else showAlert('danger', 'Error saving fee');
-            })
-            .catch(() => showAlert('danger', 'Something went wrong while saving fee.'));
-        });
+      
+       
 
         // ---------- CRYPTOCURRENCY HANDLER ----------
        let supportedCoins = new Set();
@@ -220,6 +196,7 @@
     // ---------- API KEY HANDLER ----------
     document.getElementById('saveApiKeyBtn').addEventListener('click', () => {
         const apiKey = document.getElementById('apiKeyInput').value.trim();
+        alert(apiKey);
         if (!apiKey) {
             showAlert('danger', 'API key cannot be empty.');
             return;

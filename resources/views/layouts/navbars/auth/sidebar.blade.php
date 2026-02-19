@@ -1,36 +1,41 @@
 <style>
-    .sidebar.d-none {
+  .sidebar.d-none {
     display: none !important;
-}
+  }
 
-.navbar-vertical.navbar-expand-xs .navbar-collapse {
+  .navbar-vertical.navbar-expand-xs .navbar-collapse {
     height: 100% !important;
-}
+  }
 
+  span.nav-link-text.ms-1 {
+    text-wrap: wrap;
+  }
 </style>
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
       <!-- <img src="{{ asset('assets/img/apple-icon.png') }}" class="navbar-brand-img h-100" alt="..."> -->
-        <img src="{{ asset('assets/img/apple-icon.png') }}" 
-     class="navbar-brand-img" 
-     alt="Logo" 
-     style="height:300px ; width:auto;">
+      <img src="{{ asset('assets/img/apple-icon.png') }}"
+        class="navbar-brand-img"
+        alt="Logo"
+        style="height:300px ; width:auto;">
 
-        <span class="ms-3 font-weight-bold"><h4>Coin Flow</h4></span>
+      <span class="ms-3 font-weight-bold">
+        <h4>Coin Flow</h4>
+      </span>
     </a>
   </div>
   <hr class="horizontal dark mt-0">
   <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
     @if(Auth::check())
-        @php $user = Auth::user(); @endphp
+    @php $user = Auth::user(); @endphp
 
-        {{-- All your sidebar items here --}}
+    {{-- All your sidebar items here --}}
     @endif
 
     <ul class="navbar-nav">
-       @if($user?->canAccessModule('dashboard-'))
+      @if($user?->canAccessModule('dashboard-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -54,7 +59,7 @@
       @endif
 
       {{-- Subscribe Stores --}}
-    @if($user?->canAccessModule('subscribe-'))
+      @if($user?->canAccessModule('subscribe-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('subscribe-store') ? 'active' : '') }}" href="{{ route('subscribe-store') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -77,9 +82,9 @@
       </li>
       @endif
 
-@if($user?->canAccessModule('license-'))
-       <li class="nav-item">
-        <a class="nav-link {{ (Request::is('license-managment') ? 'active' : '') }}" href="{{ route('license-managment') }}">
+      @if($user?->canAccessModule('license-'))
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('license') ? 'active' : '') }}" href="{{ route('license-managment') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>customer-support</title>
@@ -100,9 +105,9 @@
         </a>
       </li>
       @endif
-       
-       @if($user?->canAccessModule('user-role-'))
-       <li class="nav-item">
+
+      @if($user?->canAccessModule('user-role-'))
+      <li class="nav-item">
         <a class="nav-link {{ (Request::is('user-role-permission') ? 'active' : '') }}" href="{{ route('user-role-permission') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -124,8 +129,8 @@
           <span class="nav-link-text ms-1">User Roles & Permission</span>
         </a>
       </li>
-       @endif
-      
+      @endif
+
       <!-- @if($user && ($user->role == 1 || $user->canany(['global_stats_view', 'global_stats_edit'])))
 
        <li class="nav-item">
@@ -151,12 +156,12 @@
       </li>
       @endif -->
       <!-- test -->
-     
-      
-  
+
+
+
       @if($user?->canAccessModule('plan-'))
 
-       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link {{ Route::is('plans-index') ? 'active' : '' }}" href="{{ route('plans-index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -169,7 +174,7 @@
                       <path class="color-background opacity-6" d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z"></path>
                       <path class="color-background" d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z"></path>
                     </g>
-                  </g>    
+                  </g>
                 </g>
               </g>
             </svg>
@@ -178,8 +183,8 @@
         </a>
       </li>
       @endif
-      
-@if($user?->canAccessModule('logs-'))
+
+      @if($user?->canAccessModule('logs-'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('logs-error') ? 'active' : '') }}" href="{{ url('logs-error') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -203,9 +208,9 @@
       </li>
       @endif
 
-      
-      
-      
+
+
+
       @if($user?->canAccessModule('merchant-'))
 
       <li class="nav-item">
@@ -231,7 +236,7 @@
       </li>
       @endif
       @if($user?->canAccessModule('support-'))
-       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link {{ Route::is('support') ? 'active' : '' }}" href="{{ route('support') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -254,10 +259,10 @@
         </a>
       </li>
       @endif
-      
-      
-       @if($user?->canAccessModule('global-'))
-       <li class="nav-item">
+
+
+      @if($user?->canAccessModule('global-'))
+      <li class="nav-item">
         <a class="nav-link {{ (Request::is('global-setting') ? 'active' : '') }}" href="{{ route('global-setting') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -270,7 +275,7 @@
                       <path class="color-background opacity-6" d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z"></path>
                       <path class="color-background" d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z"></path>
                     </g>
-                  </g>    
+                  </g>
                 </g>
               </g>
             </svg>
@@ -302,9 +307,9 @@
           <span class="nav-link-text ms-1">Update Tracker</span>
         </a>
       </li>
-        @endif
-        @if($user?->canAccessModule('push-'))
-        <li class="nav-item">
+      @endif
+      @if($user?->canAccessModule('push-'))
+      <li class="nav-item">
         <a class="nav-link {{ (Request::is('push-notice') ? 'active' : '') }}" href="{{ route('push.notice.index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -324,17 +329,17 @@
           <span class="nav-link-text ms-1">Push Notices</span>
         </a>
       </li>
-      
+
       @endif
-      
-      
-    @if(Auth::check() && Auth::user()->role == 0)
-     <li class="nav-item pb-2">
+
+
+      @if(Auth::check() && Auth::user()->role == 0)
+      <li class="nav-item pb-2">
         <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
-            <div class="icon icon-list icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
-            </div>
-            <span class="nav-link-text ms-1">View Subscribed Plans</span>
+          <div class="icon icon-list icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">View Subscribed Plans</span>
         </a>
       </li>
       <li class="nav-item">
@@ -377,15 +382,12 @@
           <span class="nav-link-text ms-1">View Stores & Details</span>
         </a>
       </li>
-       @endif
+      @endif
     </ul>
   </div>
 
 
- <!-- need -->
+  <!-- need -->
 
 
 </aside>
-
-
-

@@ -69,7 +69,7 @@ class GlobalSettingController extends Controller
     public function updateApiKey(Request $request)
     {
         $request->validate([
-            'api_key' => 'required|string|min:10', // adjust min as per actual key length
+            'api_key' => 'required|string|min:10',
         ]);
 
         GlobalSetting::updateOrCreate(

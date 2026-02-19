@@ -24,7 +24,7 @@
                     <!-- Full Name -->
                     <div class="form-group">
                         <label class="form-label">Full Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Enter your full name" value="{{ old('name') }}">
+                        <input type="text" maxlength="50" name="name" class="form-control" placeholder="Enter your full name" value="{{ old('name') }}">
                     </div>
                     @error('name')
                     <span class="field-error">{{ $message }}</span>
@@ -471,23 +471,30 @@
         .register-left {
             padding: 24px 20px;
         }
-    
 
-     
-.captcha-box .g-recaptcha div iframe {
-    width: 100%;
-}
 
-.captcha-box .g-recaptcha div {
-    width: 100% !important;
-}
 
-    .terms-row label {
-      font-size: 12px;
+        .captcha-box .g-recaptcha div iframe {
+            width: 100%;
+        }
+
+        .captcha-box .g-recaptcha div {
+            width: 100% !important;
+        }
+
+        .terms-row label {
+            font-size: 12px;
+        }
+
+        @media (max-width: 1200px) {
+            .terms-row {
+                display: flex;
+                align-items: start;
+            }
+
+            .terms-row input#terms {
+                margin-top: 5px;
+            }
+        }
     }
-
-    .terms-row {
-      display: inline-flex;
-    }
-}
 </style>

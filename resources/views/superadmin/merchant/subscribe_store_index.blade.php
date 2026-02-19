@@ -1,5 +1,4 @@
 @extends('layouts.user_type.auth')
-
 @section('content')
 
 @if(session('success'))
@@ -203,3 +202,9 @@
 
 
 @endsection
+
+<style>
+    .container-fluid span.rounded-circle i::before {
+        color: #1a97ff;
+    }
+</style>

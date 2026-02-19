@@ -35,7 +35,7 @@ class SupportController extends Controller
             $query->where('status', $request->status);
         }
 
-        $supports = $query->paginate(2);
+        $supports = $query->paginate(20);
 
         return view('superadmin.support.index', compact('supports'));
     }

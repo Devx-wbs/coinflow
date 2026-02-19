@@ -66,10 +66,23 @@
                     <span class="field-error">{{ $message }}</span>
                     @enderror
                     <!-- Remember Me -->
-                    <label class="remember-me">
-                        <input type="checkbox" class="custom-checkbox" checked>
-                        <span class="remember-label">Remember me</span>
-                    </label>
+
+
+
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+
+                        <label class="remember-me">
+                            <input type="checkbox" class="custom-checkbox" checked>
+                            <span class="remember-label">Remember me</span>
+                        </label>
+
+                        <a href="{{ route('forgot.password') }}"
+                            style="font-size:14px; color:#1494FF; text-decoration:none;">
+                            Forgot Password?
+                        </a>
+
+                    </div>
 
 
                     <!-- Submit Button -->

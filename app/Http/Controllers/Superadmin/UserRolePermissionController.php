@@ -59,8 +59,8 @@ class UserRolePermissionController extends Controller
 
         // Generate random password
         $randomPassword = Str::random(10);
-        // $user->password = bcrypt($randomPassword);
-        $user->password = bcrypt('Admin@123');
+        $user->password = bcrypt($randomPassword);
+        // $user->password = bcrypt('Admin@123');
         $user->save();
 
         // Determine role name
@@ -86,20 +86,17 @@ class UserRolePermissionController extends Controller
         }
 
         // Send Email
-        $subject = "Your Account Has Been Created - Coin Flow";
-        $message = "
-    Hello {$user->name},\n\n
-    Your account has been created successfully!\n\n
-    Role: {$roleName}\n
-    Email: {$user->email}\n
-    Password: {$randomPassword}\n\n
-    Please login and change your password after first login.\n\n
-    Regards,\nCoin Flow Team
-    ";
 
-        Mail::raw($message, function ($mail) use ($user, $subject) {
+
+        Mail::send('emails.user-created', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'role' => $roleName,
+            'password' => $randomPassword,
+        ], function ($mail) use ($user) {
+
             $mail->to($user->email)
-                ->subject($subject);
+                ->subject('Your Account Has Been Created - Coin Flow');
         });
 
         return redirect()->route('user-role-permission')
