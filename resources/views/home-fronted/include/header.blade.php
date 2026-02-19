@@ -194,3 +194,23 @@
     window.addEventListener("hashchange", setActive);
   });
 </script>
+
+<style>
+  button.mobile-menu-toggle.active {
+    margin: 25px 20px 0 0;
+  }
+  button.mobile-menu-toggle {
+    margin: 25px 20px 0 0;
+  }
+  header.navbar {
+    flex-direction: column;
+}
+
+  @media screen and (max-width:400px) {
+
+  .container.navbar-container {
+    width: 90%;
+}
+
+  }
+</style>

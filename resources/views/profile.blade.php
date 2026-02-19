@@ -14,25 +14,25 @@ $layout = Auth::user()->role == 1
     <div class="col-lg-8">
 
       {{-- PROFILE CARD --}}
-      <div class="card shadow-lg border-0 rounded-4 p-4">
+      <div class="card rounded-4 p-4">
 
         <div class="text-center mb-4">
 
           <div class="position-relative d-inline-block">
 
             @if(Auth::user()->imageFile)
-              <img src="{{ asset('storage/' . Auth::user()->imageFile->file_path) }}"
-                class="rounded-circle border"
-                width="120"
-                height="120"
-                style="object-fit: cover;">
-              @else
-              <img src="{{ asset('images/default-user.png') }}"
-                class="rounded-circle border"
-                width="120"
-                height="120"
-                style="object-fit: cover;">
-              @endif
+            <img src="{{ asset('storage/' . Auth::user()->imageFile->file_path) }}"
+              class="rounded-circle border"
+              width="120"
+              height="120"
+              style="object-fit: cover;">
+            @else
+            <img src="{{ asset('images/default-user.png') }}"
+              class="rounded-circle border"
+              width="120"
+              height="120"
+              style="object-fit: cover;">
+            @endif
 
           </div>
 
@@ -43,27 +43,27 @@ $layout = Auth::user()->role == 1
 
         <hr>
 
-        <form action="/profile/update" 
-              method="POST" 
-              enctype="multipart/form-data">
+        <form action="/profile/update"
+          method="POST"
+          enctype="multipart/form-data">
           @csrf
           @method('PUT')
 
           <div class="mb-3">
             <label class="form-label fw-semibold">Full Name</label>
             <input type="text"
-                   name="name"
-                   class="form-control rounded-3"
-                   value="{{ old('name', Auth::user()->name) }}"
-                   required>
+              name="name"
+              class="form-control rounded-3"
+              value="{{ old('name', Auth::user()->name) }}"
+              required>
           </div>
 
           <div class="mb-4">
             <label class="form-label fw-semibold">Change Profile Image</label>
             <input type="file"
-                   name="image"
-                   class="form-control rounded-3"
-                   accept="image/*">
+              name="image"
+              class="form-control rounded-3"
+              accept="image/*">
           </div>
 
           <div class="text-center">
@@ -75,15 +75,15 @@ $layout = Auth::user()->role == 1
         </form>
 
         @if(session('success'))
-          <div class="alert alert-success mt-3 text-center">
-            {{ session('success') }}
-          </div>
+        <div class="alert alert-success mt-3 text-center">
+          {{ session('success') }}
+        </div>
         @endif
 
       </div>
 
       {{-- PASSWORD CARD --}}
-      <div class="card shadow-lg border-0 rounded-4 p-4 mt-4">
+      <div class="card rounded-4 p-4 mt-4">
 
         <h5 class="fw-bold mb-3">Change Password</h5>
 
@@ -92,26 +92,26 @@ $layout = Auth::user()->role == 1
 
           <div class="mb-3">
             <input type="password"
-                   name="current_password"
-                   class="form-control rounded-3"
-                   placeholder="Current Password"
-                   required>
+              name="current_password"
+              class="form-control rounded-3"
+              placeholder="Current Password"
+              required>
           </div>
 
           <div class="mb-3">
             <input type="password"
-                   name="new_password"
-                   class="form-control rounded-3"
-                   placeholder="New Password"
-                   required>
+              name="new_password"
+              class="form-control rounded-3"
+              placeholder="New Password"
+              required>
           </div>
 
           <div class="mb-3">
             <input type="password"
-                   name="new_password_confirmation"
-                   class="form-control rounded-3"
-                   placeholder="Confirm New Password"
-                   required>
+              name="new_password_confirmation"
+              class="form-control rounded-3"
+              placeholder="Confirm New Password"
+              required>
           </div>
 
           <div class="text-center">
@@ -190,5 +190,10 @@ $layout = Auth::user()->role == 1
 <style>
   .profile_space {
     padding: 100px 0 !important;
+  }
+
+  .card {
+    border: var(--bs-card-border-width) solid rgb(0 0 0 / 7%);
+
   }
 </style>

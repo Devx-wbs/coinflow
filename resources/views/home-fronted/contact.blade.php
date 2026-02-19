@@ -27,8 +27,9 @@
                     <label class="form-label">Full Name</label>
                     <input type="text"
                         name="full_name"
-                        class=" form-control @error('full_name') is-invalid @enderror"
-                        value="{{ old('full_name', auth()->check() ? auth()->user()->name : '') }}">
+                        placeholder="sam"
+                        class="form-control @error('full_name') is-invalid @enderror"
+                        value="{{ old('full_name', auth()->user()->name ?? '') }}">
 
                     @error('full_name')
                     <div class="field-error">{{ $message }}</div>
@@ -40,6 +41,7 @@
                     <label class="form-label">Email Address</label>
                     <input type="email"
                         name="email"
+                        placeholder="xyz@gmail.com"
                         class="form-control  @error('email') is-invalid @enderror"
                         value="{{ old('email', auth()->check() ? auth()->user()->email : '') }}">
 

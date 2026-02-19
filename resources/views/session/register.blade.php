@@ -182,9 +182,6 @@
         padding: 20px 0;
     }
 
-    .register-section {
-        padding-top: 50px;
-    }
 
     .terms-row label {
         margin-left: 10px !important;
@@ -474,5 +471,23 @@
         .register-left {
             padding: 24px 20px;
         }
+    
+
+     
+.captcha-box .g-recaptcha div iframe {
+    width: 100%;
+}
+
+.captcha-box .g-recaptcha div {
+    width: 100% !important;
+}
+
+    .terms-row label {
+      font-size: 12px;
     }
+
+    .terms-row {
+      display: inline-flex;
+    }
+}
 </style>

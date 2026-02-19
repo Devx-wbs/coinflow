@@ -17,7 +17,7 @@ class ExpireLicenses extends Command
          $now =  Carbon::today();
 
         $expiredCount = License::where('status', 'active')
-            ->where('expiry_date', '<', $now)
+            ->where('expiration_date', '<', $now)
             ->update([
                 'status' => 'expired'
             ]);
