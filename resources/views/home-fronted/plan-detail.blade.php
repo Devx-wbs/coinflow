@@ -47,7 +47,7 @@
           <!-- License Key Section -->
           @if($license)
           <div class="plan-info-label" style="margin-bottom: 8px;">License Key</div>
-          <div class="license-input-wrapper license-input">
+          <div class="license-input-wrapper">
             <input type="text" class="license-input" value="{{$masked}}" readonly>
             <div class="copy-icon-btn" onclick="copyLicense()">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -143,11 +143,12 @@
 </section>
 
 <script>
+ 
   function copyLicense() {
-    const input = document.querySelector(".license-input input");
-    navigator.clipboard.writeText(input.value);
+    const originalKey = "{{ $license->license_key }}";
+    navigator.clipboard.writeText(originalKey);
     alert("License copied!");
-  }
+}
 </script>
 
 @endsection
@@ -171,9 +172,9 @@
   }
 
   .copy_license {
-    background: transparent;
-    border: 2px solid #1594FE;
-    color: #1C1C1C;
+    background: transparent !important;
+    border: 2px solid #1594FE !important;
+    color: #1594FE !important;
   }
 
   /* 1440px Content Container */
@@ -291,12 +292,13 @@
     gap: 10px;
   }
 
+
   .license-input {
     flex: 1;
     height: 48px;
     /* background: #F9FAFB; */
-    /* border: 1px solid #EAECF0; */
-    border-radius: 8px;
+    border: 1px solid #EAECF0;
+    border-radius: 24px;
     padding: 0 16px;
     font-family: 'Poppins', sans-serif;
     color: #667085;

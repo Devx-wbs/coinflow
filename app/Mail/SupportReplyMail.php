@@ -36,13 +36,14 @@ class SupportReplyMail extends Mailable
         );
     }
 
+
     /**
      * Email content
      */
     public function content(): Content
     {
         return new Content(
-            view: 'emails.support_reply',
+            view: 'emails.support-reply',
             with: [
                 'support' => $this->support,
                 'reply'   => $this->reply,
