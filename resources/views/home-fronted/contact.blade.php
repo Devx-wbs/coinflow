@@ -123,7 +123,7 @@
     .contact-bg-wrapper {
         width: 100%;
         max-width: 1920px;
-        background: url("public/hero_bg.png") no-repeat center center;
+        background: url("/images/hero_bg.png") no-repeat center center;
         background-size: cover;
         border-radius: 40px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);

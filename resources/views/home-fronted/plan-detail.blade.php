@@ -143,12 +143,11 @@
 </section>
 
 <script>
- 
   function copyLicense() {
     const originalKey = "{{ $license->license_key }}";
     navigator.clipboard.writeText(originalKey);
     alert("License copied!");
-}
+  }
 </script>
 
 @endsection
@@ -158,7 +157,7 @@
   .account-bg-wrapper {
     width: 100%;
     max-width: 1920px;
-    background: url("public/hero_bg.png") no-repeat center center;
+    background: url("images/hero_bg.png") no-repeat center center;
     background-size: cover;
     border-radius: 40px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
@@ -186,6 +185,7 @@
     padding: 60px 80px;
     position: relative;
     z-index: 2;
+    justify-content: space-evenly;
   }
 
   /* Success Banner */
@@ -236,6 +236,16 @@
     flex-direction: column;
     gap: 24px;
   }
+
+  .card.plan-card {
+    border-radius: 12px !important;
+  }
+
+  .card.history-card {
+    border-radius: 12px !important;
+  }
+
+
 
   h2.card-title {
     font-size: 20px;
