@@ -66,7 +66,7 @@ class SupportController extends Controller
 
         Support::create([
             'user_id'     => $user->id,
-            'full_name'   => $user->name,  
+            'full_name'   => $user->name,
             'email'       => $user->email,
             'subject'     => $request->subject,
             'description' => $request->description,
@@ -166,20 +166,28 @@ class SupportController extends Controller
             'reply' => 'required|string'
         ]);
 
+
         $reply = SupportReply::create([
             'support_id' => $support->id,
             'user_id'    => auth()->id(),
             'message'    => $request->reply,
         ]);
 
-        // optional: auto-close ticket
 
 
-        Mail::to($support->user->email)
-            ->send(new SupportReplyMail($support, $reply));
+
+        $customerEmail = $support->email
+            ?? optional($support->user)->email;
+
+        if ($customerEmail) {
+            Mail::to($customerEmail)
+                ->send(new SupportReplyMail($support, $reply));
+        }
+
         $support->update([
             'status' => Support::STATUS_CLOSED
         ]);
+
         return response()->json([
             'success' => true,
             'reply' => [
