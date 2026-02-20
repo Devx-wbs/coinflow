@@ -450,16 +450,29 @@
 
         .register-left {
             width: 100%;
-            max-width: 450px;
         }
 
-        .register-right {
-            display: none;
+        .register-content-container {
+            flex-direction: column-reverse;
         }
 
         .register-bg-wrapper {
             height: auto;
             min-height: auto;
+        }
+
+        .register-right {
+            width: 40%;
+            padding: 0;
+        }
+
+        .terms-row {
+            display: flex;
+            align-items: start;
+        }
+
+        .terms-row input#terms {
+            margin-top: 5px;
         }
     }
 
@@ -486,15 +499,5 @@
             font-size: 12px;
         }
 
-        @media (max-width: 1200px) {
-            .terms-row {
-                display: flex;
-                align-items: start;
-            }
-
-            .terms-row input#terms {
-                margin-top: 5px;
-            }
-        }
     }
 </style>

@@ -89,7 +89,7 @@
 
           @if($hasActiveSubscription)
           <a href="{{ route('plan-detail') }}" class="dropdown-item">
-            Account Preferences
+            My Plan
           </a>
           @endif
 
@@ -285,13 +285,13 @@
 </script>
 
 <style>
-  /* header.navbar.scrolled .container {
+  header.navbar.scrolled .container {
     padding: 10px 20px;
-  } */
-
-  button.mobile-menu-toggle.active {
-    margin: 25px 20px 0 0;
   }
+
+  /* button.mobile-menu-toggle.active {
+    margin: 25px 20px 0 0;
+  }*/
 
   button.mobile-menu-toggle {
     margin: 25px 20px 0 0;
@@ -301,12 +301,33 @@
     flex-direction: column;
   }
 
+  button.mobile-dropdown-item.logout-btn {
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    width: 100%;
+}
+
+
   @media screen and (max-width:922px) {
 
-    .container.navbar-container {
-      /* width: 90%; */
-      padding: 10px 20px;
-    }
+ .container.navbar-container {
+    width: 90%;
+    padding: 10px 20px;
+}
+
+.mobile-user-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.mobile-user-dropdown a {
+    background: #fefefe;
+    border: 1px solid #4b4b4b;
+}
+.mobile-user-section {
+    width: 100%;
+}
 
     header.navbar {
       height: 80px;

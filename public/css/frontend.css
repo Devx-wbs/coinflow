@@ -2182,7 +2182,7 @@ width: 56%;
     }
 
     .user-name:hover {
-      background: #f5f5f5;
+      background: none;
     }
 
     .user-name i {
