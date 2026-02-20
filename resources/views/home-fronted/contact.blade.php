@@ -100,7 +100,7 @@
 <!-- END -->
 <style>
     .contact-wrapper {
-        background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
+        background: url("/images/hero_bg.png") no-repeat center center;
         padding: 80px 0;
     }
 
