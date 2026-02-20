@@ -866,7 +866,7 @@ a {
 }
 
 .why-header {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1782,7 +1782,7 @@ body.no-scroll {
 
   .global-subheading {
     font-size: 15px;
-    max-width: 65%;
+    max-width: 90%;
     padding: 0 1rem;
   }
 

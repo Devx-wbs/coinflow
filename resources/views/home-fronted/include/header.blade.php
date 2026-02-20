@@ -135,86 +135,86 @@
     </button>
 
     <!-- Mobile Menu -->
-   <div class="mobile-menu">
+    <div class="mobile-menu">
 
-    <a href="{{ url('/') }}" class="mobile-link">Home</a>
-    <a href="#features" class="mobile-link">Features</a>
-    <a href="#pricing" class="mobile-link">Pricing</a>
-    <a href="{{ route('contact.form') }}" class="mobile-link">Contact</a>
+      <a href="{{ url('/') }}" class="mobile-link">Home</a>
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#pricing" class="mobile-link">Pricing</a>
+      <a href="{{ route('contact.form') }}" class="mobile-link">Contact</a>
 
-    @if(Auth::check())
+      @if(Auth::check())
 
-        @php
-            $user = Auth::user();
+      @php
+      $user = Auth::user();
 
-            $activeSubscription = \App\Models\Subscription::where('user_id', $user->id)
-                ->where('status', 'active')
-                ->whereDate('end_date', '>=', now())
-                ->first();
+      $activeSubscription = \App\Models\Subscription::where('user_id', $user->id)
+      ->where('status', 'active')
+      ->whereDate('end_date', '>=', now())
+      ->first();
 
-            $activeLicense = \App\Models\License::where('user_id', $user->id)
-                ->where('status', 'active')
-                ->whereDate('expiration_date', '>=', now())
-                ->first();
+      $activeLicense = \App\Models\License::where('user_id', $user->id)
+      ->where('status', 'active')
+      ->whereDate('expiration_date', '>=', now())
+      ->first();
 
-            $hasActiveSubscription = $activeSubscription && $activeLicense;
-        @endphp
+      $hasActiveSubscription = $activeSubscription && $activeLicense;
+      @endphp
 
-        <!-- 🔹 Logged In Mobile View -->
-        @if(Auth::check())
+      <!-- 🔹 Logged In Mobile View -->
+      @if(Auth::check())
 
-<div class="mobile-user-section">
+      <div class="mobile-user-section">
 
-    <!-- Dropdown Header -->
-    <div class="mobile-user-toggle" id="mobileUserToggle">
-        <div class="user-left">
+        <!-- Dropdown Header -->
+        <div class="mobile-user-toggle" id="mobileUserToggle">
+          <div class="user-left">
             <img src="{{ Auth::user()->profile_image_url }}"
-                 width="32"
-                 height="32"
-                 style="border-radius:50%; object-fit:cover;">
+              width="32"
+              height="32"
+              style="border-radius:50%; object-fit:cover;">
             <span>{{ Auth::user()->name }}</span>
+          </div>
+          <i class="fas fa-chevron-down mobile-arrow"></i>
         </div>
-        <i class="fas fa-chevron-down mobile-arrow"></i>
-    </div>
 
-    <!-- Dropdown Body -->
-    <div class="mobile-user-dropdown" id="mobileUserDropdown">
+        <!-- Dropdown Body -->
+        <div class="mobile-user-dropdown" id="mobileUserDropdown">
 
-        <a href="/profile" class="mobile-dropdown-item">
+          <a href="/profile" class="mobile-dropdown-item">
             Profile Setting
-        </a>
+          </a>
 
-        @if($hasActiveSubscription)
-            <a href="{{ route('plan-detail') }}" class="mobile-dropdown-item">
-                Account Preferences
-            </a>
-        @endif
+          @if($hasActiveSubscription)
+          <a href="{{ route('plan-detail') }}" class="mobile-dropdown-item">
+            Account Preferences
+          </a>
+          @endif
 
-        <form method="POST" action="{{ route('logout') }}">
+          <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="mobile-dropdown-item logout-btn">
-                Sign Out
+              Sign Out
             </button>
-        </form>
+          </form>
 
-    </div>
-
-</div>
-
-@endif
-
-
-    @else
-
-        <!-- 🔹 Guest Mobile View -->
-        <div class="mobile-auth">
-            <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-primary">Sign up</a>
         </div>
 
-    @endif
+      </div>
 
-</div>
+      @endif
+
+
+      @else
+
+      <!-- 🔹 Guest Mobile View -->
+      <div class="mobile-auth">
+        <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
+        <a href="{{ route('register') }}" class="btn btn-primary">Sign up</a>
+      </div>
+
+      @endif
+
+    </div>
 
 
 
@@ -236,19 +236,19 @@
       dropdown.querySelector('.dropdown-menu').classList.remove('active');
     }
   });
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
 
     const toggle = document.getElementById("mobileUserToggle");
     const dropdown = document.getElementById("mobileUserDropdown");
 
     if (toggle) {
-        toggle.addEventListener("click", function () {
-            dropdown.classList.toggle("active");
-            toggle.classList.toggle("open");
-        });
+      toggle.addEventListener("click", function() {
+        dropdown.classList.toggle("active");
+        toggle.classList.toggle("open");
+      });
     }
 
-});
+  });
 
 
 
@@ -285,90 +285,104 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <style>
+  /* header.navbar.scrolled .container {
+    padding: 10px 20px;
+  } */
+
   button.mobile-menu-toggle.active {
     margin: 25px 20px 0 0;
   }
+
   button.mobile-menu-toggle {
     margin: 25px 20px 0 0;
   }
+
   header.navbar {
     flex-direction: column;
-}
+  }
 
   @media screen and (max-width:922px) {
 
-  .container.navbar-container {
-    width: 90%;
-}
+    .container.navbar-container {
+      /* width: 90%; */
+      padding: 10px 20px;
+    }
+
+    header.navbar {
+      height: 80px;
+    }
+
+    .user-name:hover {
+      background: none;
+    }
 
   }
 
 
   @media (max-width: 768px) {
     #userDropdown {
-        display: none !important;
+      display: none !important;
     }
-}
+  }
 
-/* Hide mobile user section on desktop */
-@media (min-width: 769px) {
+  /* Hide mobile user section on desktop */
+  @media (min-width: 769px) {
     .mobile-user-section {
-        display: none !important;
+      display: none !important;
     }
-}
+  }
 
 
-.mobile-user-section {
+  .mobile-user-section {
     margin-top: 15px;
     border-top: 1px solid #eee;
     padding-top: 10px;
-}
+  }
 
-.mobile-user-toggle {
+  .mobile-user-toggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     cursor: pointer;
     font-weight: 500;
-}
+  }
 
-.user-left {
+  .user-left {
     display: flex;
     align-items: center;
     gap: 8px;
-}
+  }
 
-.mobile-user-dropdown {
+  .mobile-user-dropdown {
     max-height: 0;
     overflow: hidden;
     transition: all 0.3s ease;
-}
+  }
 
-.mobile-user-dropdown.active {
+  .mobile-user-dropdown.active {
     max-height: 300px;
     margin-top: 8px;
-}
+  }
 
-.mobile-dropdown-item {
+  .mobile-dropdown-item {
     display: block;
     padding: 8px 10px;
     font-size: 14px;
     color: #333;
     text-decoration: none;
     border-radius: 6px;
-}
+  }
 
-.mobile-dropdown-item:hover {
+  .mobile-dropdown-item:hover {
     background: #f5f5f5;
-}
+  }
 
-.mobile-arrow {
+  .mobile-arrow {
     transition: transform 0.3s ease;
-}
+  }
 
-.mobile-user-toggle.open .mobile-arrow {
+  .mobile-user-toggle.open .mobile-arrow {
     transform: rotate(180deg);
-}
-
+  }
 </style>
