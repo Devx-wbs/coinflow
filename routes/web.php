@@ -101,7 +101,7 @@ Route::domain('admincp.coinflowspay.com')->group(function () {
         // Route::middleware('route.permission')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::post('/logout', [LoginController::class, 'logout'])->name('loadmin.logingout');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
         // Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
         //     ->name('login');
 
