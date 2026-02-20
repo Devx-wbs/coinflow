@@ -35,7 +35,7 @@
     @endif
 
     <ul class="navbar-nav">
-      @if($user?->canAccessModule('dashboard-'))
+      @if($user?->canAccessModule('dashboard'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('dashboard') ? 'active' : '') }}" href="{{ url('dashboard') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -235,7 +235,7 @@
         </a>
       </li>
       @endif
-      @if($user?->canAccessModule('support-'))
+      @if($user?->canAccessModule('support'))
       <li class="nav-item">
         <a class="nav-link {{ Route::is('support') ? 'active' : '' }}" href="{{ route('support') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -284,7 +284,7 @@
         </a>
       </li>
       @endif
-      @if($user && ($user->role == 1 || $user->canany(['update_tracker_view', 'update_tracker_edit'])))
+      @if($user?->canAccessModule('update'))
       <li class="nav-item">
         <a class="nav-link {{ (Request::is('update-tracker') ? 'active' : '') }}" href="{{ route('update-tracker.index') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
