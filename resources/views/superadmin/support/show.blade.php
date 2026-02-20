@@ -84,8 +84,8 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h6>Ticket Information</h6>
-                <p><strong>Customer:</strong> {{ $support->user->name ?? '-' }}</p>
-                <p><strong>Email:</strong> {{ $support->user->email ?? '-' }}</p>
+                <p><strong>Customer:</strong> {{ $support->full_name ?? '-' }}</p>
+                <p><strong>Email:</strong> {{ $support->email ?? '-' }}</p>
                 <p><strong>Assigned To : <span id="assignedUserName">{{ $support->assignedUser->name ?? '-' }}</span></strong></p>
                 <p><strong>Date Created:</strong> {{ optional($support->created_at)->format('Y-m-d') }}</p>
                 <p><strong>Status:</strong></p>
