@@ -196,4 +196,5 @@ $layout = Auth::user()->role == 1
     border: var(--bs-card-border-width) solid rgb(0 0 0 / 7%);
 
   }
+  
 </style>

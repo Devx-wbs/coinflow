@@ -37,13 +37,6 @@ Route::domain('coinflowspay.com')->group(function () {
 
         Route::get('/plan-detail', [FrontedController::class, 'plan_detail'])->name('plan-detail');
 
-
-        // // Login form
-        // Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-
-        // // Handle login
-        // Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-
         //reset password
         Route::get('/resetpassword', [ResetController::class, 'create'])->name('reset.password');
         Route::post('/forgot-password', [ResetController::class, 'sendEmail'])->name('forgot.password');
@@ -82,12 +75,9 @@ Route::domain('coinflowspay.com')->group(function () {
 
 
 
-// Pricing page
-// Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
-
 // Routes protected by auth middleware
 
-// Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
+// Route::middleware('route.permission')->group(function () {
 Route::domain('admincp.coinflowspay.com')->group(function () {
 
     Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
@@ -97,20 +87,15 @@ Route::domain('admincp.coinflowspay.com')->group(function () {
         ->name('admin.login.post');
     Route::middleware(['auth', 'route.permission'])->group(function () {
 
-
-        // Route::middleware('route.permission')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
-        // Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
-        //     ->name('login');
-
-        // Route::post('/login', [LoginController::class, 'adminLogin'])
-        //     ->name('admin.login.post');
 
         Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
         Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+        
         Route::prefix('plans')->group(function () {
             Route::get('/', [PlanController::class, 'index'])->name('plans-index');
             Route::get('/create', [PlanController::class, 'create'])->name('plan-create');
