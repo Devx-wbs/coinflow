@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckRoutePermission;
+use App\Http\Middleware\RedirectAdminFromFrontend;
 use App\Models\SystemLog;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -24,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => RoleOrPermissionMiddleware::class,
             'route.permission' => CheckRoutePermission::class,
             'plugin.download.secure' => \App\Http\Middleware\PluginDownloadSecurity::class,
+            'redirect.admin.from.frontend' => RedirectAdminFromFrontend::class,
 
         ]);
     })
