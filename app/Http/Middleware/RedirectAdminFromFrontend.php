@@ -14,18 +14,21 @@ class RedirectAdminFromFrontend
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        // If NOT logged in → allow
+        if (!auth()->check()) {
+            return $next($request);
+        }
 
-            $user = Auth::user();
+        $user = auth()->user();
 
-            if (
-                $request->getHost() === 'coinflowspay.com' &&
-                $user->hasRole(['admin', 'sub_admin', 'support'])
-            ) {
-                return redirect()->away('https://admincp.coinflowspay.com/dashboard');
-            }
+        // Only redirect if user is logged in AND is admin
+        if (
+            $request->getHost() === 'coinflowspay.com' &&
+            $user->hasRole(['admin', 'sub_admin', 'support'])
+        ) {
+            return redirect()->away('https://admincp.coinflowspay.com/dashboard');
         }
 
         return $next($request);

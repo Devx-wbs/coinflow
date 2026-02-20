@@ -79,16 +79,26 @@ use App\Http\Controllers\Superadmin\SupportController;
 
 // Routes protected by auth middleware
 
-Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
-    // Route::middleware('route.permission')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-   
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
+// Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission'])->group(function () {
+Route::domain('admincp.coinflowspay.com')->group(function () {
+
+ Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
         ->name('login');
 
     Route::post('/login', [LoginController::class, 'adminLogin'])
         ->name('admin.login.post');
+        Route::middleware(['auth', 'route.permission'])->group(function () {
+
+
+// Route::middleware('route.permission')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+   
+    Route::post('/logout', [LoginController::class, 'logout'])->name('loadmin.logingout');
+    // Route::get('/login', [LoginController::class, 'showAdminLoginForm'])
+    //     ->name('login');
+
+    // Route::post('/login', [LoginController::class, 'adminLogin'])
+    //     ->name('admin.login.post');
 
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.show');
         Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
@@ -203,5 +213,5 @@ Route::domain('admincp.coinflowspay.com')->middleware(['auth', 'route.permission
 
     // update profile
 
-
+});
 });
