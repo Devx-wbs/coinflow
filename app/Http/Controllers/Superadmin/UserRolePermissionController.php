@@ -23,14 +23,14 @@ class UserRolePermissionController extends Controller
     public function index()
     {
         // $users = User::whereIn('role', [2, 3])->get(); // Only Subadmin/Admin & Support
-        $users = User::whereIn('role', [1, 2, 3])->get();
+        $users = User::whereIn('role', [ 2, 3])->get();
         return view('superadmin.user-role-permission.index', compact('users'));
     }
 
     public function create()
     {
         // Fetch roles dynamically
-        $roles = Role::whereIn('name', ['admin', 'sub_admin', 'support'])->get();
+        $roles = Role::whereIn('name', ['sub_admin', 'support'])->get();
 
         // Fetch all permissions as-is
         $permissions = Permission::orderBy('name')->get();
@@ -51,6 +51,13 @@ class UserRolePermissionController extends Controller
             'role' => 'required',
             'status' => 'required|in:Active,Inactive',
         ]);
+
+        if ($validated['role'] == 1) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Admin cannot be created from this panel!');
+        }
+
         $user = new User();
         $user->name = $validated['name'];
         $user->email = $validated['email'];
@@ -63,20 +70,14 @@ class UserRolePermissionController extends Controller
         // $user->password = bcrypt('Admin@123');
         $user->save();
 
-        // Determine role name
-        if ($user->role == "1") {
-            $roleName = 'admin';
-        } elseif ($user->role == "2") {
-            $roleName = 'sub_admin';
-        } else {
-            $roleName = 'support';
-        }
+
+        $roleName = $user->role == "2" ? 'sub_admin' : 'support';
 
         // Assign Role
         $user->assignRole($roleName);
 
         // ✅ If NOT admin, then assign permissions
-        if ($roleName !== 'admin' && $request->has('permissions')) {
+        if ($request->has('permissions')) {
             foreach ($request->input('permissions') as $permName) {
                 $permission = Permission::firstOrCreate(
                     ['name' => $permName, 'guard_name' => 'web']
@@ -108,11 +109,15 @@ class UserRolePermissionController extends Controller
     public function edit($id)
     {
 
-        $roles = Role::whereIn('name', ['admin', 'sub_admin', 'support'])->get();
+        $roles = Role::whereIn('name', ['sub_admin', 'support'])->get();
 
         // Fetch all permissions as-is
         $permissions = Permission::orderBy('name')->get();
         $user = User::findOrFail($id);
+        if ($user->hasRole('admin')) {
+            return redirect()->route('user-role-permission')
+                ->with('error', 'Admin cannot be edited!');
+        }
         $userPermissions = $user->getPermissionNames()->toArray();
         return view('superadmin.user-role-permission.edit', compact('user', 'roles', 'permissions', 'userPermissions'));
     }
@@ -141,29 +146,20 @@ class UserRolePermissionController extends Controller
             'status' => $validated['status'],
         ]);
 
+
+
+
         // Get selected role
         $role = Role::findOrFail($validated['role_id']);
 
         // Sync new role
         $user->syncRoles([$role->name]);
 
-        // Check if now admin
-        $isAdmin = $role->name === 'admin';
 
-        /*
-    |--------------------------------------------------------------------------
-    | Permission Handling
-    |--------------------------------------------------------------------------
-    */
+        // If not admin → sync selected permissions
+        $permissions = $request->input('permissions', []);
+        $user->syncPermissions($permissions);
 
-        if ($isAdmin) {
-            // If switched TO admin → remove all direct permissions
-            $user->syncPermissions([]);
-        } else {
-            // If not admin → sync selected permissions
-            $permissions = $request->input('permissions', []);
-            $user->syncPermissions($permissions);
-        }
 
         return redirect()->route('user-role-permission')
             ->with('success', 'User updated successfully!');
@@ -175,6 +171,11 @@ class UserRolePermissionController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        // ❌ Prevent deleting Admin
+        if ($user->hasRole('admin')) {
+            return redirect()->back()
+                ->with('error', 'Admin user cannot be deleted!');
+        }
         $user->delete();
 
         return redirect()->route('user-role-permission')

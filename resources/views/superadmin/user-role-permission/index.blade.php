@@ -52,25 +52,29 @@
 
                             {{-- Role Badge --}}
                             <td>
-                                @php
-                                $roleName = match($user->role){
-                                1 => 'Admin',
-                                2 => 'Subadmin',
-                                3 => 'Support',
-                                default => 'Unknown',
-                                };
-                                $roleColors = [
-                                'Admin' => ['bg' => '#eedaff', 'text' => '#a24bcf'],
-                                'Subadmin' => ['bg' => '#eedaff', 'text' => '#a24bcf'],
-                                'Support' => ['bg' => '#e4f7ea', 'text' => '#37c978'],
-                                ];
-                                $colors = $roleColors[$roleName];
-                                @endphp
-                                <span style="background:{{ $colors['bg'] }}; color:{{ $colors['text'] }}; padding:4px 18px; border-radius:12px; font-size:14px;">
-                                    {{ $roleName }}
-                                </span>
+                                 @php
+$roleName = match($user->role){
+    2 => 'Subadmin',
+    3 => 'Support',
+    default => null,
+};
+
+$roleColors = [
+    'Subadmin' => ['bg' => '#eedaff', 'text' => '#a24bcf'],
+    'Support' => ['bg' => '#e4f7ea', 'text' => '#37c978'],
+];
+
+$colors = $roleName && isset($roleColors[$roleName])
+    ? $roleColors[$roleName]
+    : ['bg' => '#ededed', 'text' => '#999'];
+@endphp
+<span style="background:{{ $colors['bg'] }}; color:{{ $colors['text'] }}; padding:4px 18px; border-radius:12px; font-size:14px;">
+    {{ $roleName ?? 'N/A' }}
+</span>
+
                             </td>
 
+                           
                             {{-- Status Badge --}}
                             <td>
                                 @if($user->status == 'Active')
