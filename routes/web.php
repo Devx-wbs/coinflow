@@ -19,7 +19,8 @@ use App\Http\Controllers\PluginController;
 use App\Http\Controllers\PushNoticeController;
 use App\Http\Controllers\Superadmin\SupportController;
 
-Route::domain('coinflowspay.com')->group(function () {
+
+    Route::domain('coinflowspay.com')->middleware('redirect.admin.from.frontend')->group(function () {
     // all frontend routes
     Route::get('/', [FrontedController::class, 'index']);
 
