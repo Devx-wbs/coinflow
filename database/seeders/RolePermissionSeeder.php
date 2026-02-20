@@ -24,6 +24,7 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'dashboard',
             'logout',
+            'login',
 
             // Plan Management
             'plans-index',
@@ -110,7 +111,8 @@ class RolePermissionSeeder extends Seeder
         // Sub Admin → limited
         $subAdmin->syncPermissions([
             'dashboard',
-            'logout'
+            'logout',
+            'login',
         ]);
 
         // Support → support only
