@@ -30,7 +30,7 @@
                     <div class="form-group password-group">
                         <label class="form-label">Password</label>
                         <div style="position: relative;">
-                            <input type="password" id="password" class="form-control" name="password" placeholder="Create a Password">
+                            <input type="password" id="password" class="form-control" name="password" placeholder="Enter Your Password">
 
                             <span class="toggle-password" id="togglePassword">
                                 <!-- Eye Open -->
@@ -77,10 +77,7 @@
                             <span class="remember-label">Remember me</span>
                         </label>
 
-                        <a href="{{ route('forgot.password') }}"
-                            style="font-size:14px; color:#1494FF; text-decoration:none;">
-                            Forgot Password?
-                        </a>
+                        
 
                     </div>
 
